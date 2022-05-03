@@ -10,13 +10,22 @@
 {% block content %}
 
 {% for item in notes %}
-<div class="card">
+<div class="card mb-3">
     <div class="card-header">
         <div class="hstack gap-3">
-            <div class=""><img src="{{ item.author.photo.url }}" alt="..." width="50" height="50"
-                               style="border-radius: 25px;">
+            <div class="">
+                {% if item.author.photo %}
+                <img src="{{ item.author.photo.url }}" alt="..." width="50" height="50"
+                     style="border-radius: 25px;">
+                {% else %}
+                {% load static %}
+                <img src="{% static 'wall/img/default_avatar.png' %} " alt="..." width="50" height="50"
+                     style="border-radius: 25px;">
+                {% endif %}
             </div>
+
             <div class=""><a href="#">{{ item.author.nickname }}</a></div>
+
             <div class="">{{ item.created_at }}</div>
             <div class="">!</div>
         </div>
