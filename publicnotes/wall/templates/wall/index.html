@@ -6,30 +6,35 @@
 
 {% block content_title %}Заметки{% endblock %}
 
+
 {% block content %}
 
+{% for item in notes %}
 <div class="card">
     <div class="card-header">
         <div class="hstack gap-3">
-            <div class=""><img src="https://picsum.photos/seed/picsum/200/300" alt="..." width="50" height="50"
-                               style="border-radius: 5px;">
+            <div class=""><img src="{{ item.author.photo.url }}" alt="..." width="50" height="50"
+                               style="border-radius: 25px;">
             </div>
-            <div class=""><a href="#">nickname</a></div>
-            <div class="">03.05.2022 08:47</div>
+            <div class=""><a href="#">{{ item.author.nickname }}</a></div>
+            <div class="">{{ item.created_at }}</div>
+            <div class="">!</div>
         </div>
     </div>
     <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">{{ item.title }}</h5>
+        <p class="card-text">{{ item.content }}</p>
+        <a href="#" class="btn btn-primary">Открыть</a>
     </div>
     <div class="card-footer">
         <div class="hstack gap-3">
             <div class="">+5</div>
-            <div class="">!</div>
+            <div class="">Категория: <a href="#">{{ item.category.title }}</a></div>
+
         </div>
     </div>
 </div>
+{% endfor %}
 
 
 {% endblock %}
