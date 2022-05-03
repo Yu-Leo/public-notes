@@ -12,7 +12,9 @@
 
 {% include 'inc/_navbar.html'%}
 
+
 <div class="container mt-3">
+
     <div class="row">
 
         <div class="col-md-2">
@@ -20,6 +22,7 @@
         </div>
 
         <div class="col-md-9">
+            <h1 class="mb-3">{% block content_title %} {% endblock %}</h1>
             {% block content %} CONTENT {% endblock %}
         </div>
 
