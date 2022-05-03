@@ -24,9 +24,13 @@
                 {% endif %}
             </div>
 
-            <div class=""><a href="#">{{ item.author.nickname }}</a></div>
+            {% if item.author %}
+            <div class="fw-bold"><a href="#" class="text-decoration-none">{{ item.author.nickname }}</a></div>
+            {% else %}
+            <div class="fw-bold">Аноним</div>
+            {% endif %}
 
-            <div class="">{{ item.created_at }}</div>
+            <div class="fw-light">{{ item.created_at }}</div>
             <div class="">!</div>
         </div>
     </div>
