@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="static/wall/css/style.css">
+{% endblock %}
+
+
 {% block title %}Главная{% endblock %}
 
 {% block sidebar %}{% endblock %}
@@ -14,21 +19,23 @@
     <div class="card-header">
         <div class="hstack gap-3">
             <div class="">
-                {% if item.author.photo %}
-                <img src="{{ item.author.photo.url }}" alt="..." width="50" height="50"
-                     style="border-radius: 25px;">
+                <img src="{% if item.author.photo %}
+                {{ item.author.photo.url }}
                 {% else %}
                 {% load static %}
-                <img src="{% static 'wall/img/default_avatar.png' %} " alt="..." width="50" height="50"
+                {% static 'wall/img/default_avatar.png' %}
+                {% endif %}" alt="..." width="50" height="50"
                      style="border-radius: 25px;">
-                {% endif %}
             </div>
 
-            {% if item.author %}
-            <div class="fw-bold"><a href="#" class="text-decoration-none">{{ item.author.nickname }}</a></div>
-            {% else %}
-            <div class="fw-bold">Аноним</div>
-            {% endif %}
+
+            <div class="fw-bold">
+                {% if item.author %}
+                <a href="#" class="text-decoration-none">{{ item.author.nickname }}</a>
+                {% else %}
+                Аноним
+                {% endif %}
+            </div>
 
             <div class="fw-light">{{ item.created_at|date:"Y-m-d H:i" }}</div>
             <div class="">
@@ -43,7 +50,9 @@
         <p class="card-text">{{ item.content|truncatewords:30 }}</p>
         <a href="#" class="btn btn-primary">Открыть</a>
     </div>
-    <div class="card-footer">
+
+    <div class="card-footer"
+         style="{% if item.category.color %}background-color: #{{item.category.color}}{% endif %}">
         <div class="hstack gap-3">
             {% if item.rating > 0 %}
             <div class="text-success fw-bold">+{{item.rating}}</div>

@@ -21,7 +21,7 @@ class Note(models.Model):
 class Author(models.Model):
     nickname = models.CharField(max_length=150, verbose_name='Никнейм', unique=True)
     email = models.EmailField(verbose_name='Почта', unique=True)
-    photo = models.ImageField(verbose_name='Аватарка', blank=True)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
 
     def __str__(self):
@@ -35,6 +35,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
+    color = models.CharField(max_length=6, verbose_name='Код цвета')
 
     def __str__(self):
         return self.title
@@ -42,4 +43,4 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
-        ordering = ['title']
+        ordering = ['title', 'color']
