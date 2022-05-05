@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -11,6 +12,9 @@ class Note(models.Model):
     stared = models.BooleanField(verbose_name='Важная', default=False)
     author = models.ForeignKey('Author', on_delete=models.PROTECT, verbose_name='Автор', null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория', null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('note', kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name = 'Заметка'

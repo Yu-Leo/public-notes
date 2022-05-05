@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content_title %}{{ note.title }}{% endblock %}
+
+
+{% block content %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="hstack gap-3">
+            <div class="">
+                <img src="{% if note.author.photo %}
+                {{ note.author.photo.url }}
+                {% else %}
+                {% load static %}
+                {% static 'wall/img/default_avatar.png' %}
+                {% endif %}" alt="..." width="50" height="50"
+                     style="border-radius: 25px;">
+            </div>
+
+
+            <div class="fw-bold">
+                {% if note.author %}
+                <a href="#" class="text-decoration-none">{{ note.author.nickname }}</a>
+                {% else %}
+                Аноним
+                {% endif %}
+            </div>
+
+            <div class="fw-light">{{ note.created_at|date:"Y-m-d H:i" }}</div>
+            <div class="">
+                {% if note.stared %}
+                <i class="fa fa-star"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ note.title }}</h5>
+        <p class="card-text">{{ note.content }}</p>
+    </div>
+
+    <div class="card-footer"
+         style="{% if note.category.color %}background-color: #{{note.category.color}}{% endif %}">
+        <div class="hstack gap-3">
+            {% if note.rating > 0 %}
+            <div class="text-success fw-bold">+{{note.rating}}</div>
+            {% elif note.rating < 0 %}
+            <div class="text-danger fw-bold">{{note.rating}}</div>
+            {% else %}
+            <div class="fw-bold">{{note.rating}}</div>
+            {% endif %}
+
+
+            {% if note.category %}
+            <div class=""><span class="fst-italic">Категория: </span><a href="#">{{ note.category.title }}</a></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
