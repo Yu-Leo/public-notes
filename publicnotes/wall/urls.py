@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path("", index, name="home"),
+    path('', index, name='home'),
+    path('note/<int:pk>/', ViewNote.as_view(), name='note')
 ]
 
 if settings.DEBUG:
