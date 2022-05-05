@@ -41,6 +41,9 @@ class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
     color = models.CharField(max_length=6, verbose_name='Код цвета')
 
+    def get_absolute_url(self):
+        return reverse('category', kwargs={"pk": self.pk})
+
     def __str__(self):
         return self.title
 

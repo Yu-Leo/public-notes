@@ -2,9 +2,9 @@ import random
 
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
-from .models import Note
+from .models import Note, Category
 
 
 # Create your views here.
@@ -13,6 +13,21 @@ class ViewNote(DetailView):
     model = Note
     template_name = 'wall/note.html'
     context_object_name = 'note'
+
+
+class ViewCategory(ListView):
+    model = Category
+    template_name = 'wall/category.html'
+    context_object_name = 'notes'
+    allow_empty = False
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ViewCategory, self).get_context_data(**kwargs)
+        context['title'] = Category.objects.get(pk=self.kwargs['pk'])
+        return context
+
+    def get_queryset(self):
+        return Note.objects.filter(category_id=self.kwargs['pk'])
 
 
 def index(request):

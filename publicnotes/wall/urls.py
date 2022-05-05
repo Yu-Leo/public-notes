@@ -7,7 +7,8 @@ from .views import *
 urlpatterns = [
     path('', index, name='home'),
     path('note/<int:pk>/', ViewNote.as_view(), name='note'),
-    path('random_note/', random_note, name='random_note')
+    path('random_note/', random_note, name='random_note'),
+    path('category/<int:pk>', ViewCategory.as_view(), name='category')
 ]
 
 if settings.DEBUG:

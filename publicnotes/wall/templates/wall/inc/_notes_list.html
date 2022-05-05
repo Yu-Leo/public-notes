@@ -1,0 +1,56 @@
+{% for item in notes %}
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="hstack gap-3">
+            <div class="">
+                <img src="{% if item.author.photo %}
+                {{ item.author.photo.url }}
+                {% else %}
+                {% load static %}
+                {% static 'wall/img/default_avatar.png' %}
+                {% endif %}" alt="..." width="50" height="50"
+                     style="border-radius: 25px;">
+            </div>
+
+
+            <div class="fw-bold">
+                {% if item.author %}
+                <a href="#" class="text-decoration-none">{{ item.author.nickname }}</a>
+                {% else %}
+                Аноним
+                {% endif %}
+            </div>
+
+            <div class="fw-light">{{ item.created_at|date:"Y-m-d H:i" }}</div>
+            <div class="">
+                {% if item.stared %}
+                <i class="fa fa-star"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ item.title|truncatewords:10 }}</h5>
+        <p class="card-text">{{ item.content|truncatewords:30 }}</p>
+        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Открыть</a>
+    </div>
+
+    <div class="card-footer"
+         style="{% if item.category.color %}background-color: #{{item.category.color}}{% endif %}">
+        <div class="hstack gap-3">
+            {% if item.rating > 0 %}
+            <div class="text-success fw-bold">+{{item.rating}}</div>
+            {% elif item.rating < 0 %}
+            <div class="text-danger fw-bold">{{item.rating}}</div>
+            {% else %}
+            <div class="fw-bold">{{item.rating}}</div>
+            {% endif %}
+
+
+            {% if item.category %}
+            <div class=""><span class="fst-italic">Категория: </span><a href="#">{{ item.category.title }}</a></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}

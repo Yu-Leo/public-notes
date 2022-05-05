@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}Категория: {{ title }}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
 
 {% block content_title %}
 <div class="hstack gap-3">
-    <h1 class="mb-3">Заметки</h1>
-    <a href="{% url 'random_note' %}" class="btn btn-outline-primary">Случайная заметка</a>
+    <h1 class="mb-3">Категория: {{ title }}</h1>
 </div>
 {% endblock %}
 
