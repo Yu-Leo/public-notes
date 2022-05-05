@@ -4,7 +4,13 @@
 
 {% block sidebar %}{% endblock %}
 
-{% block content_title %}Заметки{% endblock %}
+
+{% block content_title %}
+<div class="hstack gap-3">
+    <h1 class="mb-3">Заметки</h1>
+    <a href="{% url 'random_note' %}" class="btn btn-outline-primary">Случайная заметка</a>
+</div>
+{% endblock %}
 
 
 {% block content %}
