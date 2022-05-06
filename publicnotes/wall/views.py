@@ -31,6 +31,13 @@ class ViewCategory(ListView):
         return Note.objects.filter(category_id=self.kwargs['pk'])
 
 
+class ViewAuthors(ListView):
+    model = Author
+    template_name = 'wall/authors.html'
+    context_object_name = 'authors'
+    allow_empty = False
+
+
 def index(request):
     notes = Note.objects.all()
     context = {
