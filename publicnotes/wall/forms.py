@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from .models import Note, Author
 
@@ -28,3 +29,9 @@ class AuthorForm(forms.ModelForm):
             'nickname': forms.TextInput(attrs={"class": "form-control"}),
             'email': forms.TextInput(attrs={"class": "form-control"}),
         }
+
+    def clean_nickname(self):
+        nickname = self.cleaned_data['nickname']
+        if ' ' in nickname:
+            raise ValidationError('Никнейм не должен содержать пробелов')
+        return nickname
