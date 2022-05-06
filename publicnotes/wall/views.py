@@ -4,7 +4,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView
 
-from .models import Note, Category
+from .models import *
+from .forms import *
 
 
 # Create your views here.
@@ -43,3 +44,15 @@ def random_note(request):
     if len(notes) > 0:
         return redirect(random.choice(notes))
     return redirect('home')
+
+
+def add_note(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save()
+            return redirect(note)
+    else:
+        form = NoteForm()
+
+    return render(request, 'wall/add_note_form.html', {"form": form})

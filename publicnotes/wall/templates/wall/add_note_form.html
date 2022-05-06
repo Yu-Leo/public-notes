@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить заметку{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+
+{% block content_title %}
+<div class="hstack gap-3">
+    <h1 class="mb-3">Добавить заметку</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="border border-info border-1 rounded p-3 bg-white">
+    <form action="{% url 'add_note' %}" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">Добавить заметку</button>
+    </form>
+
+</div>
+
+{% endblock %}
