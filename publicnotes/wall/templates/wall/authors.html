@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторы{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+
+{% block content_title %}
+<h1 class="mb-3">Авторы</h1>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    {% for item in authors %}
+
+    <div class="col">
+        <div class="card h-100 border-primary">
+
+            <div class="hstack gap-3">
+                <div class="">
+                    <img src="{% if item.photo %}
+                {{ item.photo.url }}
+                {% else %}
+                {% load static %}
+                {% static 'wall/img/default_avatar.png' %}
+                {% endif %}" alt="..." width="100" height="100"
+                         style="border-radius: 25px; padding: 10px;">
+                </div>
+
+                <h5 class="card-title"> {{item.nickname}} </h5>
+            </div>
+
+
+            <div class="card-body">
+                <ul>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
