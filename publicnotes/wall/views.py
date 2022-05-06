@@ -48,11 +48,18 @@ def random_note(request):
 
 def add_note(request):
     if request.method == 'POST':
-        form = NoteForm(request.POST)
-        if form.is_valid():
-            note = form.save()
+        note_form = NoteForm(request.POST)
+        author_form = AuthorForm(request.POST)
+
+        if note_form.is_valid() and author_form.is_valid():
+            notes_data = note_form.cleaned_data
+            author = author_form.save()
+
+            notes_data['author'] = author
+            note = Note.objects.create(**notes_data)
             return redirect(note)
     else:
-        form = NoteForm()
+        note_form = NoteForm()
+        author_form = AuthorForm()
 
-    return render(request, 'wall/add_note_form.html', {"form": form})
+    return render(request, 'wall/add_note_form.html', {"note_form": note_form, "author_form": author_form})
