@@ -48,7 +48,8 @@
 
 
             {% if item.category %}
-            <div class=""><span class="fst-italic">Категория: </span><a href="#">{{ item.category.title }}</a></div>
+            <div class=""><span class="fst-italic">Категория: </span><a href="{{ item.category.get_absolute_url }}">
+                {{ item.category.title }}</a></div>
             {% endif %}
         </div>
     </div>
