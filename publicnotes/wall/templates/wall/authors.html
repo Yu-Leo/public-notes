@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load wall_tags %}
+
+
 {% block title %}Авторы{% endblock %}
 
 {% block sidebar %}{% endblock %}
@@ -29,17 +32,26 @@
                          style="border-radius: 25px; padding: 10px;">
                 </div>
 
-                <h5 class="card-title"> {{item.nickname}} </h5>
+                <h5 class="card-title fw-bold"> {{item.nickname}} </h5>
             </div>
 
-
             <div class="card-body">
-                <ul>
-                    <li>Lorem ipsum</li>
-                    <li>Lorem ipsum</li>
-                    <li>Lorem ipsum</li>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Заметок: <span class="fw-bold">
+                        {% get_notes_count_for_author item %} </span></li>
+                    <li class="list-group-item">Рейтинг: <span class="
+                        {% if item.rating > 0 %}
+                        text-success
+                        {% elif item.rating < 0 %}
+                        text-danger
+                        {% else %}
+                        {% endif %}
+                        fw-bold"> {{ item.rating }}
+                    </span>
+                    </li>
 
                 </ul>
+
             </div>
         </div>
     </div>
