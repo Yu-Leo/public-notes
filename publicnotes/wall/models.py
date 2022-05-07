@@ -35,7 +35,7 @@ class Author(models.Model):
     class Meta:
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
-        ordering = ['nickname']
+        ordering = ['-rating']
 
 
 class Category(models.Model):
