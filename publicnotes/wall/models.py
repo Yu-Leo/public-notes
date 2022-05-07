@@ -27,6 +27,7 @@ class Author(models.Model):
     email = models.EmailField(verbose_name='Почта', unique=True)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
+    bio = models.TextField(verbose_name='О себе', blank=True)
 
     def __str__(self):
         return self.nickname
