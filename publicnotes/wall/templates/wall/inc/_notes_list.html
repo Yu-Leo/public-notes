@@ -15,7 +15,7 @@
 
             <div class="fw-bold">
                 {% if item.author %}
-                <a href="#" class="text-decoration-none">{{ item.author.nickname }}</a>
+                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none">{{ item.author.nickname }}</a>
                 {% else %}
                 Аноним
                 {% endif %}

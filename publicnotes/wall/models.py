@@ -29,6 +29,9 @@ class Author(models.Model):
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     bio = models.TextField(verbose_name='О себе', blank=True)
 
+    def get_absolute_url(self):
+        return reverse('author', kwargs={"pk": self.pk})
+
     def __str__(self):
         return self.nickname
 

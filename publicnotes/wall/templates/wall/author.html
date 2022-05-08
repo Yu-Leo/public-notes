@@ -2,14 +2,14 @@
 
 {% load wall_tags %}
 
-{% block title %}{{ author.nickname }}{% endblock %}
+{% block title %}Профиль {{ author.nickname }}{% endblock %}
 
 {% block sidebar %}
 
-<div class="card" style="width: 18rem;">
+<div class="card mt-2 mb-3" style="width: 18rem;">
 
-    <img src="{% if item.photo %}
-                {{ item.photo.url }}
+    <img src="{% if author.photo %}
+                {{ author.photo.url }}
                 {% else %}
                 {% load static %}
                 {% static 'wall/img/default_avatar.png' %}
@@ -39,7 +39,7 @@
 
 {% endblock %}
 
-{% block content_title %} <h1 class="mb-3">{{ author.nickname }}</h1>{% endblock %}
+{% block content_title %} <h1 class="mb-3">Заметки</h1>{% endblock %}
 
 {% block content %}
 
