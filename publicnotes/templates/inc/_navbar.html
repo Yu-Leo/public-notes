@@ -1,14 +1,15 @@
 {% load wall_tags %}
-
+{% load static %}
 {% get_categories as categories %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">PublicNotes</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'wall/img/logo.png' %}" alt="" width="32" height="32"
+                 class="d-inline-block align-text-center rounded-circle">
+            <span class="dark_purple_text">Public</span><span class="dark_pink_text">Notes</span>
+        </a>
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
