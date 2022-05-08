@@ -3,7 +3,7 @@ import random
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView
-
+from django.core.paginator import Paginator
 from .models import *
 from .forms import *
 
@@ -19,8 +19,8 @@ class ViewNote(DetailView):
 class ViewCategory(ListView):
     model = Category
     template_name = 'wall/category.html'
-    context_object_name = 'notes'
     allow_empty = False
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewCategory, self).get_context_data(**kwargs)
@@ -51,8 +51,11 @@ class ViewAuthor(DetailView):
 
 def index(request):
     notes = Note.objects.all().select_related('category', 'author')
+    paginator = Paginator(notes, 5)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
     context = {
-        'notes': notes,
+        'page_obj': page_objects
     }
     return render(request, 'wall/index.html', context)
 
