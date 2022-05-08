@@ -1,13 +1,14 @@
 from django import template
 from wall.models import Category, Note
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Count
 
 register = template.Library()
 
 
 @register.simple_tag
 def get_categories():
-    return Category.objects.all()
+    return Category.objects.annotate(cnt=Count('note')).order_by('-cnt', 'title')
 
 
 @register.simple_tag
