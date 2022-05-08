@@ -28,7 +28,7 @@ class ViewCategory(ListView):
         return context
 
     def get_queryset(self):
-        return Note.objects.filter(category_id=self.kwargs['pk'])
+        return Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
 
 
 class ViewAuthors(ListView):
@@ -50,7 +50,7 @@ class ViewAuthor(DetailView):
 
 
 def index(request):
-    notes = Note.objects.all()
+    notes = Note.objects.all().select_related('category', 'author')
     context = {
         'notes': notes,
     }
