@@ -6,11 +6,43 @@
 
 {% block sidebar %}
 
+<div class="card" style="width: 18rem;">
+
+    <img src="{% if item.photo %}
+                {{ item.photo.url }}
+                {% else %}
+                {% load static %}
+                {% static 'wall/img/default_avatar.png' %}
+                {% endif %}" alt="..." width="100" height="100"
+         style="border-radius: 25px; padding: 10px;">
+
+    <div class="card-body">
+        <h5 class="card-title"><span class="fw-bold">{{ author.nickname }}</span></h5>
+        <p class="card-text"><span>О себе:</span>{{author.bio}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Заметок: <span class="fw-bold">
+                        {% get_notes_count_for_author author %} </span></li>
+
+        <li class="list-group-item">Рейтинг: <span class="
+                        {% if item.rating > 0 %}
+                        text-success
+                        {% elif item.rating < 0 %}
+                        text-danger
+                        {% else %}
+                        {% endif %}
+                        fw-bold"> {{ author.rating }}
+                    </span>
+        </li>
+    </ul>
+</div>
+
 {% endblock %}
 
 {% block content_title %} <h1 class="mb-3">{{ author.nickname }}</h1>{% endblock %}
 
 {% block content %}
 
+{% include 'wall/inc/_notes_list.html'%}
 
 {% endblock %}

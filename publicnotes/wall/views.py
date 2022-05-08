@@ -43,6 +43,11 @@ class ViewAuthor(DetailView):
     template_name = 'wall/author.html'
     context_object_name = 'author'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ViewAuthor, self).get_context_data(**kwargs)
+        context['notes'] = Note.objects.filter(author=self.kwargs['pk'])
+        return context
+
 
 def index(request):
     notes = Note.objects.all()
