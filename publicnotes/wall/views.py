@@ -33,9 +33,15 @@ class ViewCategory(ListView):
 
 class ViewAuthors(ListView):
     model = Author
-    template_name = 'wall/authors.html'
+    template_name = 'wall/authors_list.html'
     context_object_name = 'authors'
     allow_empty = False
+
+
+class ViewAuthor(DetailView):
+    model = Author
+    template_name = 'wall/author.html'
+    context_object_name = 'author'
 
 
 def index(request):
