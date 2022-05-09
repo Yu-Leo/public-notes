@@ -84,3 +84,13 @@ def add_note(request):
         author_form = AuthorForm()
 
     return render(request, 'wall/add_note_form.html', {"note_form": note_form, "author_form": author_form})
+
+
+def registration(request):
+    context = {}
+    return render(request, 'wall/registration.html', context)
+
+
+def login(request):
+    context = {}
+    return render(request, 'wall/login.html', context)
