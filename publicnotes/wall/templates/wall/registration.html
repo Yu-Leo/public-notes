@@ -14,5 +14,11 @@
 
 {% block content %}
 
+<form action="{% url 'registration' %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+</form>
 
 {% endblock %}
