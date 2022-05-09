@@ -30,9 +30,9 @@
 
         <div class="col-md-9">
 
-            {% block content_title %}
+            {% include 'inc/_messages.html'%}
 
-            {% endblock %}
+            {% block content_title %} {% endblock %}
 
             {% block content %} CONTENT {% endblock %}
         </div>

@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView
 from django.core.paginator import Paginator
+from django.contrib import messages
+
 from .models import *
 from .forms import *
 
@@ -91,6 +93,10 @@ def registration(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегистрировались')
+            return redirect('login')
+        else:
+            messages.error(request, 'Ошибка регистрации')
     else:
         form = UserRegisterForm()
 
