@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}О сайте{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content_title %}
+<div class="hstack gap-3">
+    <h1 class="mb-3">О сайте</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="bg-light fs-5">
+    <h2>Идея:</h2>
+    <p> PublicNotes - место, где каждый может оставить заметку на общей стене.</p>
+
+    <h2>Функциональность:</h2>
+    <ul>
+        <li>Отображение заметок одним списком (главная страница)</li>
+        <li>Добавление новых заметок</li>
+        <li>Отображение заметок по категориям</li>
+        <li>Отображение списка авторов</li>
+        <li>Регистрация аккаунта</li>
+    </ul>
+
+    <h2>Используемые технологии:</h2>
+    <ul>
+        <li>
+            BackEnd:
+            <ul>
+                <li>Язык программирования: <span class="fw-bold">Python (3.10)</span></li>
+                <li>Фреймворки и библиотеки:
+                    <ul>
+                        <li><span class="fw-bold">Django (3.0.2)</span></li>
+                        <li>django_debug_toolbar (2.2)</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+
+        <li>
+            FrontEnd:
+            <ul>
+                <li>Языки: html, css</li>
+                <li>Фреймворки и библиотеки:
+                    <ul>
+                        <li>Bootstrap 5</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+        <li>Система контроля версий: <span class="fw-bold">git</span></li>
+        <li>IDE: JetBrains PyCharm Community</li>
+    </ul>
+
+
+    <h2>Ссылки:</h2>
+    <ul>
+        <li><a class="link-primary" href="https://djangoproject.com/" target="_blank">Официальный сайт Django</a></li>
+        <li><a class="link-primary" href="https://djbook.ru/" target="_blank">Русскоязычный сайт по Django</a></li>
+        <li><a class="link-primary" href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+    </ul>
+
+    <h2>Автор:</h2>
+    <ul>
+        <li><a class="link-primary" href="https://github.com/Yu-Leo" target="_blank">GitHub</a></li>
+        <li><a class="link-primary" href="https://t.me/yu_leo" target="_blank">Telegram</a></li>
+    </ul>
+
+</div>
+
+
+{% endblock %}
