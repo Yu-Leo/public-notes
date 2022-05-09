@@ -27,7 +27,7 @@ class AuthorForm(forms.ModelForm):
         }
         widgets = {
             'nickname': forms.TextInput(attrs={"class": "form-control"}),
-            'email': forms.TextInput(attrs={"class": "form-control"}),
+            'email': forms.EmailInput(attrs={"class": "form-control"}),
         }
 
     def clean_nickname(self):
