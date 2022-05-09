@@ -87,7 +87,17 @@ def add_note(request):
 
 
 def registration(request):
-    context = {}
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserRegisterForm()
+
+    context = {
+        'form': form,
+    }
+
     return render(request, 'wall/registration.html', context)
 
 
