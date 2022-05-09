@@ -12,6 +12,8 @@ urlpatterns = [
     path('add_note/', add_note, name='add_note'),
     path('authors/', ViewAuthors.as_view(), name='authors'),
     path('author/<int:pk>', ViewAuthor.as_view(), name='author'),
+    path('registration', registration, name='registration'),
+    path('login', login, name='login'),
 ]
 
 if settings.DEBUG:
