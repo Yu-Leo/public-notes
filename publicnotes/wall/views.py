@@ -110,3 +110,7 @@ def registration(request):
 def login(request):
     context = {}
     return render(request, 'wall/login.html', context)
+
+
+def about(request):
+    return render(request, 'wall/about.html', {})

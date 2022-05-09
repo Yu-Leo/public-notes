@@ -14,6 +14,7 @@ urlpatterns = [
     path('author/<int:pk>', ViewAuthor.as_view(), name='author'),
     path('registration', registration, name='registration'),
     path('login', login, name='login'),
+    path('about', about, name='about'),
 ]
 
 if settings.DEBUG:
