@@ -25,12 +25,16 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_note' %}">Добавить заметку</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'authors' %}">Авторы</a>
                 </li>
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_note' %}">Добавить заметку</a>
+                </li>
+                {% endif %}
 
             </ul>
         </div>

@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 from .models import *
 from .forms import *
@@ -69,6 +71,7 @@ def random_note(request):
     return redirect('home')
 
 
+@login_required(login_url=reverse_lazy('login'))
 def add_note(request):
     if request.method == 'POST':
         note_form = NoteForm(request.POST)
