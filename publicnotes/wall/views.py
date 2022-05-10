@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.contrib.auth import login, logout
 
 from .models import *
 from .forms import *
@@ -95,7 +96,8 @@ def registration(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             messages.success(request, 'Вы успешно зарегистрировались')
             return redirect('login')
         else:
@@ -110,8 +112,23 @@ def registration(request):
     return render(request, 'wall/registration.html', context)
 
 
-def login(request):
-    context = {}
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f'Добро пожаловать, {user.username}')
+            return redirect('home')
+        else:
+            messages.error(request, 'Ошибка входа')
+    else:
+        form = UserLoginForm()
+
+    context = {
+        'form': form,
+    }
+
     return render(request, 'wall/login.html', context)
 
 

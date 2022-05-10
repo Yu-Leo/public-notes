@@ -13,7 +13,7 @@ urlpatterns = [
     path('authors/', ViewAuthors.as_view(), name='authors'),
     path('author/<int:pk>', ViewAuthor.as_view(), name='author'),
     path('registration', registration, name='registration'),
-    path('login', login, name='login'),
+    path('login', user_login, name='login'),
     path('about', about, name='about'),
 ]
 
