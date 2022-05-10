@@ -132,5 +132,11 @@ def user_login(request):
     return render(request, 'wall/login.html', context)
 
 
+def user_logout(request):
+    logout(request)
+    messages.error(request, 'Вы вышли из аккаунта')
+    return redirect('login')
+
+
 def about(request):
     return render(request, 'wall/about.html', {})

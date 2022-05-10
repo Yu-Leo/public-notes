@@ -14,6 +14,7 @@ urlpatterns = [
     path('author/<int:pk>', ViewAuthor.as_view(), name='author'),
     path('registration', registration, name='registration'),
     path('login', user_login, name='login'),
+    path('logout', user_logout, name='logout'),
     path('about', about, name='about'),
 ]
 
