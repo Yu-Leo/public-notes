@@ -17,12 +17,6 @@
 <form action="{% url 'add_note' %}" method="post">
     {% csrf_token %}
 
-    <div class="border border-info border-1 rounded p-3 bg-white mb-3">
-        <h3>Автор:</h3>
-        {{ author_form.as_p }}
-    </div>
-
-
     <div class="border border-info border-1 rounded p-3 bg-white mb-5">
         <h3>Заметка:</h3>
 
