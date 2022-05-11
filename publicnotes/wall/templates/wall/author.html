@@ -2,7 +2,7 @@
 
 {% load wall_tags %}
 
-{% block title %}Профиль {{ author.nickname }}{% endblock %}
+{% block title %}{{ author.username }}{% endblock %}
 
 {% block sidebar %}
 
@@ -17,18 +17,28 @@
          style="border-radius: 50%; padding: 10px;">
 
     <div class="card-body">
-        <h5 class="card-title"><span class="fw-bold">{{ author.username }}</span></h5>
-        <p class="card-text"><span class="text-secondary"> О себе: </span>{{author.bio}}</p>
-        {% if request.user == author%}
+        <h4 class="card-title"><span class="fw-bold">{{ author.username }}</span></h4>
+        <h5><span class="fw-light">
+            {% if author.first_name %}
+            {{ author.first_name }}
+            {% endif %}
+            {% if author.last_name %}
+            {{ author.last_name }}
+            {% endif %}</span></h5>
+
+        {% if request.user == author %}
         <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary d-block">Редактировать профиль</a>
         {% endif %}
     </div>
 
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Заметок: <span class="fw-bold">
+        <li class="list-group-item">
+            <p class="card-text"><span class="text-secondary"> О себе: </span>{{author.bio}}</p>
+        </li>
+        <li class="list-group-item"><span class="text-secondary">Заметок: </span><span class="fw-bold">
                         {% get_notes_count_for_author author %} </span></li>
 
-        <li class="list-group-item">Рейтинг: <span class="
+        <li class="list-group-item"><span class="text-secondary">Рейтинг: </span><span class="
                         {% if item.rating > 0 %}
                         text-success
                         {% elif item.rating < 0 %}
