@@ -90,7 +90,15 @@ def add_note(request):
 
 @login_required(login_url=reverse_lazy('login'))
 def edit_profile(request):
-    pass
+    if request.method == 'POST':
+        user_form = UpdateProfile(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect(request.user)
+    else:
+        user_form = UpdateProfile(instance=request.user)
+
+    return render(request, 'wall/edit_profile.html', {"user_form": user_form})
 
 
 def registration(request):
