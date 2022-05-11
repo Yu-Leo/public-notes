@@ -1,3 +1,10 @@
+:root {
+    --purple: #6005A6;
+    --dark-purple: #3E026C;
+    --pink: #A60070;
+    --dark-pink: #7B0053;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -15,14 +22,50 @@ footer {
   background-color: #B899D1;
 }
 
-.dark_purple_text {
-    color: #6005A6;
+.text-purple {
+    color: var(--purple);
+}
+
+.text-pink {
+    color: var(--pink);
 }
 
 .purple-navbar {
     background-color: #E0BBFC;
 }
 
-.dark_pink_text {
-    color: #A60070;
+.btn-purple {
+    background-color: var(--purple);
+    color: #fff;
+}
+
+.btn-purple:hover {
+    background-color: var(--dark-purple);
+    color: #fff;
+}
+
+.btn-outline-purple {
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+.btn-outline-purple:hover {
+    border-color: var(--dark-purple);
+    background-color: var(--dark-purple);
+    color: #fff;
+}
+
+.btn-outline-pink {
+    border-color: var(--pink);
+    color: var(--pink);
+}
+
+.btn-outline-pink:hover {
+    border-color: var(--dark-pink);
+    background-color: var(--dark-pink);
+    color: #fff;
+}
+
+.border-purple {
+    border-color: var(--purple);
 }

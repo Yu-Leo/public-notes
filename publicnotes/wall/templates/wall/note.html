@@ -26,7 +26,8 @@
 
             <div class="fw-bold">
                 {% if note.author %}
-                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none">{{ note.author.username }}</a>
+                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none text-purple">
+                    {{ note.author.username }}</a>
                 {% else %}
                 Аноним
                 {% endif %}
@@ -66,16 +67,16 @@
         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
             {% get_prev_note_in_category note as prev_note %}
             {% if prev_note%}
-            <a href="{{ prev_note.get_absolute_url }}" class="btn btn-outline-dark">Предыдущая заметка</a>
+            <a href="{{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">Предыдущая заметка</a>
             {% else%}
-            <a href="#" class="btn btn-outline-dark disabled">Предыдущая заметка</a>
+            <a href="#" class="btn btn-outline-purple disabled">Предыдущая заметка</a>
             {% endif %}
 
             {% get_next_note_in_category note as next_note %}
             {% if next_note%}
-            <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-dark">Следующая заметка</a>
+            <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">Следующая заметка</a>
             {% else%}
-            <a href="#" class="btn btn-outline-dark disabled">Следующая заметка</a>
+            <a href="#" class="btn btn-outline-purple disabled">Следующая заметка</a>
             {% endif %}
         </div>
     </div>

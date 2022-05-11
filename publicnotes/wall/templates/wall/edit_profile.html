@@ -17,9 +17,9 @@
 <form action="{% url 'edit_profile' %}" method="post">
     {% csrf_token %}
 
-    <div class="border border-info border-1 rounded p-3 bg-white mb-5">
+    <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
         {{ user_form.as_p }}
-        <button type="submit" class="btn btn-primary btn-block">Обновить</button>
+        <button type="submit" class="btn btn-purple btn-block">Обновить</button>
     </div>
 
 </form>

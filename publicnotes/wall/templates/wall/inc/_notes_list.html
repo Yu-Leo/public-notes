@@ -13,7 +13,8 @@
             </div>
             <div class="fw-bold">
                 {% if item.author %}
-                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none">{{ item.author.username }}</a>
+                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none text-purple">
+                    {{ item.author.username }}</a>
                 {% else %}
                 Аноним
                 {% endif %}
@@ -30,7 +31,7 @@
     <div class="card-body">
         <h5 class="card-title">{{ item.title|truncatewords:10 }}</h5>
         <p class="card-text">{{ item.content|truncatewords:30 }}</p>
-        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Открыть</a>
+        <a href="{{ item.get_absolute_url }}" class="btn btn-purple">Открыть</a>
     </div>
 
     <div class="card-footer"
