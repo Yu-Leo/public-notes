@@ -1,8 +1,15 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
+
+
+class User(AbstractUser):
+    pass
+
 
 class Note(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
@@ -11,6 +18,13 @@ class Note(models.Model):
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     stared = models.BooleanField(verbose_name='Важная', default=False)
     # author = models.ForeignKey('Author', on_delete=models.PROTECT, verbose_name='Автор', null=True, blank=True)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        verbose_name='Автор',
+        null=True,
+        blank=True,
+    )
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория', null=True, blank=True)
 
     def get_absolute_url(self):

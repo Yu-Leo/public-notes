@@ -84,8 +84,8 @@ def add_note(request):
         if note_form.is_valid():
             notes_data = note_form.cleaned_data
             # author = author_form.save()
-
-            # notes_data['author'] = author
+            author = request.user
+            notes_data['author'] = author
             note = Note.objects.create(**notes_data)
             return redirect(note)
     else:
