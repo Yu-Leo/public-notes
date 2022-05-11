@@ -8,6 +8,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
+    rating = models.IntegerField(verbose_name='Рейтинг', default=0)
+    bio = models.TextField(verbose_name='О себе', blank=True)
 
     def get_absolute_url(self):
         return reverse('author', kwargs={"pk": self.pk})

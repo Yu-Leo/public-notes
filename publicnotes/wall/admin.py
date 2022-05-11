@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 # from .models import Note, Author, Category
 from .models import Note, Category, User
+from django.contrib.auth.forms import UserChangeForm
 
 
 # Register your models here.
@@ -12,17 +13,24 @@ class NoteAdmin(admin.ModelAdmin):
     list_filter = ('created_at', 'category')
 
 
-#
-# class AuthorAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'nickname', 'email', 'rating')
-#     list_display_links = ('id', 'nickname')
+class MyUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = User
+
+
+class MyUserAdmin(UserAdmin):
+    form = MyUserChangeForm
+
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('rating',)}),
+    )
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(User, MyUserAdmin)
 
 admin.site.register(Note, NoteAdmin)
 # admin.site.register(Author, AuthorAdmin)
