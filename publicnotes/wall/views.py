@@ -33,29 +33,31 @@ class ViewCategory(ListView):
         return context
 
     def get_queryset(self):
-        return Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
+        # return Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
+        return Note.objects.filter(category_id=self.kwargs['pk']).select_related('category')
 
 
-class ViewAuthors(ListView):
-    model = Author
-    template_name = 'wall/authors_list.html'
-    context_object_name = 'authors'
-    allow_empty = False
-
-
-class ViewAuthor(DetailView):
-    model = Author
-    template_name = 'wall/author.html'
-    context_object_name = 'author'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ViewAuthor, self).get_context_data(**kwargs)
-        context['page_obj'] = Note.objects.filter(author=self.kwargs['pk'])
-        return context
+# class ViewAuthors(ListView):
+#     model = Author
+#     template_name = 'wall/authors_list.html'
+#     context_object_name = 'authors'
+#     allow_empty = False
+#
+#
+# class ViewAuthor(DetailView):
+#     model = Author
+#     template_name = 'wall/author.html'
+#     context_object_name = 'author'
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super(ViewAuthor, self).get_context_data(**kwargs)
+#         context['page_obj'] = Note.objects.filter(author=self.kwargs['pk'])
+#         return context
 
 
 def index(request):
-    notes = Note.objects.all().select_related('category', 'author')
+    # notes = Note.objects.all().select_related('category', 'author')
+    notes = Note.objects.all().select_related('category')
     paginator = Paginator(notes, 5)
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
@@ -76,20 +78,22 @@ def random_note(request):
 def add_note(request):
     if request.method == 'POST':
         note_form = NoteForm(request.POST)
-        author_form = AuthorForm(request.POST)
+        # author_form = AuthorForm(request.POST)
 
-        if note_form.is_valid() and author_form.is_valid():
+        # if note_form.is_valid() and author_form.is_valid():
+        if note_form.is_valid():
             notes_data = note_form.cleaned_data
-            author = author_form.save()
+            # author = author_form.save()
 
-            notes_data['author'] = author
+            # notes_data['author'] = author
             note = Note.objects.create(**notes_data)
             return redirect(note)
     else:
         note_form = NoteForm()
-        author_form = AuthorForm()
+        # author_form = AuthorForm()
 
-    return render(request, 'wall/add_note_form.html', {"note_form": note_form, "author_form": author_form})
+    # return render(request, 'wall/add_note_form.html', {"note_form": note_form, "author_form": author_form})
+    return render(request, 'wall/add_note_form.html', {"note_form": note_form})
 
 
 def registration(request):

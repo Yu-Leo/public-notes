@@ -3,7 +3,9 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from .models import Note, Author
+# from .models import Note, Author
+
+from .models import Note
 
 
 class NoteForm(forms.ModelForm):
@@ -19,24 +21,24 @@ class NoteForm(forms.ModelForm):
         }
 
 
-class AuthorForm(forms.ModelForm):
-    class Meta:
-        model = Author
-        fields = ['nickname', 'email']
-        labels = {
-            'title': 'Название',
-            'email': 'E-mail'
-        }
-        widgets = {
-            'nickname': forms.TextInput(attrs={"class": "form-control"}),
-            'email': forms.EmailInput(attrs={"class": "form-control"}),
-        }
-
-    def clean_nickname(self):
-        nickname = self.cleaned_data['nickname']
-        if ' ' in nickname:
-            raise ValidationError('Никнейм не должен содержать пробелов')
-        return nickname
+# class AuthorForm(forms.ModelForm):
+#     class Meta:
+#         model = Author
+#         fields = ['nickname', 'email']
+#         labels = {
+#             'title': 'Название',
+#             'email': 'E-mail'
+#         }
+#         widgets = {
+#             'nickname': forms.TextInput(attrs={"class": "form-control"}),
+#             'email': forms.EmailInput(attrs={"class": "form-control"}),
+#         }
+#
+#     def clean_nickname(self):
+#         nickname = self.cleaned_data['nickname']
+#         if ' ' in nickname:
+#             raise ValidationError('Никнейм не должен содержать пробелов')
+#         return nickname
 
 
 class UserRegisterForm(UserCreationForm):
