@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 # from .models import Note, Author, Category
-from .models import Note, Category
+from .models import Note, Category, User
 
 
 # Register your models here.
@@ -20,6 +21,8 @@ class NoteAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 
+
+admin.site.register(User, UserAdmin)
 
 admin.site.register(Note, NoteAdmin)
 # admin.site.register(Author, AuthorAdmin)
