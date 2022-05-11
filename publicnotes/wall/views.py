@@ -88,6 +88,11 @@ def add_note(request):
     return render(request, 'wall/add_note_form.html', {"note_form": note_form})
 
 
+@login_required(login_url=reverse_lazy('login'))
+def edit_profile(request):
+    pass
+
+
 def registration(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

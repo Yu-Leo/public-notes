@@ -13,13 +13,17 @@
                 {% else %}
                 {% load static %}
                 {% static 'wall/img/default_avatar.png' %}
-                {% endif %}" alt="..." width="100" height="100"
-         style="border-radius: 25px; padding: 10px;">
+                {% endif %}" alt="..."
+         style="border-radius: 50%; padding: 10px;">
 
     <div class="card-body">
         <h5 class="card-title"><span class="fw-bold">{{ author.username }}</span></h5>
-        <p class="card-text"><span>О себе:</span>{{author.bio}}</p>
+        <p class="card-text"><span class="text-secondary"> О себе: </span>{{author.bio}}</p>
+        {% if request.user == author%}
+        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary d-block">Редактировать профиль</a>
+        {% endif %}
     </div>
+
     <ul class="list-group list-group-flush">
         <li class="list-group-item">Заметок: <span class="fw-bold">
                         {% get_notes_count_for_author author %} </span></li>
@@ -34,7 +38,10 @@
                         fw-bold"> {{ author.rating }}
                     </span>
         </li>
+
+
     </ul>
+
 </div>
 
 {% endblock %}
