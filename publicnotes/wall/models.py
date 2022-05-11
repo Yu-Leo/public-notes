@@ -40,25 +40,6 @@ class Note(models.Model):
         ordering = ['-created_at', 'title']
 
 
-# class Author(models.Model):
-#     nickname = models.CharField(max_length=150, verbose_name='Никнейм', unique=True)
-#     email = models.EmailField(verbose_name='Почта', unique=True)
-#     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
-#     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
-#     bio = models.TextField(verbose_name='О себе', blank=True)
-#
-#     def get_absolute_url(self):
-#         return reverse('author', kwargs={"pk": self.pk})
-#
-#     def __str__(self):
-#         return self.nickname
-#
-#     class Meta:
-#         verbose_name = 'Автор'
-#         verbose_name_plural = 'Авторы'
-#         ordering = ['-rating']
-
-
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
     color = models.CharField(max_length=6, verbose_name='Код цвета')
