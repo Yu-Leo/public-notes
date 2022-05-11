@@ -8,7 +8,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+
+    def get_absolute_url(self):
+        return reverse('author', kwargs={"pk": self.pk})
 
 
 class Note(models.Model):
@@ -17,7 +19,6 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     stared = models.BooleanField(verbose_name='Важная', default=False)
-    # author = models.ForeignKey('Author', on_delete=models.PROTECT, verbose_name='Автор', null=True, blank=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,

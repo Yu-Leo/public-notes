@@ -3,7 +3,6 @@
     <div class="card-header">
         <div class="hstack gap-3">
             <div class="">
-                {% comment %}
                 <img src="{% if item.author.photo %}
                 {{ item.author.photo.url }}
                 {% else %}
@@ -11,18 +10,13 @@
                 {% static 'wall/img/default_avatar.png' %}
                 {% endif %}" alt="..." width="50" height="50"
                      style="border-radius: 25px;">
-                {% endcomment %}
             </div>
-
-
             <div class="fw-bold">
-                {% comment %}
                 {% if item.author %}
-                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none">{{ item.author.nickname }}</a>
+                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none">{{ item.author.username }}</a>
                 {% else %}
                 Аноним
                 {% endif %}
-                {% endcomment %}
             </div>
 
             <div class="fw-light">{{ item.created_at|date:"Y-m-d H:i" }}</div>
