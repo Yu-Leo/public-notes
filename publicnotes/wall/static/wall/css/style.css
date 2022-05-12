@@ -29,6 +29,10 @@ footer {
     color: var(--purple);
 }
 
+a.text-purple:hover {
+    color: var(--dark-purple);
+}
+
 .text-pink {
     color: var(--pink);
 }
