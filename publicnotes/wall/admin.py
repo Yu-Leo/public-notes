@@ -1,10 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-# from .models import Note, Author, Category
 from django.utils.safestring import mark_safe
 
 from .models import Note, Category, User
-from django.contrib.auth.forms import UserChangeForm
 
 
 # Register your models here.
@@ -21,7 +19,7 @@ class MyUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Персональная информация', {'fields': ('first_name', 'last_name',
-                                                'email', 'rating', 'photo', 'get_photo', 'bio')}),
+                                                'email', 'show_email', 'rating', 'photo', 'get_photo', 'bio')}),
         ('Права доступа', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),

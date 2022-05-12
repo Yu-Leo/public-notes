@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # from .models import Note, Author
@@ -23,13 +22,14 @@ class NoteForm(forms.ModelForm):
 class UpdateProfile(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'bio', 'photo']
+        fields = ['username', 'email', 'show_email', 'first_name', 'last_name', 'bio']
         widgets = {
-            'username': forms.TextInput(attrs={"class": "form-control"}),
-            'email': forms.EmailInput(attrs={"class": "form-control"}),
-            'first_name': forms.TextInput(attrs={"class": "form-control"}),
-            'last_name': forms.TextInput(attrs={"class": "form-control"}),
-            'bio': forms.Textarea(attrs={"class": "form-control"}),
+            'username': forms.TextInput(attrs={"class": "form-control mb-2"}),
+            'email': forms.EmailInput(attrs={"class": "form-control mb-2"}),
+            'show_email': forms.CheckboxInput(attrs={"class": "form-check-input mb-2"}),
+            'first_name': forms.TextInput(attrs={"class": "form-control mb-2"}),
+            'last_name': forms.TextInput(attrs={"class": "form-control mb-2"}),
+            'bio': forms.Textarea(attrs={"class": "form-control mb-2"}),
         }
 
 

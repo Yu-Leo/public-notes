@@ -7,7 +7,6 @@
 {% block sidebar %}
 
 <div class="card">
-
     <img src="{% if author.photo %}
                 {{ author.photo.url }}
                 {% else %}
@@ -25,16 +24,23 @@
             {% if author.last_name %}
             {{ author.last_name }}
             {% endif %}</span></h5>
-
         {% if request.user == author %}
         <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">Редактировать профиль</a>
         {% endif %}
     </div>
 
     <ul class="list-group list-group-flush">
+
+        {% if author.show_email %}
+        <li class="list-group-item">
+            <p class="card-text"><span class="text-secondary"> E-mail: </span>{{ author.email }}</p>
+        </li>
+        {% endif %}
+
         <li class="list-group-item">
             <p class="card-text"><span class="text-secondary"> О себе: </span>{{author.bio}}</p>
         </li>
+
         <li class="list-group-item"><span class="text-secondary">Заметок: </span><span class="fw-bold">
                         {% get_notes_count_for_author author %} </span></li>
 
