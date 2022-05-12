@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,500;0,700;1,500;1,700&display=swap');
+
 :root {
     --purple: #6005A6;
     --dark-purple: #3E026C;
@@ -12,6 +14,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    font-family: 'Raleway', sans-serif;
 }
 
 footer {
