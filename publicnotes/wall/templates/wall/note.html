@@ -23,10 +23,9 @@
                      style="border-radius: 25px;">
             </div>
 
-
             <div class="fw-bold">
                 {% if note.author %}
-                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none text-purple">
+                <a href="{{ note.author.get_absolute_url }}" class="text-decoration-none text-purple">
                     {{ note.author.username }}</a>
                 {% else %}
                 Аноним
