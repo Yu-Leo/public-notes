@@ -37,9 +37,11 @@
         </li>
         {% endif %}
 
+        {% if author.bio %}
         <li class="list-group-item">
             <p class="card-text"><span class="text-secondary"> О себе: </span>{{author.bio}}</p>
         </li>
+        {% endif %}
 
         <li class="list-group-item"><span class="text-secondary">Заметок: </span><span class="fw-bold">
                         {% get_notes_count_for_author author %} </span></li>
