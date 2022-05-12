@@ -28,10 +28,10 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="transform: rotate(0);">
         <h5 class="card-title">{{ item.title|truncatewords:10 }}</h5>
         <p class="card-text">{{ item.content|truncatewords:30 }}</p>
-        <a href="{{ item.get_absolute_url }}" class="btn btn-purple">Открыть</a>
+        <a href="{{ item.get_absolute_url }}" class="btn btn-purple stretched-link">Открыть</a>
     </div>
 
     <div class="card-footer"
