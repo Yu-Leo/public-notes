@@ -149,3 +149,7 @@ def user_logout(request):
 
 def about(request):
     return render(request, 'wall/about.html', {})
+
+
+def handle_page_not_found(request, exception=None):
+    return render(request, 'wall/404.html', {})
