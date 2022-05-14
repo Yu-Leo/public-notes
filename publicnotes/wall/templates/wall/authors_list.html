@@ -29,7 +29,7 @@
                 {% load static %}
                 {% static 'wall/img/default_avatar.png' %}
                 {% endif %}" alt="..." width="100" height="100"
-                         style="border-radius: 25px; padding: 10px;">
+                         style="border-radius: 50%; padding: 10px;">
                 </div>
 
                 <h5 class="card-title fw-bold"> {{item.username}} </h5>
@@ -53,7 +53,8 @@
 
             </div>
             <div class="card-footer">
-                <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">Открыть профиль</a>
+                <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">Открыть
+                    профиль</a>
             </div>
         </div>
     </div>
