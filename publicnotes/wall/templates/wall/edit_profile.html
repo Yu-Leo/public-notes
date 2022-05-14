@@ -11,7 +11,10 @@
         <h1>Редактировать профиль</h1>
     </div>
     <div class="ms-auto">
-        <a href="{% url 'delete_profile' %}" class="btn btn-outline-danger">Удалить профиль</a>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                data-bs-target="#deleteProfileModal">
+            Удалить профиль
+        </button>
     </div>
 </div>
 
@@ -29,5 +32,25 @@
 
 </form>
 
+
+<!-- deleteProfileModal -->
+<div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProfileModalLabel">Удаление профиля</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Ваш профиль и все заметки будут удалены навсегда! Продолжить?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <a class="btn btn-danger" href="{% url 'delete_profile' %}" role="button">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
