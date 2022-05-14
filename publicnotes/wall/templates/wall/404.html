@@ -6,9 +6,13 @@
 
 
 {% block content_title %}
-<div class="hstack gap-3">
-    <h1 class="mb-3">Запрашиваемая страница не найдена</h1>
-    <a href="{% url 'home' %}" class="btn btn-outline-purple">На главную</a>
+<div class="hstack gap-3 mb-3">
+    <div>
+        <h1>Запрашиваемая страница не найдена</h1>
+    </div>
+    <div>
+        <a href="{% url 'home' %}" class="btn btn-outline-purple">На главную</a>
+    </div>
 </div>
 {% endblock %}
 
