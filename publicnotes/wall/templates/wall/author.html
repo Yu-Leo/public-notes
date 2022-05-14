@@ -62,10 +62,14 @@
 {% endblock %}
 
 {% block content_title %}
-<div class="hstack gap-3">
-    <h1 class="mb-3">Заметки</h1>
+<div class="hstack gap-3 mb-3">
+    <div>
+        <h1>Заметки</h1>
+    </div>
     {% if request.user == author%}
-    <a href="{% url 'add_note' %}" class="btn btn-outline-purple">Добавить заметку</a>
+    <div>
+        <a href="{% url 'random_note' %}" class="btn btn-outline-purple">Случайная заметка</a>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
