@@ -1,5 +1,6 @@
 import random
 
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView
@@ -153,3 +154,12 @@ def about(request):
 
 def handle_page_not_found(request, exception=None):
     return render(request, 'wall/404.html', {})
+
+
+@login_required(login_url=reverse_lazy('login'))
+def delete_profile(request):
+    user = request.user
+    logout(request)
+    user.delete()
+    messages.success(request, 'Профиль и заметки успешно удалены!')
+    return redirect('home')
