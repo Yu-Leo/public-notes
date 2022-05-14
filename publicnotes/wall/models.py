@@ -25,7 +25,7 @@ class Note(models.Model):
     stared = models.BooleanField(verbose_name='Важная', default=False)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name='Автор',
         null=True,
         blank=True,
