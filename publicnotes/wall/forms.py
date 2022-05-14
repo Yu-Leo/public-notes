@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
-# from .models import Note, Author
+from django.core.exceptions import ValidationError
 
 from .models import Note, User
 
@@ -29,8 +28,17 @@ class UpdateProfile(forms.ModelForm):
             'show_email': forms.CheckboxInput(attrs={"class": "form-check-input mb-2"}),
             'first_name': forms.TextInput(attrs={"class": "form-control mb-2"}),
             'last_name': forms.TextInput(attrs={"class": "form-control mb-2"}),
-            'bio': forms.Textarea(attrs={"class": "form-control mb-2"}),
+            'bio': forms.Textarea(attrs={"class": "form-control mb-2",
+                                         "placeholder": "Расскажите немного о себе. Не более 20 слов"}),
         }
+
+    def clean_bio(self):
+        bio: str = self.cleaned_data['bio']
+
+        if len(bio.split()) > 20:
+            raise ValidationError('Раздел "О себе" должен содержать не более 20 слов')
+
+        return bio
 
 
 class UserRegisterForm(UserCreationForm):
