@@ -1,6 +1,6 @@
 import random
 
-from django.http import HttpResponse
+from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView, CreateView
@@ -25,16 +25,22 @@ class ViewNote(DetailView):
 class ViewCategory(ListView):
     model = Category
     template_name = 'wall/category.html'
-    allow_empty = False
+    allow_empty = True
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewCategory, self).get_context_data(**kwargs)
-        context['title'] = Category.objects.get(pk=self.kwargs['pk'])
-        return context
+        try:
+            context['title'] = Category.objects.get(pk=self.kwargs['pk'])
+            return context
+        except Category.DoesNotExist:
+            raise Http404()
 
     def get_queryset(self):
-        return Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
+        try:
+            return Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
+        except Category.DoesNotExist:
+            raise Http404()
 
 
 class ViewAuthors(ListView):
@@ -168,7 +174,7 @@ def delete_profile(request):
 class CategoriesList(CreateView):
     form_class = CategoryForm
     template_name = 'wall/categories_list.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('categories_list')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CategoriesList, self).get_context_data(**kwargs)

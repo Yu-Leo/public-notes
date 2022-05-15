@@ -37,7 +37,9 @@
     </div>
 </div>
 
+{% if page_obj %}
 <h2 class="mb-2">Список</h2>
+{% endif %}
 {% for item in page_obj %}
 <div class="card mb-2">
     <div class="card-body">
