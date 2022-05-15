@@ -30,7 +30,7 @@ class Note(models.Model):
         null=True,
         blank=True,
     )
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория', null=True, blank=True)
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
@@ -43,7 +43,6 @@ class Note(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
-    color = models.CharField(max_length=6, verbose_name='Код цвета')
 
     def get_absolute_url(self):
         return reverse('category', kwargs={"pk": self.pk})
@@ -54,4 +53,4 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
-        ordering = ['title', 'color']
+        ordering = ['title']

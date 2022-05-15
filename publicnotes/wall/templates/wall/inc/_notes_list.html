@@ -34,8 +34,7 @@
         <a href="{{ item.get_absolute_url }}" class="btn btn-purple stretched-link">Открыть</a>
     </div>
 
-    <div class="card-footer"
-         style="{% if item.category.color %}background-color: #{{item.category.color}}{% endif %}">
+    <div class="card-footer">
         <div class="hstack gap-3">
             {% if item.rating > 0 %}
             <div class="text-success fw-bold">+{{item.rating}}</div>
@@ -47,7 +46,7 @@
 
 
             {% if item.category %}
-            <div class=""><span class="fst-italic">Категория: </span><a href="{{ item.category.get_absolute_url }}">
+            <div class=""><span class="">Категория: </span><a href="{{ item.category.get_absolute_url }}">
                 {{ item.category.title }}</a></div>
             {% endif %}
         </div>
