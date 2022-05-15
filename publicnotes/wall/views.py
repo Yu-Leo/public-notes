@@ -3,7 +3,7 @@ import random
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -163,3 +163,14 @@ def delete_profile(request):
     user.delete()
     messages.success(request, 'Профиль и заметки успешно удалены!')
     return redirect('home')
+
+
+class CategoriesList(CreateView):
+    form_class = CategoryForm
+    template_name = 'wall/categories_list.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CategoriesList, self).get_context_data(**kwargs)
+        context['page_obj'] = Category.objects.all()
+        return context
