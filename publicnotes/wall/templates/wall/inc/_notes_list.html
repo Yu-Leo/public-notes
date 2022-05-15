@@ -46,7 +46,8 @@
 
 
             {% if item.category %}
-            <div class=""><span class="">Категория: </span><a href="{{ item.category.get_absolute_url }}">
+            <div class=""><span class="">Категория: </span><a href="{{ item.category.get_absolute_url }}"
+                                                              class="text-decoration-none text-dark fw-bold">
                 {{ item.category.title }}</a></div>
             {% endif %}
         </div>

@@ -56,9 +56,9 @@
             <div class="fw-bold">{{note.rating}}</div>
             {% endif %}
 
-
             {% if note.category %}
-            <div class=""><span class="fst-italic">Категория: </span><a href="{{ note.category.get_absolute_url }}">
+            <div class=""><span class="">Категория: </span><a href="{{ note.category.get_absolute_url }}"
+                                                              class="text-decoration-none text-dark fw-bold">
                 {{ note.category.title }}</a></div>
             {% endif %}
 
