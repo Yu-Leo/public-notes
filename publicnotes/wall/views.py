@@ -171,12 +171,26 @@ def delete_profile(request):
     return redirect('home')
 
 
-class CategoriesList(CreateView):
-    form_class = CategoryForm
-    template_name = 'wall/categories_list.html'
-    success_url = reverse_lazy('categories_list')
+def categories_list(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Категория добавлена')
+            return redirect('categories_list')
+        else:
+            messages.error(request, 'Ошибка добавления')
+    else:
+        form = CategoryForm()
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(CategoriesList, self).get_context_data(**kwargs)
-        context['page_obj'] = Category.objects.all()
-        return context
+    objects = Category.objects.all()
+    paginator = Paginator(objects, 15)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
+
+    context = {
+        'form': form,
+        'page_obj': page_objects
+    }
+
+    return render(request, 'wall/categories_list.html', context)

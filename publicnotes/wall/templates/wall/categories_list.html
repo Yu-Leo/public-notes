@@ -15,38 +15,41 @@
 
 
 {% block content %}
-
-<h2 class="mb-2">Добавить</h2>
-<div class="card mb-4">
-    <div class="card-body">
-        <form action="{% url 'categories_list' %}" method="post">
-            {% csrf_token %}
-            <label for="{{ form.title.id_for_label }}">Название:</label>
-
-            <div class="invalid-feedback">
-                {{ form.title.errors }}
-            </div>
-            <div class="d-flex">
-                {{ form.title }}
-                <button type="submit" class="btn btn-purple">Добавить</button>
-
-            </div>
-        </form>
+<div class="mb-4">
+    <h2 class="mb-2">Добавить</h2>
+    <div class="card ">
+        <div class="card-body">
+            <form action="{% url 'categories_list' %}" method="post">
+                {% csrf_token %}
+                <label for="{{ form.title.id_for_label }}">Название:</label>
+                <div class="text-danger">
+                    {{ form.title.errors }}
+                </div>
+                <div class="d-flex">
+                    {{ form.title }}
+                    <button type="submit" class="btn btn-purple">Добавить</button>
+                </div>
+            </form>
 
 
+        </div>
     </div>
 </div>
 
-{% if page_obj %}
-<h2 class="mb-2">Список</h2>
-{% endif %}
-{% for item in page_obj %}
-<div class="card mb-2">
-    <div class="card-body">
-        <h5><a href="{{ item.get_absolute_url }}"
-               class="text-decoration-none text-purple stretched-link">{{ item.title }}</a></h5>
+<div class="mb-4">
+    {% if page_obj %}
+    <h2 class="mb-2">Список</h2>
+    {% endif %}
+    {% for item in page_obj %}
+    <div class="card mb-2">
+        <div class="card-body">
+            <h5><a href="{{ item.get_absolute_url }}"
+                   class="text-decoration-none text-purple stretched-link">{{ item.title }}</a></h5>
+        </div>
     </div>
+    {% endfor %}
+
+    {% include 'wall/inc/_pagination.html' %}
 </div>
-{% endfor %}
 
 {% endblock %}
