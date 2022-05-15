@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         {% for item in categories%}
                         <li><a class="dropdown-item" href="{{item.get_absolute_url }}">{{ item.title }}
-                            <span class="badge bg-secondary">{% get_notes_count_for_category item %}</span>
+                            <span class="badge btn-purple">{% get_notes_count_for_category item %}</span>
                         </a></li>
                         {% endfor %}
                     </ul>
