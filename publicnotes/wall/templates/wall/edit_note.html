@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактировать заметку{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+
+{% block content_title %}
+<div class="hstack gap-3 mb-3">
+    <div>
+        <h1>Редактировать заметку</h1>
+    </div>
+    <div class="ms-auto">
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                data-bs-target="#deleteProfileModal">
+            Удалить заметку
+        </button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'edit_note' note_pk  %}" method="post">
+    {% csrf_token %}
+
+    <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
+        {{ note_form.as_p }}
+        <button type="submit" class="btn btn-purple btn-block">Обновить</button>
+    </div>
+
+</form>
+
+
+<!-- deleteProfileModal -->
+<div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProfileModalLabel">Удаление профиля</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Ваш профиль и все заметки будут удалены навсегда! Продолжить?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <a class="btn btn-danger" href="{% url 'delete_profile' %}" role="button">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

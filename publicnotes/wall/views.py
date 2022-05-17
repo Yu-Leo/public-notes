@@ -108,6 +108,22 @@ def edit_profile(request):
     return render(request, 'wall/edit_profile.html', {"user_form": user_form})
 
 
+@login_required(login_url=reverse_lazy('login'))
+def edit_note(request, pk):
+    if request.method == 'POST':
+        note_form = UpdateNote(request.POST, instance=Note.objects.get(pk=pk))
+        if note_form.is_valid():
+            note = note_form.save()
+            return redirect(note)
+    else:
+        note_form = UpdateNote(instance=Note.objects.get(pk=pk))
+
+    context = {'note_form': note_form,
+               'note_pk': pk}
+
+    return render(request, 'wall/edit_note.html', context)
+
+
 def registration(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

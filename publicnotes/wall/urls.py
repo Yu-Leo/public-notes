@@ -18,7 +18,8 @@ urlpatterns = [
     path('about', about, name='about'),
     path('edit_profile', edit_profile, name='edit_profile'),
     path('delete_profile', delete_profile, name='delete_profile'),
-    path('categories_list', categories_list, name='categories_list')
+    path('categories_list', categories_list, name='categories_list'),
+    path('edit_note/<int:pk>', edit_note, name='edit_note'),
 ]
 
 if settings.DEBUG:
