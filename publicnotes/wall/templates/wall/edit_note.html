@@ -12,7 +12,7 @@
     </div>
     <div class="ms-auto">
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                data-bs-target="#deleteProfileModal">
+                data-bs-target="#deleteNoteModal">
             Удалить заметку
         </button>
     </div>
@@ -33,21 +33,21 @@
 </form>
 
 
-<!-- deleteProfileModal -->
-<div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel"
+<!-- deleteNoteModal -->
+<div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteProfileModalLabel">Удаление профиля</h5>
+                <h5 class="modal-title" id="deleteNoteModalLabel">Удаление заметки</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Ваш профиль и все заметки будут удалены навсегда! Продолжить?
+                Эта заметка будет удалена навсегда! Продолжить?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <a class="btn btn-danger" href="{% url 'delete_profile' %}" role="button">Удалить</a>
+                <a class="btn btn-danger" href="{% url 'delete_note' note_pk %}" role="button">Удалить</a>
             </div>
         </div>
     </div>

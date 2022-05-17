@@ -127,6 +127,18 @@ def edit_note(request, pk):
     return render(request, 'wall/edit_note.html', context)
 
 
+@login_required(login_url=reverse_lazy('login'))
+def delete_note(request, pk):
+    note = Note.objects.get(pk=pk)
+
+    if request.user != note.author:
+        return redirect('login')
+
+    note.delete()
+    messages.success(request, 'Заметка успешно удалена!')
+    return redirect(request.user)
+
+
 def registration(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
