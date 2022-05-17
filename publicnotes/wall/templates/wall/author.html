@@ -107,7 +107,7 @@
                 {% endif %}
             </div>
 
-            {% if request.user == author%}
+            {% if request.user == author %}
             <div class="ms-auto me-2">
                 <a href="{% url 'edit_note' item.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
             </div>

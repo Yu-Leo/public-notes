@@ -110,6 +110,9 @@ def edit_profile(request):
 
 @login_required(login_url=reverse_lazy('login'))
 def edit_note(request, pk):
+    if request.user != Note.objects.get(pk=pk).author:
+        return redirect('login')
+
     if request.method == 'POST':
         note_form = UpdateNote(request.POST, instance=Note.objects.get(pk=pk))
         if note_form.is_valid():
