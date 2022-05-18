@@ -186,7 +186,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Пароль успешно сменён!')
-            return redirect('home')
+            return redirect('login')
         else:
             messages.error(request, 'Ошибка')
     else:
