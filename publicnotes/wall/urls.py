@@ -21,6 +21,7 @@ urlpatterns = [
     path('categories_list/', categories_list, name='categories_list'),
     path('edit_note/<int:pk>/', edit_note, name='edit_note'),
     path('delete_note/<int:pk>/', delete_note, name='delete_note'),
+    path('change_password/', change_password, name='change_password'),
 ]
 
 if settings.DEBUG:

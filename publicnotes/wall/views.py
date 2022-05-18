@@ -179,6 +179,26 @@ def user_login(request):
     return render(request, 'wall/login.html', context)
 
 
+@login_required(login_url=reverse_lazy('login'))
+def change_password(request):
+    if request.method == 'POST':
+        form = UserChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Пароль успешно сменён!')
+            return redirect('home')
+        else:
+            messages.error(request, 'Ошибка')
+    else:
+        form = UserChangePasswordForm(request.user)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'wall/change_password.html', context)
+
+
 def user_logout(request):
     logout(request)
     messages.error(request, 'Вы вышли из аккаунта')
