@@ -22,7 +22,6 @@
                 {% endif %}" alt="..." width="50" height="50"
                      style="border-radius: 25px;">
             </div>
-
             <div class="fw-bold">
                 {% if note.author %}
                 <a href="{{ note.author.get_absolute_url }}" class="text-decoration-none text-purple">
@@ -31,7 +30,6 @@
                 Аноним
                 {% endif %}
             </div>
-
             <div class="fw-light">{{ note.created_at|date:"d.m.Y H:i" }}</div>
             <div class="">
                 {% if note.stared %}
@@ -79,8 +77,5 @@
             {% endif %}
         </div>
     </div>
-
 </div>
-
-
 {% endblock %}

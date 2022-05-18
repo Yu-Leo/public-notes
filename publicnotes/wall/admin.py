@@ -42,6 +42,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, MyUserAdmin)
-
 admin.site.register(Note, NoteAdmin)
 admin.site.register(Category, CategoryAdmin)

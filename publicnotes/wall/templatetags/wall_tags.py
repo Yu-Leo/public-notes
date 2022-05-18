@@ -1,7 +1,8 @@
 from django import template
-from wall.models import Category, Note
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count
+
+from wall.models import Category, Note
 
 register = template.Library()
 
