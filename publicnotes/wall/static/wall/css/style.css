@@ -76,3 +76,7 @@ a.text-purple:hover {
 .border-purple {
     border-color: var(--purple);
 }
+
+.navbar-about {
+    background-color: #ffffff;
+}
