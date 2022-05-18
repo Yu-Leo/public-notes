@@ -11,6 +11,9 @@
         <h1>Редактировать профиль</h1>
     </div>
     <div class="ms-auto">
+        <a href="{% url 'change_password' %}" class="btn btn-outline-purple">Сменить пароль</a>
+    </div>
+    <div>
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                 data-bs-target="#deleteProfileModal">
             Удалить профиль
@@ -29,6 +32,7 @@
         {{ user_form.as_p }}
         <button type="submit" class="btn btn-purple btn-block">Обновить</button>
     </div>
+
 
 </form>
 

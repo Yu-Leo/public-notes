@@ -86,5 +86,12 @@ class CategoryForm(forms.ModelForm):
 
 
 class UserChangePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(label="Старый пароль",
+                                   widget=forms.PasswordInput(attrs={"class": "form-control"}))
+    new_password1 = forms.CharField(label="Новый пароль",
+                                    widget=forms.PasswordInput(attrs={"class": "form-control"}))
+    new_password2 = forms.CharField(label="Подтверждение нового пароля",
+                                    widget=forms.PasswordInput(attrs={"class": "form-control"}))
+
     class Meta:
         model = User
