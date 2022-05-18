@@ -5,7 +5,6 @@
 {% block title %}{{ author.username }}{% endblock %}
 
 {% block sidebar %}
-
 <div class="card">
     <img src="{% if author.photo %}
                 {{ author.photo.url }}
@@ -58,7 +57,6 @@
         </li>
     </ul>
 </div>
-
 {% endblock %}
 
 {% block content_title %}
@@ -75,7 +73,6 @@
 {% endblock %}
 
 {% block content %}
-
 
 {% for item in page_obj %}
 <div class="card mb-3">
@@ -142,6 +139,5 @@
     </div>
 </div>
 {% endfor %}
-
 
 {% endblock %}

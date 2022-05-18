@@ -76,15 +76,6 @@ class UserLoginForm(AuthenticationForm):
                                widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
 
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = ['title']
-        widgets = {
-            'title': forms.TextInput(attrs={"class": "form-control me-2"}),
-        }
-
-
 class UserChangePasswordForm(PasswordChangeForm):
     old_password = forms.CharField(label="Старый пароль",
                                    widget=forms.PasswordInput(attrs={"class": "form-control"}))
@@ -95,3 +86,12 @@ class UserChangePasswordForm(PasswordChangeForm):
 
     class Meta:
         model = User
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['title']
+        widgets = {
+            'title': forms.TextInput(attrs={"class": "form-control me-2"}),
+        }
