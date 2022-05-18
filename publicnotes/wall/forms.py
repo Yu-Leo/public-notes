@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.core.exceptions import ValidationError
 
 from .models import *
@@ -83,3 +83,8 @@ class CategoryForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={"class": "form-control me-2"}),
         }
+
+
+class UserChangePasswordForm(PasswordChangeForm):
+    class Meta:
+        model = User
