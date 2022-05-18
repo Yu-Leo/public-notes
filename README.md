@@ -1,4 +1,4 @@
-<h1 align="center"> Pulic Notes </h1>
+<h1 align="center"> Public Notes </h1>
 
 <p align="center">
   <a href="https://github.com/Yu-Leo/public-notes/blob/main/LICENSE" target="_blank"> <img alt="license" src="https://img.shields.io/github/license/Yu-Leo/public-notes?style=for-the-badge&labelColor=090909"></a>
