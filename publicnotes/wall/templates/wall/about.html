@@ -2,22 +2,35 @@
 
 {% block title %}О проекте{% endblock %}
 
-{% block sidebar %}{% endblock %}
+{% block sidebar %}
+
+<nav id="navbar-example3"
+     class="navbar flex-column align-items-stretch navbar-about border rounded border-purple sticky-top">
+    <a class="nav-link text-purple" href="#idea">Идея</a>
+    <a class="nav-link text-purple" href="#functionality">Функциональность</a>
+    <a class="nav-link text-purple" href="#technologies">Используемые технологии</a>
+    <a class="nav-link text-purple" href="#links">Полезные ссылки</a>
+    <a class="nav-link text-purple" href="#author">Автор</a>
+    <a class="nav-link text-purple" href="#project">Проект</a>
+</nav>
+
+
+{% endblock %}
 
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>О проекте</h1>
+        <h1 id="about">О проекте</h1>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="bg-light fs-5">
-    <h2>Идея:</h2>
-    <p> PublicNotes - место, где каждый может оставить заметку на общей стене.</p>
+    <h2 id="idea">Идея:</h2>
+    <p><span class="fw-bold">PublicNotes</span> - место, где каждый может оставить заметку на общей стене.</p>
 
-    <h2>Функциональность:</h2>
+    <h2 id="functionality">Функциональность:</h2>
     <ul>
         <li>Заметки:
             <ul>
@@ -32,8 +45,9 @@
         <li>Профиль:
             <ul>
                 <li>Регистрация</li>
-                <li>Отображение профиля</li>
+                <li>Отображение профиля и заметок</li>
                 <li>Изменение данных профиля</li>
+                <li>Смена пароля</li>
                 <li>Удаление профиля</li>
             </ul>
         </li>
@@ -46,7 +60,7 @@
 
     </ul>
 
-    <h2>Используемые технологии:</h2>
+    <h2 id="technologies">Используемые технологии:</h2>
     <ul>
         <li>
             BackEnd:
@@ -79,7 +93,7 @@
     </ul>
 
 
-    <h2>Полезные ссылки:</h2>
+    <h2 id="links">Полезные ссылки:</h2>
     <ul>
         <li><a class="text-decoration-none text-purple" href="https://djangoproject.com/" target="_blank">Официальный
             сайт
@@ -95,7 +109,7 @@
         <li><a class="text-decoration-none text-purple" href="https://t.me/yu_leo" target="_blank">Telegram</a></li>
     </ul>
 
-    <h2>Проект:</h2>
+    <h2 id="project">Проект:</h2>
     <ul>
         <li><a class="text-decoration-none text-purple" href="#" target="_blank">GitHub</a></li>
     </ul>
