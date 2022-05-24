@@ -19,6 +19,9 @@
     <div>
         <h1 id="about">О проекте</h1>
     </div>
+    <div>
+        <h2><span class="badge bg-info">v1.0.0</span></h2>
+    </div>
 </div>
 {% endblock %}
 
@@ -59,13 +62,15 @@
         <li>
             BackEnd:
             <ul>
+                <li>СУБД: <span class="fw-bold">SQLite3</span></li>
                 <li>Язык программирования: <span class="fw-bold">Python (3.10)</span></li>
                 <li>Фреймворки и библиотеки:
                     <ul>
-                        <li><span class="fw-bold">Django (3.0.2)</span></li>
-                        <li class="fw-bold">django_debug_toolbar (2.2)</li>
+                        <li><span class="fw-bold">Django (3.1.14)</span></li>
+                        <li class="fw-bold">django_debug_toolbar (2.2.1)</li>
                     </ul>
                 </li>
+                <li>Веб-сервер: <span class="fw-bold">gunicorn</span></li>
             </ul>
         </li>
         <li>
@@ -102,6 +107,10 @@
     <ul>
         <li><a class="text-decoration-none text-purple" href="https://github.com/Yu-Leo/public-notes/" target="_blank">GitHub</a>
         </li>
+        <li><a class="text-decoration-none text-purple" href="https://ylpn.herokuapp.com/"
+               target="_blank">Heroku deploy</a>
+        </li>
+
     </ul>
 </div>
 {% endblock %}
