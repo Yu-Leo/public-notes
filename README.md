@@ -96,10 +96,12 @@
 
 #### BackEnd:
 
+- СУБД: **SQLite3**
 - Язык программирования: **Python (3.10)**
 - Фреймворки и библиотеки:
-    - **Django (3.0.2)**
-    - **django_debug_toolbar (2.2)**
+    - **Django (3.1.14)**
+    - **django_debug_toolbar (2.2.1)**
+- Веб-сервер: **gunicorn**
 
 #### FrontEnd:
 
