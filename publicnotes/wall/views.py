@@ -88,7 +88,7 @@ def add_note(request):
             notes_data['author'] = author
             note = Note.objects.create(**notes_data)
             return redirect(note)
-    elif request.method == 'GET':
+    elif request.method == 'GET' and request.GET.get('category') is not None:
         category_pk = int(request.GET.get('category'))
         category_pk = category_pk
         try:
