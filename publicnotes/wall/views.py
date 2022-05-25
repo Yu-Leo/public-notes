@@ -88,6 +88,13 @@ def add_note(request):
             notes_data['author'] = author
             note = Note.objects.create(**notes_data)
             return redirect(note)
+    elif request.method == 'GET':
+        category_pk = int(request.GET.get('category'))
+        category_pk = category_pk
+        try:
+            note_form = NoteForm(initial={'category': Category.objects.get(pk=category_pk)})
+        except Category.DoesNotExist:
+            note_form = NoteForm()
     else:
         note_form = NoteForm()
 
