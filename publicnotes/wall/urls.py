@@ -21,6 +21,7 @@ urlpatterns = [
     path('edit_note/<int:pk>/', edit_note, name='edit_note'),
     path('delete_note/<int:pk>/', delete_note, name='delete_note'),
     path('change_password/', change_password, name='change_password'),
+    path('search/', Search.as_view(), name='search')
 ]
 
 if settings.DEBUG:

@@ -244,3 +244,16 @@ def categories_list(request):
     }
 
     return render(request, 'wall/categories_list.html', context)
+
+
+class Search(ListView):
+    template_name = 'wall/search.html'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Note.objects.filter(title__icontains=self.request.GET.get('search'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('search')
+        return context
