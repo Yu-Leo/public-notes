@@ -8,7 +8,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from .forms import *
 
@@ -211,8 +211,8 @@ def user_logout(request):
     return redirect('login')
 
 
-def about(request):
-    return render(request, 'wall/about.html', {})
+class About(TemplateView):
+    template_name = 'wall/about.html'
 
 
 def handle_page_not_found(request, exception=None):
