@@ -8,7 +8,7 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Категория: {{ title }}</h1>
+        <h1>Категория: {{ category.title }}</h1>
     </div>
     <div>
         <a href="{% url 'add_note' %}?category={{ category.pk }}" class="btn btn-outline-purple">Добавить заметку</a>
