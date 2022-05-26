@@ -43,6 +43,7 @@ class Note(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
+    preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Превью', blank=True)
 
     def get_absolute_url(self):
         return reverse('category', kwargs={"pk": self.pk})

@@ -30,7 +30,7 @@ class ViewCategory(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewCategory, self).get_context_data(**kwargs)
         try:
-            context['title'] = Category.objects.get(pk=self.kwargs['pk'])
+            context['category'] = Category.objects.get(pk=self.kwargs['pk'])
             return context
         except Category.DoesNotExist:
             raise Http404()

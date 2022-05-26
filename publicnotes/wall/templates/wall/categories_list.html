@@ -38,16 +38,25 @@
     {% if page_obj %}
     <h2 class="mb-2">Список</h2>
     {% endif %}
+
     {% for item in page_obj %}
     <div class="card mb-2">
         <div class="card-body">
-            <h5><a href="{{ item.get_absolute_url }}"
-                   class="text-decoration-none text-purple stretched-link">{{ item.title }}</a></h5>
+            <div class="hstack gap-3">
+                <div>
+                    {% if item.preview %}
+                    <img src="{{ item.preview.url }}" alt="" width="100px">
+                    {% else%}
+                    {% endif %}
+                </div>
+                <div>
+                    <h5><a href="{{ item.get_absolute_url }}"
+                           class="text-decoration-none text-purple stretched-link">{{ item.title }}</a></h5>
+                </div>
+            </div>
         </div>
     </div>
     {% endfor %}
-
     {% include 'wall/inc/_pagination.html' %}
 </div>
-
 {% endblock %}
