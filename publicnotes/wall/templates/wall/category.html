@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Категория: {{ title }}{% endblock %}
+{% block title %}Категория: {{ category.title }}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -11,9 +11,10 @@
         <h1>Категория: {{ title }}</h1>
     </div>
     <div>
-        <a href="{% url 'add_note' %}?category={{ title.pk }}" class="btn btn-outline-purple">Добавить заметку</a>
+        <a href="{% url 'add_note' %}?category={{ category.pk }}" class="btn btn-outline-purple">Добавить заметку</a>
     </div>
 </div>
+
 {% endblock %}
 
 
