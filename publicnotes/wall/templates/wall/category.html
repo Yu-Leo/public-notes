@@ -8,7 +8,7 @@
 
 {% block content_title %}
 <div class="mb-3">
-    <div class="hstack gap-3 mb-1">
+    <div class="hstack gap-3">
         <div>
             <h1>Категория: {{ category.title }}</h1>
         </div>
@@ -17,7 +17,8 @@
                 заметку</a>
         </div>
     </div>
-    <nav aria-label="breadcrumb">
+    {% if categories_tree %}
+    <nav aria-label="breadcrumb" class="mt-1">
         <ol class="breadcrumb">
             {% for item in categories_tree %}
             <li class="breadcrumb-item"><a href="{{ item.get_absolute_url }}" class="text-purple">
@@ -26,13 +27,39 @@
             <li class="breadcrumb-item active" aria-current="page">{{ category.title }}</li>
         </ol>
     </nav>
+    {% endif %}
 </div>
-
-
 {% endblock %}
 
 
 {% block content %}
+{% if children %}
+<div class="border border-purple border-1 rounded p-3 bg-white mb-3">
+    <h2>Подкатегории:</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for item in children %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="hstack gap-3">
+                        <div>
+                            {% if item.preview %}
+                            <img src="{{ item.preview.url }}" alt="" width="100px" class="rounded">
+                            {% else%}
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h5><a href="{{ item.get_absolute_url }}"
+                                   class="text-decoration-none text-purple stretched-link">{{ item.title }}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% include 'wall/inc/_notes_list.html'%}
 
