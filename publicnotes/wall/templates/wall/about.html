@@ -7,6 +7,7 @@
     <ul class="list-group">
         <li class="list-group-item"><a class="nav-link text-purple" href="#idea">Идея</a></li>
         <li class="list-group-item"><a class="nav-link text-purple" href="#functionality">Функциональность</a></li>
+        <li class="list-group-item"><a class="nav-link text-purple" href="#releases">Версии</a></li>
         <li class="list-group-item"><a class="nav-link text-purple" href="#technologies">Используемые технологии</a>
         </li>
         <li class="list-group-item"><a class="nav-link text-purple" href="#links">Полезные ссылки</a></li>
@@ -22,7 +23,7 @@
         <h1 id="about">О проекте</h1>
     </div>
     <div>
-        <h2><span class="badge bg-info">v1.0.0</span></h2>
+        <h2><span class="badge bg-info">v1.0.1</span></h2>
     </div>
 </div>
 {% endblock %}
@@ -37,6 +38,7 @@
             <ul>
                 <li>Отображение одним списком (главная страница)</li>
                 <li>Отображение по категориям</li>
+                <li>Поиск по названиям</li>
                 <li>Добавление</li>
                 <li>Редактирование</li>
                 <li>Удаление</li>
@@ -59,6 +61,33 @@
             </ul>
         </li>
     </ul>
+    <h2 id="releases">Версии:</h2>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseOne">
+                    v1.0.1
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <ul>
+                        <li>Добавлен поиск по названиям заметок</li>
+                        <li>К категориям добавлены картинки</li>
+                        <li>На странице категории добавлена кнопка "Добавить заметку", позволяющая создать заметку
+                            сразу в данной категории
+                        </li>
+                        <li>Исправлен баг с отсутствием меню навигации на мобильных устройствах</li>
+                        <li>Исправлен баг с меню навигации на странице "О проекте"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h2 id="technologies">Используемые технологии:</h2>
     <ul>
         <li>
