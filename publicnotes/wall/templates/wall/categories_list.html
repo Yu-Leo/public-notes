@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load mptt_tags %}
 
 {% block title %}Категории{% endblock %}
 
@@ -39,24 +40,32 @@
     <h2 class="mb-2">Список</h2>
     {% endif %}
 
-    {% for item in page_obj %}
-    <div class="card mb-2">
-        <div class="card-body">
-            <div class="hstack gap-3">
-                <div>
-                    {% if item.preview %}
-                    <img src="{{ item.preview.url }}" alt="" width="100px">
-                    {% else%}
-                    {% endif %}
-                </div>
-                <div>
-                    <h5><a href="{{ item.get_absolute_url }}"
-                           class="text-decoration-none text-purple stretched-link">{{ item.title }}</a></h5>
+    {% recursetree page_obj %}
+    <div>
+        <div class="card mb-2">
+            <div class="card-body">
+                <div class="hstack gap-3">
+                    <div>
+                        {% if node.preview %}
+                        <img src="{{ node.preview.url }}" alt="" width="100px">
+                        {% else%}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h5><a href="{{ node.get_absolute_url }}"
+                               class="text-decoration-none text-purple stretched-link">{{ node.title }}</a></h5>
+                    </div>
                 </div>
             </div>
         </div>
+
+        {% if not node.is_leaf_node %}
+        <div class="children ps-5">
+            {{ children }}
+        </div>
+        {% endif %}
     </div>
-    {% endfor %}
-    {% include 'wall/inc/_pagination.html' %}
+    {% endrecursetree %}
+
 </div>
 {% endblock %}
