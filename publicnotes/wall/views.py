@@ -27,11 +27,21 @@ class ViewCategory(ListView):
     allow_empty = True
     paginate_by = 5
 
+    def get_breadcrumb_list(self, category):
+        breadcrumb_list = []
+        while category:
+            breadcrumb_list.append(category)
+            category = category.parent
+        return list(reversed(breadcrumb_list))[:-1]
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewCategory, self).get_context_data(**kwargs)
         try:
-            context['category'] = Category.objects.get(pk=self.kwargs['pk'])
+            category = Category.objects.get(pk=self.kwargs['pk'])
+            context['category'] = category
+            context['categories_tree'] = self.get_breadcrumb_list(category)
             return context
+
         except Category.DoesNotExist:
             raise Http404()
 
