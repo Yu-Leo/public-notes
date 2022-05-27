@@ -252,13 +252,10 @@ def categories_list(request):
         form = CategoryForm()
 
     objects = Category.objects.all()
-    paginator = Paginator(objects, 15)
-    page_num = request.GET.get('page', 1)
-    page_objects = paginator.get_page(page_num)
 
     context = {
         'form': form,
-        'page_obj': page_objects
+        'page_obj': objects
     }
 
     return render(request, 'wall/categories_list.html', context)
