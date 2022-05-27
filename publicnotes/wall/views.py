@@ -40,6 +40,7 @@ class ViewCategory(ListView):
             category = Category.objects.get(pk=self.kwargs['pk'])
             context['category'] = category
             context['categories_tree'] = self.get_breadcrumb_list(category)
+            context['children'] = category.get_children()
             return context
 
         except Category.DoesNotExist:
