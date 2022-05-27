@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 # Create your models here.
@@ -41,9 +42,13 @@ class Note(models.Model):
         ordering = ['-created_at', 'title']
 
 
-class Category(models.Model):
+class Category(MPTTModel):
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
     preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Превью', blank=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
     def get_absolute_url(self):
         return reverse('category', kwargs={"pk": self.pk})

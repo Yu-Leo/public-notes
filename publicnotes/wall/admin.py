@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
+from mptt.admin import MPTTModelAdmin
 
 from .models import Note, Category, User
 
@@ -37,7 +38,7 @@ class MyUserAdmin(UserAdmin):
     get_photo.short_description = 'Текущая аватарка'
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(MPTTModelAdmin):
     list_display = ('id', 'title')
 
 

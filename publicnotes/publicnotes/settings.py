@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'wall.apps.WallConfig',
     'debug_toolbar',
+    'mptt',
 ]
 
 MIDDLEWARE = [
