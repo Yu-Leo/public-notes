@@ -3,15 +3,17 @@
 {% block title %}О проекте{% endblock %}
 
 {% block sidebar %}
-<nav id="navbar-example3"
-     class="navbar flex-column align-items-stretch navbar-about border rounded border-purple sticky-top">
-    <a class="nav-link text-purple" href="#idea">Идея</a>
-    <a class="nav-link text-purple" href="#functionality">Функциональность</a>
-    <a class="nav-link text-purple" href="#technologies">Используемые технологии</a>
-    <a class="nav-link text-purple" href="#links">Полезные ссылки</a>
-    <a class="nav-link text-purple" href="#author">Автор</a>
-    <a class="nav-link text-purple" href="#project">Проект</a>
-</nav>
+<div class="sticky-top">
+    <ul class="list-group">
+        <li class="list-group-item"><a class="nav-link text-purple" href="#idea">Идея</a></li>
+        <li class="list-group-item"><a class="nav-link text-purple" href="#functionality">Функциональность</a></li>
+        <li class="list-group-item"><a class="nav-link text-purple" href="#technologies">Используемые технологии</a>
+        </li>
+        <li class="list-group-item"><a class="nav-link text-purple" href="#links">Полезные ссылки</a></li>
+        <li class="list-group-item"><a class="nav-link text-purple" href="#author">Автор</a></li>
+        <li class="list-group-item"><a class="nav-link text-purple" href="#project">Проект</a></li>
+    </ul>
+</div>
 {% endblock %}
 
 {% block content_title %}
