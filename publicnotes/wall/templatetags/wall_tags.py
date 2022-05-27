@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.simple_tag
 def get_categories():
-    return Category.objects.annotate(cnt=Count('note')).order_by('-cnt', 'title')
+    return Category.objects.all()
 
 
 @register.simple_tag
