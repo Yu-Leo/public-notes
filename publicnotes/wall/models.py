@@ -31,7 +31,7 @@ class Note(models.Model):
         null=True,
         blank=True,
     )
-    category = models.ForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
+    category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
@@ -47,14 +47,14 @@ class Category(MPTTModel):
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
     preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Превью', blank=True)
 
-    class MPTTMeta:
-        order_insertion_by = ['title']
-
     def get_absolute_url(self):
         return reverse('category', kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
     class Meta:
         verbose_name = 'Категория'
