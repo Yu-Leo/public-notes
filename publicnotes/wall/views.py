@@ -239,26 +239,11 @@ def delete_profile(request):
     return redirect('home')
 
 
-def categories_list(request):
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Категория добавлена')
-            return redirect('categories_list')
-        else:
-            messages.error(request, 'Ошибка добавления')
-    else:
-        form = CategoryForm()
-
-    objects = Category.objects.all()
-
-    context = {
-        'form': form,
-        'page_obj': objects
-    }
-
-    return render(request, 'wall/categories_list.html', context)
+class ViewCategoriesList(ListView):
+    model = Category
+    template_name = 'wall/categories_list.html'
+    context_object_name = 'categories'
+    allow_empty = False
 
 
 class Search(ListView):
