@@ -23,7 +23,7 @@
         <h1 id="about">О проекте</h1>
     </div>
     <div>
-        <h2><span class="badge bg-info">v1.0.1</span></h2>
+        <h2><span class="badge bg-info">v1.0.2</span></h2>
     </div>
 </div>
 {% endblock %}
@@ -56,8 +56,10 @@
         </li>
         <li>Категории:
             <ul>
-                <li>Отображение списка</li>
-                <li>Добавление</li>
+                <li>Отображение категорий в виде списка с различными уровнями вложенности</li>
+                <li>Каждая категория может иметь подкатегории. Заметки могут относиться как к родительской, так и к
+                    дочерним категориям
+                </li>
             </ul>
         </li>
     </ul>
@@ -71,7 +73,7 @@
                     v1.0.1
                 </button>
             </h2>
-            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
                  aria-labelledby="panelsStayOpen-headingOne">
                 <div class="accordion-body">
                     <ul>
@@ -82,6 +84,28 @@
                         </li>
                         <li>Исправлен баг с отсутствием меню навигации на мобильных устройствах</li>
                         <li>Исправлен баг с меню навигации на странице "О проекте"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseTwo">
+                    v1.0.2
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                    <ul>
+                        <li>Добавлена возможность создавать подкатегории в каждой категории</li>
+                        <li>Убрана возможность создавать категории пользователям. Категории может создавать только
+                            админ
+                        </li>
+                        <li>В меню пагинации добавлены ссылки на первую и на последнюю страницы</li>
                     </ul>
                 </div>
             </div>
@@ -97,8 +121,9 @@
                 <li>Язык программирования: <span class="fw-bold">Python (3.10)</span></li>
                 <li>Фреймворки и библиотеки:
                     <ul>
-                        <li><span class="fw-bold">Django (3.1.14)</span></li>
+                        <li class="fw-bold">Django (3.1.14)</li>
                         <li class="fw-bold">django_debug_toolbar (2.2.1)</li>
+                        <li class="fw-bold">django_mptt (0.13.4)</li>
                     </ul>
                 </li>
                 <li>Веб-сервер: <span class="fw-bold">gunicorn</span></li>
