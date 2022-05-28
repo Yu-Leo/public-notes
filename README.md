@@ -89,6 +89,8 @@
 
 ![profile_page](./docs/img/profile_page.jpg)
 
+![category_page](./docs/img/category_page.jpg)
+
 <a id="chapter-3"></a>
 
 ## :computer: Код
