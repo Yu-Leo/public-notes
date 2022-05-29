@@ -95,9 +95,12 @@ def add_note(request):
         note_form = NoteForm(request.POST)
         if note_form.is_valid():
             notes_data = note_form.cleaned_data
+            tags = note_form.cleaned_data.get('tags')
             author = request.user
             notes_data['author'] = author
+            del notes_data['tags']
             note = Note.objects.create(**notes_data)
+            note.tags.set(tags)
             return redirect(note)
     elif request.method == 'GET' and request.GET.get('category') is not None:
         category_pk = int(request.GET.get('category'))
