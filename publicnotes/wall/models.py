@@ -73,6 +73,9 @@ class Tag(models.Model):
 
     title = models.CharField(max_length=50, verbose_name='Название', unique=True)
 
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={"pk": self.pk})
+
     def __str__(self):
         return self.title
 

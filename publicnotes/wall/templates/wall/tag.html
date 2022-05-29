@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Тег: {{ tag.title }}{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+
+{% block content_title %}
+<div class="mb-3">
+    <div class="hstack gap-3">
+        <div>
+            <h1>Тег: {{ tag.title }}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'wall/inc/_notes_list.html'%}
+
+{% include 'wall/inc/_pagination.html' %}
+
+{% endblock %}
