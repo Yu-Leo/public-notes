@@ -68,3 +68,11 @@ def one_note(note: models.Note, allow_edit: bool = False, show_full: bool = Fals
         'show_full': show_full
     }
     return context
+
+
+@register.simple_tag
+def get_tags():
+    """
+    :return: List of all tags
+    """
+    return models.Tag.objects.all()
