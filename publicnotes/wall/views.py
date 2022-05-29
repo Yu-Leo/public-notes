@@ -30,7 +30,7 @@ class ViewCategory(ListView):
     allow_empty = True
     paginate_by = 5
 
-    def get_breadcrumb_list(self, category):
+    def get_breadcrumb_list(self, category: models.Category):
         breadcrumb_list = []
         while category:
             breadcrumb_list.append(category)

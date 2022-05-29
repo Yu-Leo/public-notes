@@ -17,7 +17,7 @@ def get_categories():
 
 
 @register.simple_tag
-def get_notes_count_for_author(author):
+def get_notes_count_for_author(author: models.User):
     """
     :return: Number of notes, which was created by author
     """
@@ -25,7 +25,7 @@ def get_notes_count_for_author(author):
 
 
 @register.simple_tag
-def get_notes_count_for_category(category):
+def get_notes_count_for_category(category: models.Category):
     """
     :return: Number of notes in category
     """
@@ -33,7 +33,7 @@ def get_notes_count_for_category(category):
 
 
 @register.simple_tag
-def get_prev_note_in_category(note):
+def get_prev_note_in_category(note: models.Note):
     """
     :return: Previous note by date of creation in category
     """
@@ -44,7 +44,7 @@ def get_prev_note_in_category(note):
 
 
 @register.simple_tag
-def get_next_note_in_category(note):
+def get_next_note_in_category(note: models.Note):
     """
     :return: Next note by date of creation in category
     """
