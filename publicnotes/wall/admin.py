@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
 from mptt.admin import MPTTModelAdmin
 
-from .models import Note, Category, User
+from .models import Note, Category, User, Tag
 
 
 # Register your models here.
@@ -42,6 +42,11 @@ class CategoryAdmin(MPTTModelAdmin):
     list_display = ('id', 'title')
 
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+
+
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Note, NoteAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Tag, TagAdmin)
