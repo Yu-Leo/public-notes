@@ -13,8 +13,6 @@ from django.views.generic import DetailView, ListView, TemplateView
 from .forms import *
 
 
-# Create your views here.
-
 class ViewNote(DetailView):
     model = Note
     template_name = 'wall/note.html'
