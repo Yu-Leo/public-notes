@@ -103,7 +103,11 @@
                 <i class="fa fa-star"></i>
                 {% endif %}
             </div>
-
+            <div class="me-1">
+                {% for tag in item.tags.all %}
+                <span class="badge rounded-pill text-bg-primary me-1">{{ tag.title }}</span>
+                {% endfor %}
+            </div>
             {% if request.user == author %}
             <div class="ms-auto me-2">
                 <a href="{% url 'edit_note' item.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
