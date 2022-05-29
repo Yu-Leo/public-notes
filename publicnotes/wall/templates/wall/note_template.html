@@ -57,7 +57,9 @@
             {% endif %}
         </p>
 
-        <a href="{{ note.get_absolute_url }}" class="btn btn-purple stretched-link">Открыть</a>
+        {% if not show_full %}
+        <a href="{{ note.get_absolute_url }}" class="btn btn-outline-purple stretched-link">Читать далее</a>
+        {% endif %}
     </div>
 
     <div class="card-footer">
