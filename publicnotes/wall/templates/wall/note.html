@@ -6,83 +6,10 @@
 
 {% block sidebar %}{% endblock %}
 
-{% block content_title %} <h1 class="mb-3">{{ note.title }}</h1>{% endblock %}
+{% block content_title %} <h1 class="mb-3">{{ note.title }}</h1> {% endblock %}
 
 {% block content %}
 
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="hstack gap-3">
-            <div class="">
-                <img src="{% if note.author.photo %}
-                {{ note.author.photo.url }}
-                {% else %}
-                {% load static %}
-                {% static 'wall/img/default_avatar.png' %}
-                {% endif %}" alt="..." width="50" height="50"
-                     style="border-radius: 25px;">
-            </div>
-            <div class="fw-bold">
-                {% if note.author %}
-                <a href="{{ note.author.get_absolute_url }}" class="text-decoration-none text-purple">
-                    {{ note.author.username }}</a>
-                {% else %}
-                Аноним
-                {% endif %}
-            </div>
-            <div class="fw-light">{{ note.created_at|date:"d.m.Y H:i" }}</div>
-            <div class="">
-                {% if note.stared %}
-                <i class="fa fa-star"></i>
-                {% endif %}
-            </div>
-            <div class="">
-                {% for tag in note.tags.all %}
-                <a href="{{ tag.get_absolute_url }}"
-                   class="badge rounded-pill text-bg-primary text-decoration-none me-1">
-                    {{ tag.title }}</a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">{{ note.title }}</h5>
-        <p class="card-text">{{ note.content }}</p>
-    </div>
+{% one_note note allow_edit=allow_edit show_full=True %}
 
-    <div class="card-footer"
-         style="{% if note.category.color %}background-color: #{{note.category.color}}{% endif %}">
-        <div class="hstack gap-3 mb-3">
-            {% if note.rating > 0 %}
-            <div class="text-success fw-bold">+{{note.rating}}</div>
-            {% elif note.rating < 0 %}
-            <div class="text-danger fw-bold">{{note.rating}}</div>
-            {% else %}
-            <div class="fw-bold">{{note.rating}}</div>
-            {% endif %}
-
-            {% if note.category %}
-            <div class=""><span class="">Категория: </span><a href="{{ note.category.get_absolute_url }}"
-                                                              class="text-decoration-none text-dark fw-bold">
-                {{ note.category.title }}</a></div>
-            {% endif %}
-
-        </div>
-        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-            {% get_prev_note_in_category note as prev_note %}
-            {% if prev_note%}
-            <a href="{{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">Предыдущая заметка</a>
-            {% else%}
-            <a href="#" class="btn btn-outline-purple disabled">Предыдущая заметка</a>
-            {% endif %}
-
-            {% get_next_note_in_category note as next_note %}
-            {% if next_note%}
-            <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">Следующая заметка</a>
-            {% else%}
-            <a href="#" class="btn btn-outline-purple disabled">Следующая заметка</a>
-            {% endif %}
-        </div>
-    </div>
-</div>
 {% endblock %}

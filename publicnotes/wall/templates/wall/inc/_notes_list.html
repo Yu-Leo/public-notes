@@ -1,63 +1,7 @@
+{% load wall_tags %}
+
 {% for item in page_obj %}
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="hstack gap-3">
-            <div class="">
-                <img src="{% if item.author.photo %}
-                {{ item.author.photo.url }}
-                {% else %}
-                {% load static %}
-                {% static 'wall/img/default_avatar.png' %}
-                {% endif %}" alt="..." width="50" height="50"
-                     style="border-radius: 25px;">
-            </div>
-            <div class="fw-bold">
-                {% if item.author %}
-                <a href="{{ item.author.get_absolute_url }}" class="text-decoration-none text-purple">
-                    {{ item.author.username }}</a>
-                {% else %}
-                Аноним
-                {% endif %}
-            </div>
 
-            <div class="fw-light">{{ item.created_at|date:"d.m.Y H:i" }}</div>
-            <div class="">
-                {% if item.stared %}
-                <i class="fa fa-star"></i>
-                {% endif %}
-            </div>
-            <div class="">
-                {% for tag in item.tags.all %}
-                <a href="{{ tag.get_absolute_url }}"
-                   class="badge rounded-pill text-bg-primary text-decoration-none me-1">
-                    {{ tag.title }}</a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="card-body" style="transform: rotate(0);">
-        <h5 class="card-title">{{ item.title|truncatewords:10 }}</h5>
-        <p class="card-text">{{ item.content|truncatewords:30 }}</p>
-        <a href="{{ item.get_absolute_url }}" class="btn btn-purple stretched-link">Открыть</a>
-    </div>
+{% one_note item %}
 
-    <div class="card-footer">
-        <div class="hstack gap-3">
-            {% if item.rating > 0 %}
-            <div class="text-success fw-bold">+{{item.rating}}</div>
-            {% elif item.rating < 0 %}
-            <div class="text-danger fw-bold">{{item.rating}}</div>
-            {% else %}
-            <div class="fw-bold">{{item.rating}}</div>
-            {% endif %}
-
-
-            {% if item.category %}
-            <div class=""><span class="">Категория: </span><a href="{{ item.category.get_absolute_url }}"
-                                                              class="text-decoration-none text-dark fw-bold">
-                {{ item.category.title }}</a></div>
-            {% endif %}
-        </div>
-    </div>
-</div>
 {% endfor %}

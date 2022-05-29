@@ -52,3 +52,19 @@ def get_next_note_in_category(note: models.Note):
         return note.get_next_by_created_at(category=note.category)
     except ObjectDoesNotExist:
         return None
+
+
+@register.inclusion_tag('wall/note_template.html')
+def one_note(note: models.Note, allow_edit: bool = False, show_full: bool = False):
+    """
+    Show one note as card.
+    :param note: note object
+    :param allow_edit: display button for edit note or no
+    :param show_full: display all note or only preview
+    """
+    context = {
+        'note': note,
+        'allow_edit': allow_edit,
+        'show_full': show_full
+    }
+    return context
