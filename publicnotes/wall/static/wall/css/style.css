@@ -80,3 +80,12 @@ a.text-purple:hover {
 .navbar-about {
     background-color: #ffffff;
 }
+
+.text-bg-purple {
+  background-color: var(--purple);
+  color: #fff;
+}
+
+.text-bg-purple:hover {
+  color: var(--dark-purple);
+}
