@@ -21,6 +21,11 @@ class ViewNote(DetailView):
     template_name = 'wall/note.html'
     context_object_name = 'note'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ViewNote, self).get_context_data(**kwargs)
+        context['allow_edit'] = self.request.user == self.object.author  # Is authenticated user show his note?
+        return context
+
 
 class ViewCategory(ListView):
     """View all notes and subcategories for category"""
@@ -75,6 +80,7 @@ class ViewAuthor(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewAuthor, self).get_context_data(**kwargs)
         context['page_obj'] = models.Note.objects.filter(author=self.kwargs['pk'])
+        context['is_self'] = self.request.user == self.object  # Is authenticated user show his profile?
         return context
 
 
