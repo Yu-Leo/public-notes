@@ -1,3 +1,5 @@
+"""Script for generating fake notes. ONLY FOR DEVELOPMENT"""
+
 import random
 
 from publicnotes.wsgi import *

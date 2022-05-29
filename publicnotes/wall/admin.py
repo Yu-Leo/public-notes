@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
 from mptt.admin import MPTTModelAdmin
 
-from .models import Note, Category, User, Tag
+from . import models
 
 
 class NoteAdmin(admin.ModelAdmin):
@@ -13,7 +13,7 @@ class NoteAdmin(admin.ModelAdmin):
 
 
 class MyUserAdmin(UserAdmin):
-    model = User
+    model = models.User
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -44,7 +44,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 
 
-admin.site.register(User, MyUserAdmin)
-admin.site.register(Note, NoteAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Tag, TagAdmin)
+admin.site.register(models.User, MyUserAdmin)
+admin.site.register(models.Note, NoteAdmin)
+admin.site.register(models.Category, CategoryAdmin)
+admin.site.register(models.Tag, TagAdmin)

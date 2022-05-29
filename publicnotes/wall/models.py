@@ -2,10 +2,13 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+
 from mptt.models import MPTTModel, TreeForeignKey
 
 
 class User(AbstractUser):
+    """Main user's object"""
+
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     bio = models.TextField(verbose_name='О себе', blank=True)
@@ -16,6 +19,8 @@ class User(AbstractUser):
 
 
 class Note(models.Model):
+    """Note's object. Main entity in application"""
+
     title = models.CharField(max_length=150, verbose_name='Название')
     content = models.TextField(verbose_name='Текст', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -29,7 +34,7 @@ class Note(models.Model):
         blank=True,
     )
     category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
-    tags = models.ManyToManyField('Tag', blank=True, related_name='notes')
+    tags = models.ManyToManyField('Tag', blank=True, verbose_name='Теги', related_name='notes')
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
@@ -41,7 +46,10 @@ class Note(models.Model):
 
 
 class Category(MPTTModel):
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    """Category for note. Сan be nested"""
+
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',
+                            verbose_name='Родительская категория')
     title = models.CharField(max_length=150, verbose_name='Название', unique=True)
     preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Превью', blank=True)
 
@@ -61,6 +69,8 @@ class Category(MPTTModel):
 
 
 class Tag(models.Model):
+    """Tag for note. One note can have multiple tags"""
+
     title = models.CharField(max_length=50, verbose_name='Название', unique=True)
 
     def __str__(self):

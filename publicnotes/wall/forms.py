@@ -2,12 +2,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.core.exceptions import ValidationError
 
-from .models import *
+from . import models
 
 
 class NoteForm(forms.ModelForm):
     class Meta:
-        model = Note
+        model = models.Note
         fields = ['title', 'content', 'rating', 'stared', 'category', 'tags']
         widgets = {
             'title': forms.TextInput(attrs={"class": "form-control"}),
@@ -21,7 +21,7 @@ class NoteForm(forms.ModelForm):
 
 class UpdateNote(forms.ModelForm):
     class Meta:
-        model = Note
+        model = models.Note
         fields = ['title', 'content', 'rating', 'stared', 'category', 'tags']
         widgets = {
             'title': forms.TextInput(attrs={"class": "form-control"}),
@@ -35,7 +35,7 @@ class UpdateNote(forms.ModelForm):
 
 class UpdateProfile(forms.ModelForm):
     class Meta:
-        model = User
+        model = models.User
         fields = ['username', 'email', 'show_email', 'first_name', 'last_name', 'bio']
         widgets = {
             'username': forms.TextInput(attrs={"class": "form-control mb-2"}),
@@ -67,7 +67,7 @@ class UserRegisterForm(UserCreationForm):
                                 widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
     class Meta:
-        model = User
+        model = models.User
         fields = ['username', 'email', 'password1', 'password2']
 
 
@@ -87,13 +87,4 @@ class UserChangePasswordForm(PasswordChangeForm):
                                     widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
     class Meta:
-        model = User
-
-
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = ['title']
-        widgets = {
-            'title': forms.TextInput(attrs={"class": "form-control me-2"}),
-        }
+        model = models.User
