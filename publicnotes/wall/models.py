@@ -66,6 +66,9 @@ class Category(MPTTModel):
 class Tag(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название', unique=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
