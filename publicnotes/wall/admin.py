@@ -6,8 +6,6 @@ from mptt.admin import MPTTModelAdmin
 from .models import Note, Category, User, Tag
 
 
-# Register your models here.
-
 class NoteAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'created_at', 'rating', 'stared', 'category')
     list_display_links = ('id', 'title')

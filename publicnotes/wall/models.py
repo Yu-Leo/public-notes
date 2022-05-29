@@ -5,9 +5,6 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-# Create your models here.
-
-
 class User(AbstractUser):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
