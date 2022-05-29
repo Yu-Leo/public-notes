@@ -32,6 +32,7 @@ class Note(models.Model):
         blank=True,
     )
     category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
+    tags = models.ManyToManyField('Tag', blank=True, related_name='notes')
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
@@ -59,4 +60,13 @@ class Category(MPTTModel):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+        ordering = ['title']
+
+
+class Tag(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Название', unique=True)
+
+    class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
         ordering = ['title']
