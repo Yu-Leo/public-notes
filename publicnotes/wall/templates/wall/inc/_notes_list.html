@@ -26,6 +26,11 @@
                 <i class="fa fa-star"></i>
                 {% endif %}
             </div>
+            <div class="">
+                {% for tag in item.tags.all %}
+                <span class="badge rounded-pill text-bg-primary me-1">{{ tag.title }}</span>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="card-body" style="transform: rotate(0);">
