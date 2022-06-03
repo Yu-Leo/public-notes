@@ -123,7 +123,8 @@ class ViewCategory(ListView):
     allow_empty = True
     paginate_by = 5
 
-    def get_breadcrumb_list(self, category: models.Category) -> list[models.Category]:
+    @staticmethod
+    def get_breadcrumb_list(category: models.Category) -> list[models.Category]:
         """
         :return: list with ancestors of category
         """
