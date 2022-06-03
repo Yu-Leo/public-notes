@@ -21,7 +21,7 @@ class ViewNote(DetailView):
     template_name = 'wall/note.html'
     context_object_name = 'note'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(ViewNote, self).get_context_data(**kwargs)
         context['allow_edit'] = self.request.user == self.object.author  # Is authenticated user show his note?
         return context
@@ -35,14 +35,17 @@ class ViewCategory(ListView):
     allow_empty = True
     paginate_by = 5
 
-    def get_breadcrumb_list(self, category: models.Category):
+    def get_breadcrumb_list(self, category: models.Category) -> list[models.Category]:
+        """
+        :return: list with ancestors of category
+        """
         breadcrumb_list = []
         while category:
             breadcrumb_list.append(category)
             category = category.parent
         return list(reversed(breadcrumb_list))[:-1]
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(ViewCategory, self).get_context_data(**kwargs)
         try:
             category = models.Category.objects.get(pk=self.kwargs['pk'])
@@ -54,7 +57,10 @@ class ViewCategory(ListView):
         except models.Category.DoesNotExist:
             raise Http404()
 
-    def get_queryset(self):
+    def get_queryset(self) -> list[models.Note]:
+        """
+        :return: list of notes, which belong to this category
+        """
         try:
             return models.Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
         except models.Category.DoesNotExist:
@@ -98,7 +104,10 @@ def index(request):
 
 
 def random_note(request):
-    """Page for redirecting to random note"""
+    """
+    Page for redirecting user to random note.
+    If there are no notes, redirect to home page.
+    """
 
     notes = models.Note.objects.all()
     if len(notes) > 0:
@@ -297,6 +306,9 @@ class Search(ListView):
     paginate_by = 5
 
     def get_queryset(self):
+        """
+        :return: list of notes, which meets the search criteria
+        """
         return models.Note.objects.filter(title__icontains=self.request.GET.get('search'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -321,6 +333,9 @@ class ViewTag(ListView):
             raise Http404()
 
     def get_queryset(self):
+        """
+        :return: list of notes, which belong to this tag
+        """
         try:
             return models.Note.objects.filter(tags__pk=self.kwargs['pk'])
         except models.Category.DoesNotExist:

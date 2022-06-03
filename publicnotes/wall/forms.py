@@ -47,12 +47,14 @@ class UpdateProfile(forms.ModelForm):
                                          "placeholder": "Расскажите немного о себе. Не более 20 слов"}),
         }
 
-    def clean_bio(self):
+    def clean_bio(self) -> str:
+        """
+        Clear 'bio' field. It should contain no more than 20 words
+        :return: clean value of raise error
+        """
         bio: str = self.cleaned_data['bio']
-
         if len(bio.split()) > 20:
             raise ValidationError('Раздел "О себе" должен содержать не более 20 слов')
-
         return bio
 
 

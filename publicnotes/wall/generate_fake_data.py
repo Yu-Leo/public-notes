@@ -10,7 +10,7 @@ TITLE_TEMPLATE = 'Lorem ipsum '
 CONTENT = '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis cursus nisl, eu ornare neque. Donec tristique, nunc quis euismod consectetur, risus enim tristique dui, nec auctor quam massa eget nisi. In sollicitudin felis in libero sollicitudin sagittis et ut nunc. Vestibulum sodales commodo diam sed cursus. Proin in tellus maximus, sollicitudin lectus et, laoreet massa. Aenean id ante tincidunt lacus ultricies vehicula. Nullam non tincidunt nulla. Quisque ex eros, finibus quis odio non, lacinia porta erat. Mauris ullamcorper bibendum efficitur. Nam aliquet accumsan leo at varius. Sed venenatis purus in rhoncus laoreet. Cras fringilla sapien a felis tempor iaculis. Phasellus ex sem, iaculis non orci sed, consequat egestas justo. '''
 
 
-def main():
+def main() -> None:
     global N, TITLE_TEMPLATE, CONTENT
     categories = Category.objects.all()
     authors = User.objects.all()
