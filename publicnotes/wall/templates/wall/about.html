@@ -23,7 +23,7 @@
         <h1 id="about">О проекте</h1>
     </div>
     <div>
-        <h2><span class="badge bg-info">v1.0.2</span></h2>
+        <h2><span class="badge bg-info">v1.0.3</span></h2>
     </div>
 </div>
 {% endblock %}
@@ -37,7 +37,8 @@
         <li>Заметки:
             <ul>
                 <li>Отображение одним списком (главная страница)</li>
-                <li>Отображение по категориям</li>
+                <li>Отображение по категориям. Каждая заметка может принадлежать одной категории</li>
+                <li>Отображение по тегам. Каждая заметка может иметь несколько тегов.</li>
                 <li>Поиск по названиям</li>
                 <li>Добавление</li>
                 <li>Редактирование</li>
@@ -97,7 +98,7 @@
                     v1.0.2
                 </button>
             </h2>
-            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
                  aria-labelledby="panelsStayOpen-headingTwo">
                 <div class="accordion-body">
                     <ul>
@@ -110,6 +111,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseThree">
+                    v1.0.3
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingThree">
+                <div class="accordion-body">
+                    <ul>
+                        <li>Добавлены теги. Каждая заметка может содержать несколько тегов. Добавлена возможность
+                            просматривать статьи по тегам
+                        </li>
+                        <li>На странице заметки добавлена кнопка "Редактировать" для авторов заметки</li>
+                        <li>Исправлен баг с контентом в sidebar'e на странице 'О проекте'</li>
+                        <li>Рефакторинг и "чистка" кода</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <h2 id="technologies">Используемые технологии:</h2>
