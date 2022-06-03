@@ -14,82 +14,6 @@ from . import models
 from . import forms
 
 
-class ViewNote(DetailView):
-    """View note at single page"""
-
-    model = models.Note
-    template_name = 'wall/note.html'
-    context_object_name = 'note'
-
-    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
-        context = super(ViewNote, self).get_context_data(**kwargs)
-        context['allow_edit'] = self.request.user == self.object.author  # Is authenticated user show his note?
-        return context
-
-
-class ViewCategory(ListView):
-    """View all notes and subcategories for category"""
-
-    model = models.Category
-    template_name = 'wall/category.html'
-    allow_empty = True
-    paginate_by = 5
-
-    def get_breadcrumb_list(self, category: models.Category) -> list[models.Category]:
-        """
-        :return: list with ancestors of category
-        """
-        breadcrumb_list = []
-        while category:
-            breadcrumb_list.append(category)
-            category = category.parent
-        return list(reversed(breadcrumb_list))[:-1]
-
-    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
-        context = super(ViewCategory, self).get_context_data(**kwargs)
-        try:
-            category = models.Category.objects.get(pk=self.kwargs['pk'])
-            context['category'] = category
-            context['categories_tree'] = self.get_breadcrumb_list(category)
-            context['children'] = category.get_children()
-            return context
-
-        except models.Category.DoesNotExist:
-            raise Http404()
-
-    def get_queryset(self) -> list[models.Note]:
-        """
-        :return: list of notes, which belong to this category
-        """
-        try:
-            return models.Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
-        except models.Category.DoesNotExist:
-            raise Http404()
-
-
-class ViewAuthors(ListView):
-    """View list of users"""
-
-    model = models.User
-    template_name = 'wall/authors_list.html'
-    context_object_name = 'authors'
-    allow_empty = False
-
-
-class ViewAuthor(DetailView):
-    """View user's profile"""
-
-    model = models.User
-    template_name = 'wall/author.html'
-    context_object_name = 'author'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ViewAuthor, self).get_context_data(**kwargs)
-        context['page_obj'] = models.Note.objects.filter(author=self.kwargs['pk'])
-        context['is_self'] = self.request.user == self.object  # Is authenticated user show his profile?
-        return context
-
-
 def index(request):
     """Main page with all notes"""
 
@@ -101,6 +25,19 @@ def index(request):
         'page_obj': page_objects
     }
     return render(request, 'wall/index.html', context)
+
+
+class ViewNote(DetailView):
+    """View note at single page"""
+
+    model = models.Note
+    template_name = 'wall/note.html'
+    context_object_name = 'note'
+
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
+        context = super(ViewNote, self).get_context_data(**kwargs)
+        context['allow_edit'] = self.request.user == self.object.author  # Is authenticated user show his note?
+        return context
 
 
 def random_note(request):
@@ -144,21 +81,6 @@ def add_note(request):
 
 
 @login_required(login_url=reverse_lazy('login'))
-def edit_profile(request):
-    """Page for editing user's profile"""
-
-    if request.method == 'POST':
-        user_form = forms.UpdateProfile(request.POST, instance=request.user)
-        if user_form.is_valid():
-            user_form.save()
-            return redirect(request.user)
-    else:
-        user_form = forms.UpdateProfile(instance=request.user)
-
-    return render(request, 'wall/edit_profile.html', {"user_form": user_form})
-
-
-@login_required(login_url=reverse_lazy('login'))
 def edit_note(request, pk):
     """Page for editing note"""
 
@@ -193,6 +115,103 @@ def delete_note(request, pk):
     return redirect(request.user)
 
 
+class ViewCategory(ListView):
+    """View all notes and subcategories for category"""
+
+    model = models.Category
+    template_name = 'wall/category.html'
+    allow_empty = True
+    paginate_by = 5
+
+    def get_breadcrumb_list(self, category: models.Category) -> list[models.Category]:
+        """
+        :return: list with ancestors of category
+        """
+        breadcrumb_list = []
+        while category:
+            breadcrumb_list.append(category)
+            category = category.parent
+        return list(reversed(breadcrumb_list))[:-1]
+
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
+        context = super(ViewCategory, self).get_context_data(**kwargs)
+        try:
+            category = models.Category.objects.get(pk=self.kwargs['pk'])
+            context['category'] = category
+            context['categories_tree'] = self.get_breadcrumb_list(category)
+            context['children'] = category.get_children()
+            return context
+
+        except models.Category.DoesNotExist:
+            raise Http404()
+
+    def get_queryset(self) -> list[models.Note]:
+        """
+        :return: list of notes, which belong to this category
+        """
+        try:
+            return models.Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
+        except models.Category.DoesNotExist:
+            raise Http404()
+
+
+class ViewCategoriesList(ListView):
+    """View list of categories"""
+
+    model = models.Category
+    template_name = 'wall/categories_list.html'
+    context_object_name = 'categories'
+    allow_empty = False
+
+
+class ViewTag(ListView):
+    """View all notes, which have this tag"""
+    model = models.Tag
+    template_name = 'wall/tag.html'
+    allow_empty = True
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ViewTag, self).get_context_data(**kwargs)
+        try:
+            context['tag'] = models.Tag.objects.get(pk=self.kwargs['pk'])
+            return context
+        except models.Tag.DoesNotExist:
+            raise Http404()
+
+    def get_queryset(self):
+        """
+        :return: list of notes, which belong to this tag
+        """
+        try:
+            return models.Note.objects.filter(tags__pk=self.kwargs['pk'])
+        except models.Category.DoesNotExist:
+            raise Http404()
+
+
+class ViewAuthors(ListView):
+    """View list of users"""
+
+    model = models.User
+    template_name = 'wall/authors_list.html'
+    context_object_name = 'authors'
+    allow_empty = False
+
+
+class ViewAuthor(DetailView):
+    """View user's profile"""
+
+    model = models.User
+    template_name = 'wall/author.html'
+    context_object_name = 'author'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ViewAuthor, self).get_context_data(**kwargs)
+        context['page_obj'] = models.Note.objects.filter(author=self.kwargs['pk'])
+        context['is_self'] = self.request.user == self.object  # Is authenticated user show his profile?
+        return context
+
+
 def registration(request):
     """Registration page"""
 
@@ -213,6 +232,21 @@ def registration(request):
     }
 
     return render(request, 'wall/registration.html', context)
+
+
+@login_required(login_url=reverse_lazy('login'))
+def edit_profile(request):
+    """Page for editing user's profile"""
+
+    if request.method == 'POST':
+        user_form = forms.UpdateProfile(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect(request.user)
+    else:
+        user_form = forms.UpdateProfile(instance=request.user)
+
+    return render(request, 'wall/edit_profile.html', {"user_form": user_form})
 
 
 def user_login(request):
@@ -259,26 +293,6 @@ def change_password(request):
     return render(request, 'wall/change_password.html', context)
 
 
-def user_logout(request):
-    """Logout page"""
-
-    logout(request)
-    messages.error(request, 'Вы вышли из аккаунта')
-    return redirect('login')
-
-
-class About(TemplateView):
-    """Page with info about this project"""
-
-    template_name = 'wall/about.html'
-
-
-def handle_page_not_found(request, exception=None):
-    """Handler for 404 error"""
-
-    return render(request, 'wall/404.html', {})
-
-
 @login_required(login_url=reverse_lazy('login'))
 def delete_profile(request):
     """Page for delete user"""
@@ -290,13 +304,18 @@ def delete_profile(request):
     return redirect('home')
 
 
-class ViewCategoriesList(ListView):
-    """View list of categories"""
+def user_logout(request):
+    """Logout page"""
 
-    model = models.Category
-    template_name = 'wall/categories_list.html'
-    context_object_name = 'categories'
-    allow_empty = False
+    logout(request)
+    messages.error(request, 'Вы вышли из аккаунта')
+    return redirect('login')
+
+
+def handle_page_not_found(request, exception=None):
+    """Handler for 404 error"""
+
+    return render(request, 'wall/404.html', {})
 
 
 class Search(ListView):
@@ -317,26 +336,7 @@ class Search(ListView):
         return context
 
 
-class ViewTag(ListView):
-    """View all notes, which have this tag"""
-    model = models.Tag
-    template_name = 'wall/tag.html'
-    allow_empty = True
-    paginate_by = 5
+class About(TemplateView):
+    """Page with info about this project"""
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ViewTag, self).get_context_data(**kwargs)
-        try:
-            context['tag'] = models.Tag.objects.get(pk=self.kwargs['pk'])
-            return context
-        except models.Tag.DoesNotExist:
-            raise Http404()
-
-    def get_queryset(self):
-        """
-        :return: list of notes, which belong to this tag
-        """
-        try:
-            return models.Note.objects.filter(tags__pk=self.kwargs['pk'])
-        except models.Category.DoesNotExist:
-            raise Http404()
+    template_name = 'wall/about.html'
