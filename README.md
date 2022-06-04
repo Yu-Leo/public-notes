@@ -50,12 +50,12 @@
     * Вариант 1
         1. Установить [Git](https://git-scm.com/download/win)
         2. Клонировать репозиторий
-       ```bash
-       git clone https://github.com/Yu-Leo/public-notes.git
-       cd public-notes
-       ```
+        ```bash
+        git clone https://github.com/Yu-Leo/public-notes.git
+        cd public-notes
+        ```
     * Вариант 2 - [Скачать ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
-2. Создать виртуальное окружение
+2. Создать виртуальное окружение в папке проекта
     ```bash
     python3 -m venv venv
     ```
@@ -67,7 +67,27 @@
     ```bash
     pip install -r requirements.txt
     ```
-5. Запустить сервер
+5. Задать [необходимые переменные окужения](#envvars).
+    * Вариант 1.
+        Задать вручную.
+        ```bash
+        export VAR_NAME=VAR_VALUE
+        ```
+    * Вариант 2.
+        Использовать [direnv](https://direnv.net/).
+        1. [Установить direnv](https://direnv.net/docs/installation.html)
+        ```bash
+        sudo pacman -S direnv
+        ```
+        2. В корне директории создать файл `.envrc`, в котором прописать необходимые перменные окружения
+        ```bash
+        export VAR_NAME=VAR_VALUE
+        ```
+        3. Разрешить запуск файла `.envrc` при входе в директорию
+        ```bash
+        direnv allow
+        ```
+6. Запустить сервер
     ```bash
     cd publicnotes
     python manage.py runserver
@@ -126,6 +146,12 @@
         - **templates** - шаблоны приложения
         - **templatetags** - самописные теги
 - **docs** - документация
+
+### :wrench: Настройки
+
+<a id="envvars"></a>
+#### Необходимые переменные окружения:
+- `DJANGO_SECRET_KEY` - SECRET_KEY для конфига Django
 
 <a id="chapter-5"></a>
 
