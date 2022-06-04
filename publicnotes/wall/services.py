@@ -30,7 +30,7 @@ def get_notes_by_author(author_pk: int) -> list[models.Note]:
     """
     :return: notes, which belong to author with tag_pk
     """
-    return models.Note.objects.filter(author=pk)
+    return models.Note.objects.filter(author=author_pk)
 
 
 def get_note_by_pk(pk: int) -> models.Note:
