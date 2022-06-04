@@ -1,5 +1,3 @@
-import random
-
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -10,14 +8,16 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView
 
-from . import models
+from . import exceptions
 from . import forms
+from . import models
+from . import services
 
 
 def index(request):
     """Main page with all notes"""
 
-    notes = models.Note.objects.all().select_related('category', 'author')
+    notes = services.get_all_notes()
     paginator = Paginator(notes, 5)
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
@@ -46,10 +46,10 @@ def random_note(request):
     If there are no notes, redirect to home page.
     """
 
-    notes = models.Note.objects.all()
-    if len(notes) > 0:
-        return redirect(random.choice(notes))
-    return redirect('home')
+    try:
+        return redirect(services.get_random_note())
+    except exceptions.ThereAreNoNotes:
+        return redirect('home')
 
 
 @login_required(login_url=reverse_lazy('login'))
@@ -59,19 +59,13 @@ def add_note(request):
     if request.method == 'POST':
         note_form = forms.NoteForm(request.POST)
         if note_form.is_valid():
-            notes_data = note_form.cleaned_data
-            tags = note_form.cleaned_data.get('tags')
-            author = request.user
-            notes_data['author'] = author
-            del notes_data['tags']
-            note = models.Note.objects.create(**notes_data)
-            note.tags.set(tags)
+            note = services.add_note(note_form, request.user)
             return redirect(note)
     elif request.method == 'GET' and request.GET.get('category') is not None:
         category_pk = int(request.GET.get('category'))
-        category_pk = category_pk
         try:
-            note_form = forms.NoteForm(initial={'category': models.Category.objects.get(pk=category_pk)})
+            note_form = forms.NoteForm(
+                initial={'category': services.get_category_by_pk(category_pk)})
         except models.Category.DoesNotExist:
             note_form = forms.NoteForm()
     else:
@@ -81,19 +75,21 @@ def add_note(request):
 
 
 @login_required(login_url=reverse_lazy('login'))
-def edit_note(request, pk):
+def edit_note(request, pk: int):
     """Page for editing note"""
 
-    if request.user != models.Note.objects.get(pk=pk).author:
+    if not services.is_authenticated_user_the_author_of_note(authenticated_user=request.user,
+                                                             note_pk=pk):
         return redirect('login')
 
     if request.method == 'POST':
-        note_form = forms.UpdateNote(request.POST, instance=models.Note.objects.get(pk=pk))
+        note_form = forms.UpdateNote(request.POST,
+                                     instance=services.get_note_by_pk(pk))
         if note_form.is_valid():
             note = note_form.save()
             return redirect(note)
     else:
-        note_form = forms.UpdateNote(instance=models.Note.objects.get(pk=pk))
+        note_form = forms.UpdateNote(instance=services.get_note_by_pk(pk))
 
     context = {'note_form': note_form,
                'note_pk': pk}
@@ -105,12 +101,11 @@ def edit_note(request, pk):
 def delete_note(request, pk):
     """Page for deleting note"""
 
-    note = models.Note.objects.get(pk=pk)
-
-    if request.user != note.author:
+    if not services.is_authenticated_user_the_author_of_note(authenticated_user=request.user,
+                                                             note_pk=pk):
         return redirect('login')
 
-    note.delete()
+    services.delete_note_by_pk(pk)
     messages.success(request, 'Заметка успешно удалена!')
     return redirect(request.user)
 
@@ -123,26 +118,14 @@ class ViewCategory(ListView):
     allow_empty = True
     paginate_by = 5
 
-    @staticmethod
-    def get_breadcrumb_list(category: models.Category) -> list[models.Category]:
-        """
-        :return: list with ancestors of category
-        """
-        breadcrumb_list = []
-        while category:
-            breadcrumb_list.append(category)
-            category = category.parent
-        return list(reversed(breadcrumb_list))[:-1]
-
     def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(ViewCategory, self).get_context_data(**kwargs)
         try:
-            category = models.Category.objects.get(pk=self.kwargs['pk'])
+            category = services.get_category_by_pk(self.kwargs['pk'])
             context['category'] = category
-            context['categories_tree'] = self.get_breadcrumb_list(category)
-            context['children'] = category.get_children()
+            context['categories_tree'] = services.get_ancestors_of_category(category)
+            context['children'] = services.get_children_of_category(category)
             return context
-
         except models.Category.DoesNotExist:
             raise Http404()
 
@@ -151,7 +134,7 @@ class ViewCategory(ListView):
         :return: list of notes, which belong to this category
         """
         try:
-            return models.Note.objects.filter(category_id=self.kwargs['pk']).select_related('category', 'author')
+            return services.get_notes_from_category(category_pk=self.kwargs['pk'])
         except models.Category.DoesNotExist:
             raise Http404()
 
@@ -167,6 +150,7 @@ class ViewCategoriesList(ListView):
 
 class ViewTag(ListView):
     """View all notes, which have this tag"""
+
     model = models.Tag
     template_name = 'wall/tag.html'
     allow_empty = True
@@ -175,18 +159,15 @@ class ViewTag(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewTag, self).get_context_data(**kwargs)
         try:
-            context['tag'] = models.Tag.objects.get(pk=self.kwargs['pk'])
+            context['tag'] = services.get_tag_by_pk(self.kwargs['pk'])
             return context
         except models.Tag.DoesNotExist:
             raise Http404()
 
     def get_queryset(self):
-        """
-        :return: list of notes, which belong to this tag
-        """
         try:
-            return models.Note.objects.filter(tags__pk=self.kwargs['pk'])
-        except models.Category.DoesNotExist:
+            return services.get_notes_by_tag(tag_pk=self.kwargs['pk'])
+        except models.Tag.DoesNotExist:
             raise Http404()
 
 
@@ -208,7 +189,7 @@ class ViewAuthor(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewAuthor, self).get_context_data(**kwargs)
-        context['page_obj'] = models.Note.objects.filter(author=self.kwargs['pk'])
+        context['page_obj'] = services.get_notes_by_author(author_pk=self.kwargs['pk'])
         context['is_self'] = self.request.user == self.object  # Is authenticated user show his profile?
         return context
 
@@ -280,7 +261,7 @@ def change_password(request):
         form = forms.UserChangePasswordForm(request.user, request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Пароль успешно сменён!')
+            messages.success(request, 'Пароль успешно сменён!')
             return redirect('login')
         else:
             messages.error(request, 'Ошибка')
@@ -300,7 +281,7 @@ def delete_profile(request):
 
     user = request.user
     logout(request)
-    user.delete()
+    services.delete_user(user)
     messages.success(request, 'Профиль и заметки успешно удалены!')
     return redirect('home')
 
@@ -329,7 +310,7 @@ class Search(ListView):
         """
         :return: list of notes, which meets the search criteria
         """
-        return models.Note.objects.filter(title__icontains=self.request.GET.get('search'))
+        return services.search_note_by_title(title=self.request.GET.get('search'))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
