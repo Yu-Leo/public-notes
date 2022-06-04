@@ -2,7 +2,7 @@
 
 import random
 
-from publicnotes.wsgi import *
+from config.wsgi import *
 from wall.models import Note, Category, User
 
 N = 20  # Number of notes

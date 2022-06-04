@@ -1,1 +1,1 @@
-web: gunicorn --chdir publicnotes publicnotes.wsgi
+web: gunicorn --chdir publicnotes config.wsgi
