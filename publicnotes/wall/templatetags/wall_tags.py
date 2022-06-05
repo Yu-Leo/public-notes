@@ -62,10 +62,14 @@ def one_note(note: models.Note, allow_edit: bool = False, show_full: bool = Fals
     :param allow_edit: display button for edit note or no
     :param show_full: display all note or only preview
     """
+    # Note marks as updated if difference between
+    # time of last update and creation time more than one second
+    was_updated = (note.updated_at - note.created_at).total_seconds() >= 1
     context = {
         'note': note,
         'allow_edit': allow_edit,
-        'show_full': show_full
+        'show_full': show_full,
+        'was_updated': was_updated,
     }
     return context
 
