@@ -23,7 +23,8 @@ class Note(models.Model):
 
     title = models.CharField(max_length=150, verbose_name='Название')
     content = models.TextField(verbose_name='Текст', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время последнего обновления')
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     stared = models.BooleanField(verbose_name='Важная', default=False)
     author = models.ForeignKey(
