@@ -13,6 +13,7 @@ urlpatterns = [
     path('authors/', views.ViewAuthors.as_view(), name='authors'),
     path('author/<int:pk>/', views.ViewAuthor.as_view(), name='author'),
     path('registration/', views.registration, name='registration'),
+    path(r'activate/<uidb64>/<token>/', views.activate_account, name='activate'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('about/', views.About.as_view(), name='about'),

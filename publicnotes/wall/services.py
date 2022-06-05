@@ -1,8 +1,15 @@
 import random
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+
 from . import exceptions
 from . import forms
 from . import models
+from . import utils
 
 
 def get_all_notes() -> list[models.Note]:
@@ -103,6 +110,13 @@ def get_children_of_category(category: models.Category) -> list[models.Category]
     return category.get_children()
 
 
+def get_tag_by_pk(pk: int) -> models.Tag:
+    """
+    :return: tag's object by its pk
+    """
+    return models.Tag.objects.get(pk=pk)
+
+
 def is_authenticated_user_the_author_of_note(authenticated_user: models.User,
                                              note_pk: int) -> bool:
     """
@@ -115,8 +129,40 @@ def delete_user(user: models.User) -> None:
     user.delete()
 
 
-def get_tag_by_pk(pk: int) -> models.Tag:
+def register_user(form: forms.UserRegisterForm,
+                  domain: str) -> None:
     """
-    :return: tag's object by its pk
+    Register new user by form.
     """
-    return models.Tag.objects.get(pk=pk)
+    user = _save_new_user_to_db(form)
+    _send_user_activation_email(user, domain)
+
+
+def _save_new_user_to_db(form: forms.UserRegisterForm) -> models.User:
+    """
+    Register inactive user by form and return its object
+    """
+    user = form.save()
+    user.is_active = False
+    user.save()
+    return user
+
+
+def _send_user_activation_email(user: models.User, domain: str) -> None:
+    """
+    Send message to user's email with link for activation user's profile
+    """
+    email_subject = 'Подтвердите e-mail'
+    context = {
+        'link': _generate_link_for_activate_account(domain, user),
+    }
+    email_message = render_to_string('wall/activate_account_message.html', context)
+    email = EmailMessage(email_subject, email_message, to=[user.email])
+    email.send()
+
+
+def _generate_link_for_activate_account(domain: str, user: models.User) -> str:
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = utils.account_activation_token.make_token(user)
+    return 'http://' + domain + str(reverse_lazy('activate',
+                                                 kwargs={'uidb64': uid, 'token': token}))

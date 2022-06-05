@@ -14,6 +14,7 @@ from . import exceptions
 from . import forms
 from . import models
 from . import services
+from . import utils
 
 
 def index(request):
@@ -209,12 +210,10 @@ def registration(request):
     if request.method == 'POST':
         form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, 'Вы успешно зарегистрировались')
+            services.register_user(form, domain=utils.get_current_domain(request))
+            messages.warning(request, 'Вам на почту отправлено письмо с ссылкой для подтверждения e-mail')
             return redirect('home')
-        else:
-            messages.error(request, 'Ошибка регистрации')
+        messages.error(request, 'Ошибка регистрации')
     else:
         form = forms.UserRegisterForm()
 
@@ -223,6 +222,10 @@ def registration(request):
     }
 
     return render(request, 'wall/registration.html', context)
+
+
+def activate_account(request):
+    pass
 
 
 @login_required(login_url=reverse_lazy('login'))
