@@ -4,7 +4,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from . import exceptions
 from . import forms
@@ -132,10 +132,39 @@ def delete_user(user: models.User) -> None:
 def register_user(form: forms.UserRegisterForm,
                   domain: str) -> None:
     """
-    Register new user by form.
+    Register new user by form
     """
     user = _save_new_user_to_db(form)
     _send_user_activation_email(user, domain)
+
+
+def activate_user_by_link(uidb64: str, token: str) -> models.User:
+    """
+    Activate user by activation link
+    :param uidb64: activation link's 'uidb64' value
+    :param token: activation link's 'token' value
+    :return: user's object
+    """
+    user = _get_user_by_activation_link_uidb64(uidb64)
+
+    if not utils.user_activation_token.check_token(user, token):
+        raise exceptions.UserActivationError
+
+    user.is_active = True
+    user.save()
+    return user
+
+
+def _get_user_by_activation_link_uidb64(uidb64: str) -> models.User:
+    """
+    :param uidb64: user's activation link's 'uidb64' value
+    :return: user's object
+    """
+    try:
+        uid = force_bytes(urlsafe_base64_decode(uidb64))
+        return models.User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, models.User.DoesNotExists):
+        raise exceptions.UserActivationError
 
 
 def _save_new_user_to_db(form: forms.UserRegisterForm) -> models.User:
@@ -154,15 +183,15 @@ def _send_user_activation_email(user: models.User, domain: str) -> None:
     """
     email_subject = 'Подтвердите e-mail'
     context = {
-        'link': _generate_link_for_activate_account(domain, user),
+        'link': _generate_link_for_activate_user(domain, user),
     }
-    email_message = render_to_string('wall/activate_account_message.html', context)
+    email_message = render_to_string('wall/activate_user_message.html', context)
     email = EmailMessage(email_subject, email_message, to=[user.email])
     email.send()
 
 
-def _generate_link_for_activate_account(domain: str, user: models.User) -> str:
+def _generate_link_for_activate_user(domain: str, user: models.User) -> str:
     uid = urlsafe_base64_encode(force_bytes(user.pk))
-    token = utils.account_activation_token.make_token(user)
+    token = utils.user_activation_token.make_token(user)
     return 'http://' + domain + str(reverse_lazy('activate',
                                                  kwargs={'uidb64': uid, 'token': token}))

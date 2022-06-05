@@ -11,7 +11,7 @@ class TokenGenerator(PasswordResetTokenGenerator):
                six.text_type(user.is_active)
 
 
-account_activation_token = TokenGenerator()
+user_activation_token = TokenGenerator()
 
 
 def get_current_domain(request):
