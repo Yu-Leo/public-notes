@@ -209,7 +209,7 @@ def registration(request):
         form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
             services.register_user(form, domain=utils.get_current_domain(request))
-            messages.warning(request, 'На указанный вами e-mail отправлено письмо с ссылкой для подтверждения')
+            messages.warning(request, 'На указанный вами E-mail отправлено письмо с ссылкой для подтверждения')
             return redirect('home')
         messages.error(request, 'Ошибка регистрации')
     else:
