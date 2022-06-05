@@ -1,8 +1,6 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import redirect
@@ -211,7 +209,7 @@ def registration(request):
         form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
             services.register_user(form, domain=utils.get_current_domain(request))
-            messages.warning(request, 'Вам на почту отправлено письмо с ссылкой для подтверждения e-mail')
+            messages.warning(request, 'На указанный вами e-mail отправлено письмо с ссылкой для подтверждения')
             return redirect('home')
         messages.error(request, 'Ошибка регистрации')
     else:
@@ -224,8 +222,15 @@ def registration(request):
     return render(request, 'wall/registration.html', context)
 
 
-def activate_account(request):
-    pass
+def activate_user(request, uidb64: str, token: str):
+    try:
+        user = services.activate_user_by_link(uidb64, token)
+        login(request, user)
+        messages.success(request, 'E-mail успешно подтверждён')
+        return redirect(user)
+    except exceptions.UserActivationError:
+        messages.error(request, 'Ошибка подтверждения E-mail')
+        return redirect('home')
 
 
 @login_required(login_url=reverse_lazy('login'))
