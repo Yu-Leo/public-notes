@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import redirect
@@ -24,6 +26,13 @@ def index(request):
     context = {
         'page_obj': page_objects
     }
+    '''
+    send_mail(subject='Subject',
+              message='Some text',
+              from_email=settings.DEFAULT_FROM_EMAIL,
+              recipient_list=['levayu22@gmail.com'],
+              fail_silently=False)
+    '''
     return render(request, 'wall/index.html', context)
 
 
