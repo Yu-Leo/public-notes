@@ -155,6 +155,10 @@
 #### Необходимые переменные окружения:
 
 - `DJANGO_SECRET_KEY` - SECRET_KEY для конфига Django
+- `EMAIL_HOST`
+- `EMAIL_PORT`
+- `EMAIL_HOST_USER`
+- `EMAIL_HOST_PASSWORD`
 
 <a id="chapter-5"></a>
 
