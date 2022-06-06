@@ -9,7 +9,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class User(AbstractUser):
     """Main user's object"""
 
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, verbose_name='E-mail')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     bio = models.TextField(verbose_name='О себе', blank=True)
