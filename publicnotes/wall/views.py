@@ -45,6 +45,7 @@ class ViewNote(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(ViewNote, self).get_context_data(**kwargs)
         context['allow_edit'] = self.request.user == self.object.author  # Is authenticated user show his note?
+        services.increase_number_of_views(self.object)
         return context
 
 
