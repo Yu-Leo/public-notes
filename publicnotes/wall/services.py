@@ -13,32 +13,36 @@ from . import models
 from . import utils
 
 
-def get_all_notes() -> list[models.Note]:
+def get_all_public_notes() -> list[models.Note]:
     """
-    :return: all notes from db
+    :return: all public notes from db
     """
-    return models.Note.objects.all().select_related('category', 'author')
+    return models.Note.objects.filter(is_public=True).select_related('category', 'author')
 
 
-def get_notes_from_category(category_pk: int) -> list[models.Note]:
+def get_public_notes_from_category(category_pk: int) -> list[models.Note]:
     """
-    :return: notes from category by its pk
+    :return: public notes from category by its pk
     """
-    return models.Note.objects.filter(category_id=category_pk).select_related('category', 'author')
+    return get_all_public_notes().filter(category_id=category_pk)
 
 
-def get_notes_by_tag(tag_pk: int) -> list[models.Note]:
+def get_public_notes_by_tag(tag_pk: int) -> list[models.Note]:
     """
-    :return: notes, which belong to tag with tag_pk
+    :return: publicnotes, which belong to tag with tag_pk
     """
-    return models.Note.objects.filter(tags__pk=tag_pk)
+    return get_all_public_notes().filter(tags__pk=tag_pk)
 
 
-def get_notes_by_author(author_pk: int) -> list[models.Note]:
+def get_notes_by_author(author_pk: int, include_private: bool) -> list[models.Note]:
     """
+    :param include_private: include private notes or not
     :return: notes, which belong to author with tag_pk
     """
-    return models.Note.objects.filter(author=author_pk)
+    all_notes = models.Note.objects.filter(author=author_pk)
+    if not include_private:
+        return all_notes.filter(is_public=True)
+    return all_notes
 
 
 def get_note_by_pk(pk: int) -> models.Note:
@@ -65,7 +69,7 @@ def get_random_note() -> models.Note:
     Raise exception if there are no notes in db
     """
 
-    notes = get_all_notes()
+    notes = get_all_public_notes()
     if len(notes) > 0:
         return random.choice(notes)
     raise exceptions.ThereAreNoNotes
@@ -93,6 +97,17 @@ def increase_number_of_views(note: models.Note) -> None:
     note.views = F('views') + 1
     note.save()
     note.refresh_from_db()
+
+
+def check_right_to_read_for_note(authenticated_user: models.User, note: models.Note) -> bool:
+    """
+    Checks whether the note can be displayed to the requesting user
+    """
+    public = note.is_public
+    private = not public and is_authenticated_user_the_author_of_note(
+        authenticated_user=authenticated_user,
+        note_pk=note.pk)
+    return public or private
 
 
 def get_category_by_pk(pk: int) -> models.Category:

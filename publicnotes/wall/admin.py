@@ -11,7 +11,7 @@ class NoteAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title')
     list_filter = ('created_at', 'category')
 
-    fields = ('title', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags', 'content')
+    fields = ('title', 'is_public', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags', 'content')
     readonly_fields = ('created_at', 'updated_at')
 
 
