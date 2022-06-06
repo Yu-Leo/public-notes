@@ -18,35 +18,31 @@ from . import utils
 def index(request):
     """Main page with all notes"""
 
-    notes = services.get_all_notes()
+    notes = services.get_all_public_notes()
     paginator = Paginator(notes, 5)
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
     context = {
         'page_obj': page_objects
     }
-    '''
-    send_mail(subject='Subject',
-              message='Some text',
-              from_email=settings.DEFAULT_FROM_EMAIL,
-              recipient_list=['levayu22@gmail.com'],
-              fail_silently=False)
-    '''
     return render(request, 'wall/index.html', context)
 
 
-class ViewNote(DetailView):
+def view_note(request, pk: int):
     """View note at single page"""
+    try:
+        note = services.get_note_by_pk(pk=pk)
+    except models.Note.DoesNotExist:
+        raise Http404()
 
-    model = models.Note
-    template_name = 'wall/note.html'
-    context_object_name = 'note'
+    if not services.check_right_to_read_for_note(authenticated_user=request.user, note=note):
+        return redirect('login')
 
-    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
-        context = super(ViewNote, self).get_context_data(**kwargs)
-        context['allow_edit'] = self.request.user == self.object.author  # Is authenticated user show his note?
-        services.increase_number_of_views(self.object)
-        return context
+    services.increase_number_of_views(note)
+    context = {'allow_edit': request.user == note.author,  # Is authenticated user show his note?
+               'note': note}
+
+    return render(request, 'wall/note.html', context)
 
 
 def random_note(request):
@@ -143,7 +139,7 @@ class ViewCategory(ListView):
         :return: list of notes, which belong to this category
         """
         try:
-            return services.get_notes_from_category(category_pk=self.kwargs['pk'])
+            return services.get_public_notes_from_category(category_pk=self.kwargs['pk'])
         except models.Category.DoesNotExist:
             raise Http404()
 
@@ -175,7 +171,7 @@ class ViewTag(ListView):
 
     def get_queryset(self):
         try:
-            return services.get_notes_by_tag(tag_pk=self.kwargs['pk'])
+            return services.get_public_notes_by_tag(tag_pk=self.kwargs['pk'])
         except models.Tag.DoesNotExist:
             raise Http404()
 
@@ -198,8 +194,10 @@ class ViewAuthor(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewAuthor, self).get_context_data(**kwargs)
-        context['page_obj'] = services.get_notes_by_author(author_pk=self.kwargs['pk'])
-        context['is_self'] = self.request.user == self.object  # Is authenticated user show his profile?
+        is_self = self.request.user == self.object  # Is authenticated user view his profile?
+        context['page_obj'] = services.get_notes_by_author(author_pk=self.kwargs['pk'],
+                                                           include_private=is_self)
+        context['is_self'] = is_self
         return context
 
 

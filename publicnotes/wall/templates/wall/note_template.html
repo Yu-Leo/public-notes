@@ -27,11 +27,16 @@
                       title="{{ note.updated_at|date:'d.m.Y H:i' }}">(изменено)</span>
                 {% endif %}
             </div>
+            {% if note.stared %}
             <div>
-                {% if note.stared %}
                 <i class="fa fa-star"></i>
-                {% endif %}
             </div>
+            {% endif %}
+            {% if not note.is_public %}
+            <div>
+                <i class="fa fa-eye-slash"></i>
+            </div>
+            {% endif %}
             <div>
                 {% for tag in note.tags.all %}
                 <a href="{{ tag.get_absolute_url }}"
