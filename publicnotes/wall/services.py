@@ -1,6 +1,7 @@
 import random
 
 from django.core.mail import EmailMessage
+from django.db.models import F
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
@@ -83,6 +84,15 @@ def add_note(note_form: forms.NoteForm, author: models.User) -> models.Note:
     note = models.Note.objects.create(**notes_data)
     note.tags.set(tags)
     return note
+
+
+def increase_number_of_views(note: models.Note) -> None:
+    """
+    Increase number of views for note by 1
+    """
+    note.views = F('views') + 1
+    note.save()
+    note.refresh_from_db()
 
 
 def get_category_by_pk(pk: int) -> models.Category:
