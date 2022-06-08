@@ -35,7 +35,10 @@
 
             {% if not note.is_public %}
             <div>
-                <i class="fa fa-eye-slash"></i>
+                <span data-bs-toggle="tooltip"
+                      title="Приватная заметка">
+                    <i class="fa fa-eye-slash"></i>
+                </span>
             </div>
             {% endif %}
             <div>
@@ -47,14 +50,20 @@
             </div>
             <div class="ms-auto">
             </div>
-            {% if note.is_pined %}
+            {% if in_profile and note.is_pined %}
             <div class="me-2">
-                <i class="fa fa-arrow-up"></i>
+                <span data-bs-toggle="tooltip"
+                      title="Закреплена в профиле">
+                    <i class="fa fa-arrow-up"></i>
+                </span>
             </div>
             {% endif %}
             {% if allow_edit %}
             <div>
-                <a href="{% url 'edit_note' note.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
+                <span data-bs-toggle="tooltip"
+                      title="Редактировать">
+                    <a href="{% url 'edit_note' note.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
+                </span>
             </div>
             {% endif %}
         </div>
