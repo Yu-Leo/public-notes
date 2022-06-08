@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-08 17:53+0300\n"
+"POT-Creation-Date: 2022-06-08 19:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,8 @@ msgstr "Add note"
 msgid "Note"
 msgstr "Note"
 
-#: templates/wall/author.html:27
+#: templates/wall/author.html:27 templates/wall/edit_profile.html:4
+#: templates/wall/edit_profile.html:12
 msgid "EditProfile"
 msgstr "Edit profile"
 
@@ -72,6 +73,7 @@ msgid "Categories"
 msgstr "Categories"
 
 #: templates/wall/category.html:4 templates/wall/category.html:13
+#: templates/wall/note_template.html:106
 msgid "Category"
 msgstr "Category"
 
@@ -80,12 +82,55 @@ msgid "SubCategories"
 msgstr "Subcategories"
 
 #: templates/wall/change_password.html:4 templates/wall/change_password.html:12
+#: templates/wall/edit_profile.html:15
 msgid "ChangePassword"
 msgstr "Change password"
 
 #: templates/wall/change_password.html:24
 msgid "Change"
 msgstr "Change"
+
+#: templates/wall/edit_note.html:4 templates/wall/edit_note.html:11
+msgid "EditNote"
+msgstr "Edit note"
+
+#: templates/wall/edit_note.html:16
+msgid "DeleteNote"
+msgstr "Delete note"
+
+#: templates/wall/edit_note.html:29 templates/wall/edit_profile.html:33
+msgid "Update"
+msgstr "Update"
+
+#: templates/wall/edit_note.html:40
+#, fuzzy
+#| msgid "MainPageTitle"
+msgid "DeletingNoteTitle"
+msgstr "Deleting the note"
+
+#: templates/wall/edit_note.html:44
+msgid "DeletingNoteText"
+msgstr "This note will be deleted forever! Continue?"
+
+#: templates/wall/edit_note.html:47 templates/wall/edit_profile.html:51
+msgid "Cancel"
+msgstr "Cancel"
+
+#: templates/wall/edit_note.html:48 templates/wall/edit_profile.html:52
+msgid "Delete"
+msgstr "Delete"
+
+#: templates/wall/edit_profile.html:20
+msgid "DeleteProfile"
+msgstr "Delete profile"
+
+#: templates/wall/edit_profile.html:44
+msgid "DeletingProfileTitle"
+msgstr "Deleting the profile"
+
+#: templates/wall/edit_profile.html:48
+msgid "DeletingProfileText"
+msgstr "Your profile and all your notes will be deleted forever! Continue?"
 
 #: templates/wall/index.html:5
 msgid "MainPageHeading"
@@ -102,3 +147,56 @@ msgstr "Notes"
 #: templates/wall/index.html:30
 msgid "RandomNotes"
 msgstr "Random Note"
+
+#: templates/wall/login.html:4 templates/wall/login.html:12
+msgid "Authorization"
+msgstr "Authorization"
+
+#: templates/wall/login.html:24
+msgid "LogIn"
+msgstr "Log in"
+
+#: templates/wall/note_template.html:29
+msgid "Updated"
+msgstr "updated"
+
+#: templates/wall/note_template.html:41
+#, fuzzy
+#| msgid "EditNote"
+msgid "PrivateNote"
+msgstr "Private note"
+
+#: templates/wall/note_template.html:58
+msgid "PinedInProfile"
+msgstr "Pined in profile"
+
+#: templates/wall/note_template.html:66
+msgid "Edit"
+msgstr "Edit"
+
+#: templates/wall/note_template.html:90
+msgid "ReadMore"
+msgstr "Read more"
+
+#: templates/wall/note_template.html:117 templates/wall/note_template.html:119
+msgid "PreviousNote"
+msgstr "Previous Note"
+
+#: templates/wall/note_template.html:124 templates/wall/note_template.html:126
+msgid "NextNote"
+msgstr "Next Note"
+
+#: templates/wall/registration.html:4 templates/wall/registration.html:12
+#: templates/wall/registration.html:24
+msgid "Registration"
+msgstr "Registration"
+
+#: templates/wall/search.html:4 templates/wall/search.html:12
+#, fuzzy
+#| msgid "Search"
+msgid "SearchWord"
+msgstr "Search"
+
+#: templates/wall/tag.html:4 templates/wall/tag.html:13
+msgid "Tag"
+msgstr "Tag"

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Регистрация{% endblock %}
+{% block title %}{% trans 'Registration' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -8,7 +9,7 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Регистрация</h1>
+        <h1>{% trans 'Registration' %}</h1>
     </div>
 </div>
 {% endblock %}
@@ -20,6 +21,6 @@
 
     {{ form.as_p }}
 
-    <button type="submit" class="btn btn-purple btn-block">Регистрация</button>
+    <button type="submit" class="btn btn-purple btn-block">{% trans 'Registration' %}</button>
 </form>
 {% endblock %}

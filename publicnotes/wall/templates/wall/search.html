@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Поиск{% endblock %}
+{% block title %}{% trans 'SearchWord' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -8,7 +9,7 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Поиск "{{ search }}":</h1>
+        <h1>{% trans 'SearchWord' %} "{{ search }}":</h1>
     </div>
 </div>
 {% endblock %}

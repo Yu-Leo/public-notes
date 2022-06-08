@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Редактировать профиль{% endblock %}
+{% block title %}{% trans 'EditProfile' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -8,15 +9,15 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Редактировать профиль</h1>
+        <h1>{% trans 'EditProfile' %}</h1>
     </div>
     <div class="ms-auto">
-        <a href="{% url 'change_password' %}" class="btn btn-outline-purple">Сменить пароль</a>
+        <a href="{% url 'change_password' %}" class="btn btn-outline-purple">{% trans 'ChangePassword' %}</a>
     </div>
     <div>
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                 data-bs-target="#deleteProfileModal">
-            Удалить профиль
+            {% trans 'DeleteProfile' %}
         </button>
     </div>
 </div>
@@ -29,7 +30,7 @@
     {% csrf_token %}
     <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
         {{ user_form.as_p }}
-        <button type="submit" class="btn btn-purple btn-block">Обновить</button>
+        <button type="submit" class="btn btn-purple btn-block">{% trans 'Update' %}</button>
     </div>
 </form>
 
@@ -40,15 +41,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteProfileModalLabel">Удаление профиля</h5>
+                <h5 class="modal-title" id="deleteProfileModalLabel">{% trans 'DeletingProfileTitle' %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Ваш профиль и все заметки будут удалены навсегда! Продолжить?
+                {% trans 'DeletingProfileText' %}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <a class="btn btn-danger" href="{% url 'delete_profile' %}" role="button">Удалить</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Cancel' %}</button>
+                <a class="btn btn-danger" href="{% url 'delete_profile' %}" role="button">{% trans 'Delete' %}</a>
             </div>
         </div>
     </div>

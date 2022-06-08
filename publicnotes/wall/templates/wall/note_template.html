@@ -1,4 +1,5 @@
 {% load wall_tags %}
+{% load i18n %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -24,7 +25,8 @@
                 {{ note.created_at|date:"d.m.Y H:i" }}
                 {% if was_updated %}
                 <span data-bs-toggle="tooltip"
-                      title="{{ note.updated_at|date:'d.m.Y H:i' }}">(изменено)</span>
+                      title="{{ note.updated_at|date:'d.m.Y H:i' }}">
+                    ({% trans 'Updated' %})</span>
                 {% endif %}
             </div>
             {% if note.stared %}
@@ -36,7 +38,7 @@
             {% if not note.is_public %}
             <div>
                 <span data-bs-toggle="tooltip"
-                      title="Приватная заметка">
+                      title="{% trans 'PrivateNote' %}">
                     <i class="fa fa-eye-slash"></i>
                 </span>
             </div>
@@ -53,7 +55,7 @@
             {% if in_profile and note.is_pined %}
             <div class="me-2">
                 <span data-bs-toggle="tooltip"
-                      title="Закреплена в профиле">
+                      title="{% trans 'PinedInProfile' %}">
                     <i class="fa fa-arrow-up"></i>
                 </span>
             </div>
@@ -61,7 +63,7 @@
             {% if allow_edit %}
             <div>
                 <span data-bs-toggle="tooltip"
-                      title="Редактировать">
+                      title="{% trans 'Edit' %}">
                     <a href="{% url 'edit_note' note.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
                 </span>
             </div>
@@ -85,7 +87,7 @@
         </p>
 
         {% if not show_full %}
-        <a href="{{ note.get_absolute_url }}" class="btn btn-outline-purple stretched-link">Читать далее</a>
+        <a href="{{ note.get_absolute_url }}" class="btn btn-outline-purple stretched-link">{% trans 'ReadMore' %}</a>
         {% endif %}
     </div>
 
@@ -101,8 +103,8 @@
 
 
             {% if note.category %}
-            <div><span class="">Категория: </span><a href="{{ note.category.get_absolute_url }}"
-                                                     class="text-decoration-none text-dark fw-bold">
+            <div><span class="">{% trans 'Category' %}: </span><a href="{{ note.category.get_absolute_url }}"
+                                                                  class="text-decoration-none text-dark fw-bold">
                 {{ note.category.title }}</a></div>
             {% endif %}
             <div class="ms-auto">{{ note.views }} просмотра(-ов)</div>
@@ -111,16 +113,17 @@
         <div class="btn-toolbar justify-content-between mt-3" role="toolbar" aria-label="Toolbar with button groups">
             {% get_prev_note_in_category note as prev_note %}
             {% if prev_note %}
-            <a href="{{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">Предыдущая заметка</a>
+            <a href="
+            {{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'PreviousNote' %}</a>
             {% else %}
-            <a href="#" class="btn btn-outline-purple disabled">Предыдущая заметка</a>
+            <a href="#" class="btn btn-outline-purple disabled">{% trans 'PreviousNote' %}</a>
             {% endif %}
 
             {% get_next_note_in_category note as next_note %}
             {% if next_note %}
-            <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">Следующая заметка</a>
+            <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'NextNote' %}</a>
             {% else %}
-            <a href="#" class="btn btn-outline-purple disabled">Следующая заметка</a>
+            <a href="#" class="btn btn-outline-purple disabled">{% trans 'NextNote' %}</a>
             {% endif %}
         </div>
         {% endif %}
