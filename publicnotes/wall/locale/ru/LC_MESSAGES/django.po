@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-08 17:53+0300\n"
+"POT-Creation-Date: 2022-06-08 19:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,8 @@ msgstr "Добавить заметку"
 msgid "Note"
 msgstr "Заметка"
 
-#: templates/wall/author.html:27
+#: templates/wall/author.html:27 templates/wall/edit_profile.html:4
+#: templates/wall/edit_profile.html:12
 msgid "EditProfile"
 msgstr "Редактировать профиль"
 
@@ -75,6 +76,7 @@ msgid "Categories"
 msgstr "Категории"
 
 #: templates/wall/category.html:4 templates/wall/category.html:13
+#: templates/wall/note_template.html:106
 msgid "Category"
 msgstr "Категория"
 
@@ -83,12 +85,53 @@ msgid "SubCategories"
 msgstr "Подкатегории"
 
 #: templates/wall/change_password.html:4 templates/wall/change_password.html:12
+#: templates/wall/edit_profile.html:15
 msgid "ChangePassword"
 msgstr "Сменить пароль"
 
 #: templates/wall/change_password.html:24
 msgid "Change"
 msgstr "Сменить"
+
+#: templates/wall/edit_note.html:4 templates/wall/edit_note.html:11
+msgid "EditNote"
+msgstr "Редактировать заметку"
+
+#: templates/wall/edit_note.html:16
+msgid "DeleteNote"
+msgstr "Удалить заметку"
+
+#: templates/wall/edit_note.html:29 templates/wall/edit_profile.html:33
+msgid "Update"
+msgstr "Обновить"
+
+#: templates/wall/edit_note.html:40
+msgid "DeletingNoteTitle"
+msgstr "Удаление заметки"
+
+#: templates/wall/edit_note.html:44
+msgid "DeletingNoteText"
+msgstr "Эта заметка будет удалена навсегда! Продолжить?"
+
+#: templates/wall/edit_note.html:47 templates/wall/edit_profile.html:51
+msgid "Cancel"
+msgstr "Отмена"
+
+#: templates/wall/edit_note.html:48 templates/wall/edit_profile.html:52
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/wall/edit_profile.html:20
+msgid "DeleteProfile"
+msgstr "Удалить профиль"
+
+#: templates/wall/edit_profile.html:44
+msgid "DeletingProfileTitle"
+msgstr "Удаление профиля"
+
+#: templates/wall/edit_profile.html:48
+msgid "DeletingProfileText"
+msgstr "Ваш профиль и все заметки будут удалены навсегда! Продолжить?"
 
 #: templates/wall/index.html:5
 msgid "MainPageHeading"
@@ -105,3 +148,52 @@ msgstr "Заметки"
 #: templates/wall/index.html:30
 msgid "RandomNotes"
 msgstr "Случайная заметка"
+
+#: templates/wall/login.html:4 templates/wall/login.html:12
+msgid "Authorization"
+msgstr "Авторизация"
+
+#: templates/wall/login.html:24
+msgid "LogIn"
+msgstr "Войти"
+
+#: templates/wall/note_template.html:29
+msgid "Updated"
+msgstr "изменено"
+
+#: templates/wall/note_template.html:41
+msgid "PrivateNote"
+msgstr "Приватная заметка"
+
+#: templates/wall/note_template.html:58
+msgid "PinedInProfile"
+msgstr "Закреплена в профиле"
+
+#: templates/wall/note_template.html:66
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/wall/note_template.html:90
+msgid "ReadMore"
+msgstr "Читать далее"
+
+#: templates/wall/note_template.html:117 templates/wall/note_template.html:119
+msgid "PreviousNote"
+msgstr "Предыдущая заметка"
+
+#: templates/wall/note_template.html:124 templates/wall/note_template.html:126
+msgid "NextNote"
+msgstr "Следующая заметка"
+
+#: templates/wall/registration.html:4 templates/wall/registration.html:12
+#: templates/wall/registration.html:24
+msgid "Registration"
+msgstr "Регистрация"
+
+#: templates/wall/search.html:4 templates/wall/search.html:12
+msgid "SearchWord"
+msgstr "Поиск"
+
+#: templates/wall/tag.html:4 templates/wall/tag.html:13
+msgid "Tag"
+msgstr "Тег"
