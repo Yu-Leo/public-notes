@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
 from mptt.admin import MPTTModelAdmin
+from django.utils.translation import ugettext as _
 
 from . import models
 
@@ -21,12 +22,12 @@ class MyUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Персональная информация', {'fields': ('first_name', 'last_name',
-                                                'email', 'show_email', 'rating', 'photo', 'get_photo', 'bio')}),
-        ('Права доступа', {
+        (_('PersonalInfo'), {'fields': ('first_name', 'last_name',
+                                        'email', 'show_email', 'rating', 'photo', 'get_photo', 'bio')}),
+        (_('AccessRights'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
-        ('Даты', {'fields': ('last_login', 'date_joined')}),
+        (_('Dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
     readonly_fields = ('get_photo',)
@@ -37,7 +38,7 @@ class MyUserAdmin(UserAdmin):
         else:
             return '-'
 
-    get_photo.short_description = 'Текущая аватарка'
+    get_photo.short_description = _('CurrentAvatar')
 
 
 class CategoryAdmin(MPTTModelAdmin):
