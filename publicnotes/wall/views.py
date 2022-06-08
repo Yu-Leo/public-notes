@@ -88,13 +88,13 @@ def edit_note(request, pk: int):
         return redirect('login')
 
     if request.method == 'POST':
-        note_form = forms.UpdateNote(request.POST,
-                                     instance=services.get_note_by_pk(pk))
+        note_form = forms.NoteForm(request.POST,
+                                   instance=services.get_note_by_pk(pk))
         if note_form.is_valid():
             note = note_form.save()
             return redirect(note)
     else:
-        note_form = forms.UpdateNote(instance=services.get_note_by_pk(pk))
+        note_form = forms.NoteForm(instance=services.get_note_by_pk(pk))
 
     context = {'note_form': note_form,
                'note_pk': pk}
