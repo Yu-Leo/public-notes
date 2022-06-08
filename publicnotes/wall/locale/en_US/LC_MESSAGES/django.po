@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-08 19:20+0300\n"
+"POT-Creation-Date: 2022-06-08 19:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:73
+#: admin.py:25
+msgid "PersonalInfo"
+msgstr "Personal info"
+
+#: admin.py:27
+msgid "AccessRights"
+msgstr "Access rights"
+
+#: admin.py:30
+msgid "Dates"
+msgstr "Dates"
+
+#: admin.py:41
+msgid "CurrentAvatar"
+msgstr "Current avatar"
+
+#: forms.py:38
+msgid "TellAboutYourself"
+msgstr "Tell us a little about yourself. No more than 20 words."
+
+#: forms.py:48
+msgid "NoMoreThan20Words"
+msgstr "The 'Bio' section should contain no more than 20 words"
+
+#: forms.py:53 forms.py:68
+msgid "Nickname"
+msgstr "Nickname"
+
+#: forms.py:57 forms.py:70
+msgid "Password"
+msgstr "Password"
+
+#: forms.py:59
+msgid "PasswordConfirmation"
+msgstr "Password confirmation"
+
+#: forms.py:75
 msgid "OldPassword"
 msgstr "Old password"
+
+#: forms.py:77
+msgid "NewPassword"
+msgstr "New password"
+
+#: forms.py:79
+msgid "NewPasswordConfirmation"
+msgstr "New password confirmation"
 
 #: templates/wall/404.html:11
 msgid "PageNotFound"

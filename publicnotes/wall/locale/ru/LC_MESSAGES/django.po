@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-08 19:20+0300\n"
+"POT-Creation-Date: 2022-06-08 19:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,9 +20,53 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:73
+#: admin.py:25
+msgid "PersonalInfo"
+msgstr "Персональная информация"
+
+#: admin.py:27
+msgid "AccessRights"
+msgstr "Права доступа"
+
+#: admin.py:30
+msgid "Dates"
+msgstr "Даты"
+
+#: admin.py:41
+msgid "CurrentAvatar"
+msgstr "Текущая аватарка"
+
+#: forms.py:38
+msgid "TellAboutYourself"
+msgstr "Расскажите немного о себе. Не более 20 слов."
+
+#: forms.py:48
+msgid "NoMoreThan20Words"
+msgstr "Раздел 'О себе' должен содержать не более 20 слов"
+
+#: forms.py:53 forms.py:68
+msgid "Nickname"
+msgstr "Никнейм"
+
+#: forms.py:57 forms.py:70
+msgid "Password"
+msgstr "Пароль"
+
+#: forms.py:59
+msgid "PasswordConfirmation"
+msgstr "Подтверждение пароля"
+
+#: forms.py:75
 msgid "OldPassword"
 msgstr "Старый пароль"
+
+#: forms.py:77
+msgid "NewPassword"
+msgstr "Новый пароль"
+
+#: forms.py:79
+msgid "NewPasswordConfirmation"
+msgstr "Подтверждение нового пароля"
 
 #: templates/wall/404.html:11
 msgid "PageNotFound"
