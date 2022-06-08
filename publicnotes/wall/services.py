@@ -42,7 +42,7 @@ def get_notes_by_author(author_pk: int, include_private: bool) -> list[models.No
     all_notes = models.Note.objects.filter(author=author_pk)
     if not include_private:
         return all_notes.filter(is_public=True)
-    return all_notes
+    return all_notes.order_by('-is_pined', '-created_at')
 
 
 def get_note_by_pk(pk: int) -> models.Note:

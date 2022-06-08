@@ -37,6 +37,7 @@ class Note(models.Model):
         null=True,
         blank=True,
     )
+    is_pined = models.BooleanField(verbose_name='Закреплена в профиле', default=False)
     category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
     tags = models.ManyToManyField('Tag', blank=True, verbose_name='Теги', related_name='notes')
 

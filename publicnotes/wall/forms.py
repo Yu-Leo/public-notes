@@ -8,7 +8,7 @@ from . import models
 class NoteForm(forms.ModelForm):
     class Meta:
         model = models.Note
-        fields = ['title', 'content', 'rating', 'stared', 'category', 'tags', 'is_public']
+        fields = ['title', 'content', 'rating', 'stared', 'category', 'tags', 'is_public', 'is_pined']
         widgets = {
             'title': forms.TextInput(attrs={"class": "form-control"}),
             'content': forms.Textarea(attrs={"class": "form-control"}),
@@ -17,21 +17,7 @@ class NoteForm(forms.ModelForm):
             'category': forms.Select(attrs={"class": "form-control"}),
             'tags': forms.CheckboxSelectMultiple(),
             'is_public': forms.CheckboxInput(attrs={"class": ["form-control", "form-check-input"]}),
-        }
-
-
-class UpdateNote(forms.ModelForm):
-    class Meta:
-        model = models.Note
-        fields = ['title', 'content', 'rating', 'stared', 'category', 'tags', 'is_public']
-        widgets = {
-            'title': forms.TextInput(attrs={"class": "form-control"}),
-            'content': forms.Textarea(attrs={"class": "form-control"}),
-            'rating': forms.NumberInput(attrs={"class": "form-control"}),
-            'stared': forms.CheckboxInput(attrs={"class": ["form-control", "form-check-input"]}),
-            'category': forms.Select(attrs={"class": "form-control"}),
-            'tags': forms.CheckboxSelectMultiple(),
-            'is_public': forms.CheckboxInput(attrs={"class": ["form-control", "form-check-input"]}),
+            'is_pined': forms.CheckboxInput(attrs={"class": ["form-control", "form-check-input"]}),
         }
 
 

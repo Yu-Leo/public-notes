@@ -32,6 +32,7 @@
                 <i class="fa fa-star"></i>
             </div>
             {% endif %}
+
             {% if not note.is_public %}
             <div>
                 <i class="fa fa-eye-slash"></i>
@@ -44,8 +45,15 @@
                     {{ tag.title }}</a>
                 {% endfor %}
             </div>
+            <div class="ms-auto">
+            </div>
+            {% if note.is_pined %}
+            <div class="me-2">
+                <i class="fa fa-arrow-up"></i>
+            </div>
+            {% endif %}
             {% if allow_edit %}
-            <div class="ms-auto me-2">
+            <div>
                 <a href="{% url 'edit_note' note.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
             </div>
             {% endif %}
