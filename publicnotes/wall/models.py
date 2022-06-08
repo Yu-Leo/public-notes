@@ -26,7 +26,7 @@ class Note(models.Model):
     content = models.TextField(verbose_name='Текст', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время последнего обновления')
-    views = models.IntegerField(default=0, verbose_name='Количество просмотров')
+    views = models.PositiveIntegerField(default=0, verbose_name='Количество просмотров')
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
     is_public = models.BooleanField(verbose_name='Публичная', default=False)
     stared = models.BooleanField(verbose_name='Важная', default=False)
