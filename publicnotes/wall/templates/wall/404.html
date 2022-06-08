@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}404{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Запрашиваемая страница не найдена</h1>
+        <h1>{% trans 'PageNotFound' %}</h1>
     </div>
     <div>
-        <a href="{% url 'home' %}" class="btn btn-outline-purple">На главную</a>
+        <a href="{% url 'home' %}" class="btn btn-outline-purple">{% trans 'ToMainPage' %}</a>
     </div>
 </div>
 {% endblock %}

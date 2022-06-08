@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load wall_tags %}
 
-{% block title %}Авторы{% endblock %}
+{% block title %}{% trans 'Authors' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
 {% block content_title %}
-<h1 class="mb-3">Авторы</h1>
+<h1 class="mb-3">{% trans 'Authors' %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -29,9 +29,9 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Заметок: <span class="fw-bold">
+                    <li class="list-group-item">{% trans 'NotesCount' %}: <span class="fw-bold">
                         {% get_notes_count_for_author item %} </span></li>
-                    <li class="list-group-item">Рейтинг: <span class="
+                    <li class="list-group-item">{% trans 'Rating' %}: <span class="
                         {% if item.rating > 0 %}
                         text-success
                         {% elif item.rating < 0 %}
@@ -44,8 +44,9 @@
                 </ul>
             </div>
             <div class="card-footer">
-                <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">Открыть
-                    профиль</a>
+                <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">
+                    {% trans 'OpenProfile' %}
+                </a>
             </div>
         </div>
     </div>

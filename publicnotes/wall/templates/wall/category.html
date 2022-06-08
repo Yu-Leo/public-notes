@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-
-{% block title %}Категория: {{ category.title }}{% endblock %}
+{% block title %}{% trans 'Category' %}: {{ category.title }}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -10,11 +10,11 @@
 <div class="mb-3">
     <div class="hstack gap-3">
         <div>
-            <h1>Категория: {{ category.title }}</h1>
+            <h1>{% trans 'Category' %}: {{ category.title }}</h1>
         </div>
         <div>
-            <a href="{% url 'add_note' %}?category={{ category.pk }}" class="btn btn-outline-purple">Добавить
-                заметку</a>
+            <a href="{% url 'add_note' %}?category={{ category.pk }}" class="btn btn-outline-purple">
+                {% trans 'AddNote' %}</a>
         </div>
     </div>
     {% if categories_tree %}
@@ -35,7 +35,7 @@
 {% block content %}
 {% if children %}
 <div class="border border-purple border-1 rounded p-3 bg-white mb-3">
-    <h2>Подкатегории:</h2>
+    <h2>{% trans 'SubCategories' %}:</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for item in children %}
         <div class="col">

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Добавить заметку{% endblock %}
+{% block title %}{% trans 'AddNote' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -8,7 +9,7 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Добавить заметку</h1>
+        <h1>{% trans 'AddNote' %}</h1>
     </div>
 </div>
 {% endblock %}
@@ -18,9 +19,9 @@
 <form action="{% url 'add_note' %}" method="post">
     {% csrf_token %}
     <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
-        <h3>Заметка:</h3>
+        <h3>{% trans 'Note' %}:</h3>
         {{ note_form.as_p }}
-        <button type="submit" class="btn btn-purple btn-block">Добавить заметку</button>
+        <button type="submit" class="btn btn-purple btn-block">{% trans 'AddNote' %}</button>
     </div>
 </form>
 

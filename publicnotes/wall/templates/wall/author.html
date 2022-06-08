@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load wall_tags %}
 
 {% block title %}{{ author.username }}{% endblock %}
@@ -24,7 +24,7 @@
             {{ author.last_name }}
             {% endif %}</span></h5>
         {% if is_self %}
-        <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">Редактировать профиль</a>
+        <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">{% trans 'EditProfile' %}</a>
         {% endif %}
     </div>
 
@@ -38,14 +38,14 @@
 
         {% if author.bio %}
         <li class="list-group-item">
-            <p class="card-text"><span class="text-secondary"> О себе: </span>{{ author.bio }}</p>
+            <p class="card-text"><span class="text-secondary"> {% trans 'AboutYourself' %}: </span>{{ author.bio }}</p>
         </li>
         {% endif %}
 
-        <li class="list-group-item"><span class="text-secondary">Заметок: </span><span class="fw-bold">
-                        {% get_notes_count_for_author author %} </span></li>
+        <li class="list-group-item"><span class="text-secondary">{% trans 'NotesCount' %}: </span>
+            <span class="fw-bold"> {% get_notes_count_for_author author %}</span></li>
 
-        <li class="list-group-item"><span class="text-secondary">Рейтинг: </span><span class="
+        <li class="list-group-item"><span class="text-secondary">{% trans 'Rating' %}: </span><span class="
                         {% if item.rating > 0 %}
                         text-success
                         {% elif item.rating < 0 %}
@@ -62,11 +62,11 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Заметки</h1>
+        <h1>{% trans 'Notes' %}</h1>
     </div>
     {% if is_self %}
     <div>
-        <a href="{% url 'add_note' %}" class="btn btn-outline-purple">Добавить заметку</a>
+        <a href="{% url 'add_note' %}" class="btn btn-outline-purple">{% trans 'AddNote' %}</a>
     </div>
     {% endif %}
 </div>

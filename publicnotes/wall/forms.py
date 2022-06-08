@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
 
 from . import models
 
@@ -69,7 +70,7 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserChangePasswordForm(PasswordChangeForm):
-    old_password = forms.CharField(label="Старый пароль",
+    old_password = forms.CharField(label=_('OldPassword'),
                                    widget=forms.PasswordInput(attrs={"class": "form-control"}))
     new_password1 = forms.CharField(label="Новый пароль",
                                     widget=forms.PasswordInput(attrs={"class": "form-control"}))

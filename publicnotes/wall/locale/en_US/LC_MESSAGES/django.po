@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-08 17:53+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:73
+msgid "OldPassword"
+msgstr "Old password"
+
+#: templates/wall/404.html:11
+msgid "PageNotFound"
+msgstr "Page not found"
+
+#: templates/wall/404.html:14
+msgid "ToMainPage"
+msgstr "To main"
+
+#: templates/wall/add_note_form.html:4 templates/wall/add_note_form.html:12
+#: templates/wall/add_note_form.html:24 templates/wall/author.html:69
+#: templates/wall/category.html:17
+msgid "AddNote"
+msgstr "Add note"
+
+#: templates/wall/add_note_form.html:22
+msgid "Note"
+msgstr "Note"
+
+#: templates/wall/author.html:27
+msgid "EditProfile"
+msgstr "Edit profile"
+
+#: templates/wall/author.html:41
+msgid "AboutYourself"
+msgstr "About"
+
+#: templates/wall/author.html:45 templates/wall/authors_list.html:32
+msgid "NotesCount"
+msgstr "Notes"
+
+#: templates/wall/author.html:48 templates/wall/authors_list.html:34
+msgid "Rating"
+msgstr "Rating"
+
+#: templates/wall/author.html:65
+msgid "Notes"
+msgstr "Notes"
+
+#: templates/wall/authors_list.html:5 templates/wall/authors_list.html:10
+msgid "Authors"
+msgstr "Authors"
+
+#: templates/wall/authors_list.html:48
+msgid "OpenProfile"
+msgstr "Open Profile"
+
+#: templates/wall/categories_list.html:5 templates/wall/categories_list.html:13
+msgid "Categories"
+msgstr "Categories"
+
+#: templates/wall/category.html:4 templates/wall/category.html:13
+msgid "Category"
+msgstr "Category"
+
+#: templates/wall/category.html:38
+msgid "SubCategories"
+msgstr "Subcategories"
+
+#: templates/wall/change_password.html:4 templates/wall/change_password.html:12
+msgid "ChangePassword"
+msgstr "Change password"
+
+#: templates/wall/change_password.html:24
+msgid "Change"
+msgstr "Change"
+
+#: templates/wall/index.html:5
+msgid "MainPageHeading"
+msgstr "Main"
+
+#: templates/wall/index.html:10
+msgid "Tags"
+msgstr "Tags"
+
+#: templates/wall/index.html:27
+msgid "MainPageTitle"
+msgstr "Notes"
+
+#: templates/wall/index.html:30
+msgid "RandomNotes"
+msgstr "Random Note"
