@@ -1,6 +1,7 @@
 {% load mptt_tags %}
 {% load wall_tags %}
 {% load static %}
+{% load i18n %}
 {% get_categories as categories %}
 
 <nav class="navbar navbar-expand-lg navbar-light purple-navbar text-white">
@@ -19,12 +20,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">О проекте</a>
+                    <a class="nav-link" href="{% url 'about' %}">{% trans 'NavbarAbout' %}</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Категории
+                        {% trans 'NavbarCategories' %}
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -41,16 +42,16 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'categories_list' %}">Список категорий</a>
+                    <a class="nav-link" href="{% url 'categories_list' %}">{% trans 'NavbarCategoriesList' %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'authors' %}">Авторы</a>
+                    <a class="nav-link" href="{% url 'authors' %}">{% trans 'NavbarAuthors' %}</a>
                 </li>
 
                 {% if request.user.is_authenticated %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_note' %}">Добавить заметку</a>
+                    <a class="nav-link" href="{% url 'add_note' %}">{% trans 'NavbarAddNote' %}</a>
                 </li>
                 {% endif %}
 
@@ -58,8 +59,8 @@
         </div>
         <div class="me-3">
             <form class="d-flex" action="{% url 'search' %}" method="get">
-                <input class="form-control me-2" type="text" placeholder="Поиск" name="search">
-                <button class="btn btn-purple" type="submit">Поиск</button>
+                <input class="form-control me-2" type="text" placeholder="{% trans 'NavbarSearch' %}" name="search">
+                <button class="btn btn-purple" type="submit">{% trans 'NavbarSearch' %}</button>
             </form>
         </div>
         <div class="">
@@ -67,10 +68,11 @@
             <a class="btn btn-purple" href="{{ request.user.get_absolute_url }}" role="button"
                aria-disabled="true">
                 {{ request.user.username }}</a>
-            <a class="btn btn-outline-purple" href="{% url 'logout' %}" role="button">Выйти</a>
+            <a class="btn btn-outline-purple" href="{% url 'logout' %}" role="button">{% trans 'NavbarLogout' %}</a>
             {% else %}
-            <a class="btn btn-outline-purple" href="{% url 'registration' %}" role="button">Регистрация</a>
-            <a class="btn btn-purple" href="{% url 'login' %}" role="button">Войти</a>
+            <a class="btn btn-outline-purple" href="{% url 'registration' %}" role="button">
+                {% trans 'NavbarRegistration' %}</a>
+            <a class="btn btn-purple" href="{% url 'login' %}" role="button">{% trans 'NavbarLogin' %}</a>
             {% endif %}
         </div>
     </div>

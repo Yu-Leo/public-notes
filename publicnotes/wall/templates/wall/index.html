@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load wall_tags %}
+{% load i18n %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}{% trans 'MainPageHeading' %}{% endblock %}
 
 {% block sidebar %}
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Теги: </h4>
+        <h4 class="card-title">{% trans 'Tags' %}</h4>
         <p class="fs-5">
             {% get_tags as tags %}
             {% for tag in tags %}
@@ -23,10 +24,10 @@
 {% block content_title %}
 <div class="hstack gap-3 mb-3">
     <div>
-        <h1>Заметки</h1>
+        <h1>{% trans 'MainPageTitle' %}</h1>
     </div>
     <div>
-        <a href="{% url 'random_note' %}" class="btn btn-outline-purple">Случайная заметка</a>
+        <a href="{% url 'random_note' %}" class="btn btn-outline-purple">{% trans 'RandomNotes' %}</a>
     </div>
 </div>
 {% endblock %}
