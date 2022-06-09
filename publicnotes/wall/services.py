@@ -144,7 +144,7 @@ def get_tag_by_pk(pk: int) -> models.Tag:
     return models.Tag.objects.get(pk=pk)
 
 
-def is_authenticated_user_the_author_of_note(authenticated_user: models.User,
+def is_authenticated_user_the_author_of_note(authenticated_user: models.User | AnonymousUser,
                                              note_pk: int) -> bool:
     """
     :return: is authenticated_user the author of note with note_pk
@@ -224,7 +224,7 @@ def _generate_link_for_activate_user(domain: str, user: models.User) -> str:
                                                  kwargs={'uidb64': uid, 'token': token}))
 
 
-def is_some_user_authenticated(user) -> bool:
+def is_some_user_authenticated(user: models.User | AnonymousUser) -> bool:
     """
     :param user: user's object from request
     :return: True if some user authenticated else False
@@ -232,7 +232,7 @@ def is_some_user_authenticated(user) -> bool:
     return not isinstance(user, AnonymousUser)
 
 
-def did_user_like_note(user, note: models.Note) -> bool:
+def did_user_like_note(user: models.User | AnonymousUser, note: models.Note) -> bool:
     """
     :param user: current user (from request)
     :param note: note object
@@ -240,9 +240,39 @@ def did_user_like_note(user, note: models.Note) -> bool:
     return user in note.likes.all()
 
 
-def did_user_dislike_note(user, note: models.Note) -> bool:
+def did_user_dislike_note(user: models.User | AnonymousUser, note: models.Note) -> bool:
     """
     :param user: current user (from request)
     :param note: note object
     """
     return user in note.dislikes.all()
+
+
+def user_liked_note(user: models.User, note_pk: int) -> None:
+    """
+    User set like to note (with note_pk)
+    """
+    note = get_note_by_pk(note_pk)
+
+    if user in note.dislikes.all():
+        note.dislikes.remove(user)
+
+    if user in note.likes.all():
+        note.likes.remove(user)
+    else:
+        note.likes.add(user)
+
+
+def user_disliked_note(user: models.User, note_pk: int) -> None:
+    """
+    User set dislike to note (with note_pk)
+    """
+    note = get_note_by_pk(note_pk)
+
+    if user in note.likes.all():
+        note.likes.remove(user)
+
+    if user in note.dislikes.all():
+        note.dislikes.remove(user)
+    else:
+        note.dislikes.add(user)

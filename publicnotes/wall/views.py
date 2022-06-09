@@ -121,26 +121,14 @@ def delete_note(request, pk):
 @login_required(login_url=reverse_lazy('login'))
 def like_note(request, pk):
     """Page for like note"""
-
-    note = services.get_note_by_pk(pk)
-    if request.user in note.likes.all():
-        note.likes.remove(request.user)
-    else:
-        note.likes.add(request.user)
-
+    services.user_liked_note(request.user, note_pk=pk)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url=reverse_lazy('login'))
 def dislike_note(request, pk):
     """Page for dislike note"""
-
-    note = services.get_note_by_pk(pk)
-    if request.user in note.dislikes.all():
-        note.dislikes.remove(request.user)
-    else:
-        note.dislikes.add(request.user)
-
+    services.user_disliked_note(request.user, note_pk=pk)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
