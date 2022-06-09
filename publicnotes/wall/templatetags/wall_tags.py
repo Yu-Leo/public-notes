@@ -15,23 +15,23 @@ def get_categories():
     """
     :return: List of all categories
     """
-    return models.Category.objects.all()
+    return services.get_categories()
 
 
 @register.simple_tag
-def get_notes_count_for_author(author: models.User):
+def get_tags():
     """
-    :return: Number of notes, which was created by author
+    :return: List of all tags
     """
-    return models.Note.objects.filter(author=author).count()
+    return services.get_tags()
 
 
 @register.simple_tag
-def get_notes_count_for_category(category: models.Category):
+def get_notes_count_for_author(user: models.User):
     """
-    :return: Number of notes in category
+    :return: Number of public notes, which was created by author
     """
-    return models.Note.objects.filter(category=category).count()
+    return services.get_notes_count_for_author(user)
 
 
 @register.simple_tag
@@ -79,11 +79,3 @@ def one_note(note: models.Note,
         'is_disliked': services.did_user_dislike_note(user, note),
     }
     return context
-
-
-@register.simple_tag
-def get_tags():
-    """
-    :return: List of all tags
-    """
-    return models.Tag.objects.all()
