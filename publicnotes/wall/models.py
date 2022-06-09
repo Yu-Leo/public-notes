@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
-
+from django.utils.translation import ugettext as _
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -10,10 +10,10 @@ class User(AbstractUser):
     """Main user's object"""
 
     email = models.EmailField(unique=True, verbose_name='E-mail')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Аватарка', blank=True)
-    rating = models.IntegerField(verbose_name='Рейтинг', default=0)
-    bio = models.TextField(verbose_name='О себе', blank=True)
-    show_email = models.BooleanField(verbose_name='Публичный e-mail', default=False)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Avatar'), blank=True)
+    rating = models.IntegerField(verbose_name=_('Rating'), default=0)
+    bio = models.TextField(verbose_name=_('Bio'), blank=True)
+    show_email = models.BooleanField(verbose_name=_('PublicEmail'), default=False)
 
     def get_absolute_url(self):
         return reverse('author', kwargs={"pk": self.pk})
@@ -22,31 +22,31 @@ class User(AbstractUser):
 class Note(models.Model):
     """Note's object. Main entity in application"""
 
-    title = models.CharField(max_length=150, verbose_name='Название')
-    content = models.TextField(verbose_name='Текст', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время последнего обновления')
-    views = models.PositiveIntegerField(default=0, verbose_name='Количество просмотров')
-    rating = models.IntegerField(verbose_name='Рейтинг', default=0)
-    is_public = models.BooleanField(verbose_name='Публичная', default=False)
-    stared = models.BooleanField(verbose_name='Важная', default=False)
+    title = models.CharField(max_length=150, verbose_name=_('Title'))
+    content = models.TextField(verbose_name=_('Text'), blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('CreationTime'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('LastUpdateTime'))
+    views = models.PositiveIntegerField(default=0, verbose_name=_('NumberOfViews'))
+    rating = models.IntegerField(verbose_name=_('Rating'), default=0)
+    is_public = models.BooleanField(verbose_name=_('Public'), default=False)
+    stared = models.BooleanField(verbose_name=_('Important'), default=False)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name='Автор',
+        verbose_name=_('Author'),
         null=True,
         blank=True,
     )
-    is_pined = models.BooleanField(verbose_name='Закреплена в профиле', default=False)
-    category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name='Категория', null=True, blank=True)
-    tags = models.ManyToManyField('Tag', blank=True, verbose_name='Теги', related_name='notes')
+    is_pined = models.BooleanField(verbose_name=_('PinedInProfile'), default=False)
+    category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name=_('Category'), null=True, blank=True)
+    tags = models.ManyToManyField('Tag', blank=True, verbose_name=_('Tags'), related_name='notes')
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
 
     class Meta:
-        verbose_name = 'Заметка'
-        verbose_name_plural = 'Заметки'
+        verbose_name = _('Note')
+        verbose_name_plural = _('Notes')
         ordering = ['-created_at', 'title']
 
 
@@ -54,9 +54,9 @@ class Category(MPTTModel):
     """Category for note. Сan be nested"""
 
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',
-                            verbose_name='Родительская категория')
-    title = models.CharField(max_length=150, verbose_name='Название', unique=True)
-    preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Превью', blank=True)
+                            verbose_name=_('ParentCategory'))
+    title = models.CharField(max_length=150, verbose_name=_('Title'), unique=True)
+    preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Preview'), blank=True)
 
     def get_absolute_url(self):
         return reverse('category', kwargs={"pk": self.pk})
@@ -68,15 +68,15 @@ class Category(MPTTModel):
         order_insertion_by = ['title']
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
         ordering = ['title']
 
 
 class Tag(models.Model):
     """Tag for note. One note can have multiple tags"""
 
-    title = models.CharField(max_length=50, verbose_name='Название', unique=True)
+    title = models.CharField(max_length=50, verbose_name=_('Title'), unique=True)
 
     def get_absolute_url(self):
         return reverse('tag', kwargs={"pk": self.pk})
@@ -85,6 +85,6 @@ class Tag(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Тег'
-        verbose_name_plural = 'Теги'
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
         ordering = ['title']

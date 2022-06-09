@@ -6,6 +6,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, ListView, TemplateView
 
 from . import exceptions
@@ -111,7 +112,7 @@ def delete_note(request, pk):
         return redirect('login')
 
     services.delete_note_by_pk(pk)
-    messages.success(request, 'Заметка успешно удалена!')
+    messages.success(request, _('NoteSuccessfullyDeleted'))
     return redirect(request.user)
 
 
@@ -208,9 +209,9 @@ def registration(request):
         form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
             services.register_user(form, domain=utils.get_current_domain(request))
-            messages.warning(request, 'На указанный вами E-mail отправлено письмо с ссылкой для подтверждения')
+            messages.warning(request, _('EmailSent'))
             return redirect('home')
-        messages.error(request, 'Ошибка регистрации')
+        messages.error(request, _('RegistrationError'))
     else:
         form = forms.UserRegisterForm()
 
@@ -225,10 +226,10 @@ def activate_user(request, uidb64: str, token: str):
     try:
         user = services.activate_user_by_link(uidb64, token)
         login(request, user)
-        messages.success(request, 'E-mail успешно подтверждён')
+        messages.success(request, _('EmailSuccessfullyConfirmed'))
         return redirect(user)
     except exceptions.UserActivationError:
-        messages.error(request, 'Ошибка подтверждения E-mail')
+        messages.error(request, _('EmailConfirmationError'))
         return redirect('home')
 
 
@@ -255,10 +256,10 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            messages.success(request, f'Добро пожаловать, {user.username}')
+            messages.success(request, f'{_("Welcome")}, {user.username}')
             return redirect('home')
         else:
-            messages.error(request, 'Ошибка входа')
+            messages.error(request, _('LogInError'))
     else:
         form = forms.UserLoginForm()
 
@@ -277,10 +278,10 @@ def change_password(request):
         form = forms.UserChangePasswordForm(request.user, request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Пароль успешно сменён!')
+            messages.success(request, _('PasswordSuccessfullyChanged'))
             return redirect('login')
         else:
-            messages.error(request, 'Ошибка')
+            messages.error(request, _('Error'))
     else:
         form = forms.UserChangePasswordForm(request.user)
 
@@ -298,7 +299,7 @@ def delete_profile(request):
     user = request.user
     logout(request)
     services.delete_user(user)
-    messages.success(request, 'Профиль и заметки успешно удалены!')
+    messages.success(request, _('ProfileAndNotesSuccessfullyDeleted'))
     return redirect('home')
 
 
@@ -306,7 +307,7 @@ def user_logout(request):
     """Logout page"""
 
     logout(request)
-    messages.error(request, 'Вы вышли из аккаунта')
+    messages.error(request, _('YouLogOut'))
     return redirect('login')
 
 
