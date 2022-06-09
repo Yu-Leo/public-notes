@@ -75,11 +75,10 @@ def one_note(note: models.Note,
 
     context = {
         'note': note,
-        'allow_edit': user == note.author,
+        'allow_edit': services.is_authenticated_user_the_author_of_note(user, note_pk=note.pk),
         'show_full': show_full,
         'was_updated': was_updated,
         'in_profile': in_profile,
-        'is_authenticated': services.is_some_user_authenticated(user),
         'is_liked': services.did_user_like_note(user, note),
         'is_disliked': services.did_user_dislike_note(user, note),
     }
