@@ -89,7 +89,7 @@
     ```bash
     pip install -r requirements.txt
     ```
-5. Задать [необходимые переменные окужения](#envvars).
+5. Задать [необходимые переменные окружения](#envvars).
     * Вариант 1.
       Задать вручную.
         ```bash
@@ -109,7 +109,16 @@
         ```bash
         direnv allow
         ```
-6. Запустить сервер
+6. Скомпилировать переводы фраз:
+    1. Общие (в папке `publicnotes`)
+    ```bash
+       django-admin compilemessages
+    ```
+    2. Для приложения 'walls' (в папке `publicnotes/walls`)
+    ```bash
+       django-admin compilemessages
+    ```
+7. Запустить сервер
     ```bash
     cd publicnotes
     python manage.py runserver
@@ -141,9 +150,11 @@
 
 - **publicnotes** - исходный код проекта
     - **media** - папка с медиа-файлами
+    - **locale** - папка с переводами
     - **config** - настройки проекта
     - **templates** - общие шаблоны проекта
     - **wall** - главное приложение
+        - **locale** - папка с переводами
         - **migragions** - файлы миграций
         - **static** - файлы статики
         - **templates** - шаблоны приложения
