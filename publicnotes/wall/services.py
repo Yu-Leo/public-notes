@@ -258,14 +258,11 @@ def user_liked_note(user: models.User, note_pk: int) -> None:
 
     if user in note.dislikes.all():
         note.dislikes.remove(user)
-        increase_rating(note)
 
     if user in note.likes.all():
         note.likes.remove(user)
-        decrease_rating(note)
     else:
         note.likes.add(user)
-        increase_rating(note)
 
 
 def user_disliked_note(user: models.User, note_pk: int) -> None:
@@ -276,14 +273,11 @@ def user_disliked_note(user: models.User, note_pk: int) -> None:
 
     if user in note.likes.all():
         note.likes.remove(user)
-        decrease_rating(note)
 
     if user in note.dislikes.all():
         note.dislikes.remove(user)
-        increase_rating(note)
     else:
         note.dislikes.add(user)
-        decrease_rating(note)
 
 
 def has_note_been_updated(note: models.Note) -> bool:
@@ -292,24 +286,6 @@ def has_note_been_updated(note: models.Note) -> bool:
     time of last update and creation time more than one second
     """
     return (note.updated_at - note.created_at).total_seconds() >= 1
-
-
-def increase_rating(note: models.Note) -> None:
-    """
-    Increase rating of views for note by 1
-    """
-    note.rating = F('rating') + 1
-    note.save()
-    note.refresh_from_db()
-
-
-def decrease_rating(note: models.Note) -> None:
-    """
-    Decrease rating of views for note by 1
-    """
-    note.rating = F('rating') - 1
-    note.save()
-    note.refresh_from_db()
 
 
 def get_categories() -> TreeQuerySet[models.Category]:

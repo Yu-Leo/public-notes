@@ -27,7 +27,6 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('CreationTime'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('LastUpdateTime'))
     views = models.PositiveIntegerField(default=0, verbose_name=_('NumberOfViews'))
-    rating = models.IntegerField(verbose_name=_('Rating'), default=0)
     is_public = models.BooleanField(verbose_name=_('Public'), default=False)
     stared = models.BooleanField(verbose_name=_('Important'), default=False)
     author = models.ForeignKey(
@@ -45,6 +44,13 @@ class Note(models.Model):
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
+
+    @property
+    def rating(self) -> int:
+        """
+        Rating calculates as difference between number of likes and number of dislikes
+        """
+        return len(self.likes.all()) - len(self.dislikes.all())
 
     class Meta:
         verbose_name = _('Note')

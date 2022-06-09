@@ -9,11 +9,10 @@ from . import models
 class NoteForm(forms.ModelForm):
     class Meta:
         model = models.Note
-        fields = ['title', 'content', 'rating', 'stared', 'category', 'tags', 'is_public', 'is_pined']
+        fields = ['title', 'content', 'stared', 'category', 'tags', 'is_public', 'is_pined']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
-            'rating': forms.NumberInput(attrs={'class': 'form-control'}),
             'stared': forms.CheckboxInput(attrs={'class': ['form-control', 'form-check-input']}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'tags': forms.CheckboxSelectMultiple(),
@@ -37,10 +36,10 @@ class UpdateProfile(forms.ModelForm):
         }
 
     def clean_bio(self) -> str:
-        '''
+        """
         Clear 'bio' field. It should contain no more than 20 words
         :return: clean value of raise error
-        '''
+        """
         bio: str = self.cleaned_data['bio']
         if len(bio.split()) > 20:
             raise ValidationError(_('NoMoreThan20Words'))
