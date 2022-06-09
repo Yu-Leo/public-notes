@@ -95,12 +95,13 @@
         <div class="hstack gap-3">
 
             <div>
-                <a href="
-                {% if is_authenticated %}
-                {% else %}
-                {% url 'login' %}
-                {% endif %}"
-                   style="color: Grey;">
+                <a href="{% url 'dislike_note' note.pk %}"
+                   style="
+                   {% if is_disliked %}
+                   color: Black;
+                   {% else %}
+                   color: Grey;
+                   {% endif %}">
                     <i class="fa fa-thumbs-down"></i>
                 </a>
             </div>
@@ -117,12 +118,7 @@
                 </span>
             </div>
             <div>
-                <a href="
-                {% if is_authenticated %}
-                {% url 'like_note' note.pk %}
-                {% else %}
-                {% url 'login' %}
-                {% endif %}"
+                <a href="{% url 'like_note' note.pk %}"
                    style="
                    {% if is_liked %}
                    color: Black;
