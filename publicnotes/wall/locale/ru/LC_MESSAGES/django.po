@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-08 19:31+0300\n"
+"POT-Creation-Date: 2022-06-09 11:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,37 +36,128 @@ msgstr "Даты"
 msgid "CurrentAvatar"
 msgstr "Текущая аватарка"
 
-#: forms.py:38
+#: forms.py:36
 msgid "TellAboutYourself"
 msgstr "Расскажите немного о себе. Не более 20 слов."
 
-#: forms.py:48
+#: forms.py:46
 msgid "NoMoreThan20Words"
 msgstr "Раздел 'О себе' должен содержать не более 20 слов"
 
-#: forms.py:53 forms.py:68
+#: forms.py:51 forms.py:66
 msgid "Nickname"
 msgstr "Никнейм"
 
-#: forms.py:57 forms.py:70
+#: forms.py:55 forms.py:68
 msgid "Password"
 msgstr "Пароль"
 
-#: forms.py:59
+#: forms.py:57
 msgid "PasswordConfirmation"
 msgstr "Подтверждение пароля"
 
-#: forms.py:75
+#: forms.py:73
 msgid "OldPassword"
 msgstr "Старый пароль"
 
-#: forms.py:77
+#: forms.py:75
 msgid "NewPassword"
 msgstr "Новый пароль"
 
-#: forms.py:79
+#: forms.py:77
 msgid "NewPasswordConfirmation"
 msgstr "Подтверждение нового пароля"
+
+#: models.py:13
+msgid "Avatar"
+msgstr "Текущая аватарка"
+
+#: models.py:14 models.py:30 templates/wall/author.html:48
+#: templates/wall/authors_list.html:34
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: models.py:15
+msgid "Bio"
+msgstr "О себе"
+
+#: models.py:16
+msgid "PublicEmail"
+msgstr "Публичный e-mail"
+
+#: models.py:25 models.py:58 models.py:79
+msgid "Title"
+msgstr "Название"
+
+#: models.py:26
+msgid "Text"
+msgstr "Текст"
+
+#: models.py:27
+msgid "CreationTime"
+msgstr "Время создания"
+
+#: models.py:28
+msgid "LastUpdateTime"
+msgstr "Время последнего обновления"
+
+#: models.py:29
+msgid "NumberOfViews"
+msgstr "Кол-во просмотров"
+
+#: models.py:31
+msgid "Public"
+msgstr "Публичная"
+
+#: models.py:32
+msgid "Important"
+msgstr "Важная"
+
+#: models.py:36
+msgid "Author"
+msgstr "Автор"
+
+#: models.py:40 templates/wall/note_template.html:58
+msgid "PinedInProfile"
+msgstr "Закреплена в профиле"
+
+#: models.py:41 models.py:71 templates/wall/category.html:4
+#: templates/wall/category.html:13 templates/wall/note_template.html:106
+msgid "Category"
+msgstr "Категория"
+
+#: models.py:42 models.py:89 templates/wall/index.html:10
+msgid "Tags"
+msgstr "Теги"
+
+#: models.py:48 templates/wall/add_note_form.html:22
+msgid "Note"
+msgstr "Заметка"
+
+#: models.py:49 templates/wall/author.html:65
+msgid "Notes"
+msgstr "Заметки"
+
+#: models.py:57
+msgid "ParentCategory"
+msgstr "Родительская категория"
+
+#: models.py:59
+msgid "Preview"
+msgstr "Превью"
+
+#: models.py:72 templates/wall/categories_list.html:5
+#: templates/wall/categories_list.html:13
+msgid "Categories"
+msgstr "Категории"
+
+#: models.py:88 templates/wall/tag.html:4 templates/wall/tag.html:13
+msgid "Tag"
+msgstr "Тег"
+
+#: services.py:210
+msgid "ConfirmEmail"
+msgstr "Подтвердите e-mail"
 
 #: templates/wall/404.html:11
 msgid "PageNotFound"
@@ -82,10 +173,6 @@ msgstr "На главную"
 msgid "AddNote"
 msgstr "Добавить заметку"
 
-#: templates/wall/add_note_form.html:22
-msgid "Note"
-msgstr "Заметка"
-
 #: templates/wall/author.html:27 templates/wall/edit_profile.html:4
 #: templates/wall/edit_profile.html:12
 msgid "EditProfile"
@@ -99,14 +186,6 @@ msgstr "О себе"
 msgid "NotesCount"
 msgstr "Заметок"
 
-#: templates/wall/author.html:48 templates/wall/authors_list.html:34
-msgid "Rating"
-msgstr "Рейтинг"
-
-#: templates/wall/author.html:65
-msgid "Notes"
-msgstr "Заметки"
-
 #: templates/wall/authors_list.html:5 templates/wall/authors_list.html:10
 msgid "Authors"
 msgstr "Авторы"
@@ -114,15 +193,6 @@ msgstr "Авторы"
 #: templates/wall/authors_list.html:48
 msgid "OpenProfile"
 msgstr "Открыть профиль"
-
-#: templates/wall/categories_list.html:5 templates/wall/categories_list.html:13
-msgid "Categories"
-msgstr "Категории"
-
-#: templates/wall/category.html:4 templates/wall/category.html:13
-#: templates/wall/note_template.html:106
-msgid "Category"
-msgstr "Категория"
 
 #: templates/wall/category.html:38
 msgid "SubCategories"
@@ -181,10 +251,6 @@ msgstr "Ваш профиль и все заметки будут удалены
 msgid "MainPageHeading"
 msgstr "Главная"
 
-#: templates/wall/index.html:10
-msgid "Tags"
-msgstr "Теги"
-
 #: templates/wall/index.html:27
 msgid "MainPageTitle"
 msgstr "Заметки"
@@ -208,10 +274,6 @@ msgstr "изменено"
 #: templates/wall/note_template.html:41
 msgid "PrivateNote"
 msgstr "Приватная заметка"
-
-#: templates/wall/note_template.html:58
-msgid "PinedInProfile"
-msgstr "Закреплена в профиле"
 
 #: templates/wall/note_template.html:66
 msgid "Edit"
@@ -238,6 +300,46 @@ msgstr "Регистрация"
 msgid "SearchWord"
 msgstr "Поиск"
 
-#: templates/wall/tag.html:4 templates/wall/tag.html:13
-msgid "Tag"
-msgstr "Тег"
+#: views.py:115
+msgid "NoteSuccessfullyDeleted"
+msgstr "Заметка успешно удалена!"
+
+#: views.py:212
+msgid "EmailSent"
+msgstr "На указанный Вами E-mail отправлено письмо с ссылкой для подтверждения"
+
+#: views.py:214
+msgid "RegistrationError"
+msgstr "Ошибка регистрации"
+
+#: views.py:229
+msgid "EmailSuccessfullyConfirmed"
+msgstr "E-mail успешно подтверждён"
+
+#: views.py:232
+msgid "EmailConfirmationError"
+msgstr "Ошибка подтверждения E-mail"
+
+#: views.py:259
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: views.py:262
+msgid "LogInError"
+msgstr "Ошибка входа"
+
+#: views.py:281
+msgid "PasswordSuccessfullyChanged"
+msgstr "'Пароль успешно сменён!'"
+
+#: views.py:284
+msgid "Error"
+msgstr "Ошибка"
+
+#: views.py:302
+msgid "ProfileAndNotesSuccessfullyDeleted"
+msgstr "Профиль и заметки успешно удалены!"
+
+#: views.py:310
+msgid "YouLogOut"
+msgstr "Вы вышли из аккаунта"

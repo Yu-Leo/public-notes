@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.translation import ugettext as _
 
 from . import exceptions
 from . import forms
@@ -206,7 +207,7 @@ def _send_user_activation_email(user: models.User, domain: str) -> None:
     """
     Send message to user's email with link for activation user's profile
     """
-    email_subject = 'Подтвердите e-mail'
+    email_subject = _('ConfirmEmail')
     context = {
         'link': _generate_link_for_activate_user(domain, user),
     }
