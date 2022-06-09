@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
-from mptt.admin import MPTTModelAdmin
 from django.utils.translation import ugettext as _
+from mptt.admin import MPTTModelAdmin
 
 from . import models
 
@@ -14,7 +14,7 @@ class NoteAdmin(admin.ModelAdmin):
 
     fields = ('title', 'is_public', 'views', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags',
               'content')
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('created_at', 'updated_at', 'rating', 'views')
 
 
 class MyUserAdmin(UserAdmin):
