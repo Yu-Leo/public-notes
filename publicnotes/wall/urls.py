@@ -23,6 +23,7 @@ urlpatterns = [
     path('edit_note/<int:pk>/', views.edit_note, name='edit_note'),
     path('delete_note/<int:pk>/', views.delete_note, name='delete_note'),
     path('like_note/<int:pk>/', views.like_note, name='like_note'),
+    path('dislike_note/<int:pk>/', views.dislike_note, name='dislike_note'),
     path('change_password/', views.change_password, name='change_password'),
     path('search/', views.Search.as_view(), name='search'),
     path('tag/<int:pk>/', views.ViewTag.as_view(), name='tag'),
