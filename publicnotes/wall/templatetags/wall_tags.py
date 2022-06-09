@@ -1,6 +1,7 @@
 """File with custom tags for 'wall' application"""
 
 from django import template
+from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ObjectDoesNotExist
 
 from wall import models
@@ -59,7 +60,7 @@ def get_next_note_in_category(note: models.Note):
 def one_note(note: models.Note,
              show_full: bool = False,
              in_profile: bool = False,
-             user=None,
+             user: models.User | AnonymousUser = None,
              ):
     """
     Show one note as card.
@@ -68,16 +69,11 @@ def one_note(note: models.Note,
     :param in_profile: display note in user's profile or no
     :param user: current user (from request)
     """
-
-    # Note marks as updated if difference between
-    # time of last update and creation time more than one second
-    was_updated = (note.updated_at - note.created_at).total_seconds() >= 1
-
     context = {
         'note': note,
         'allow_edit': services.is_authenticated_user_the_author_of_note(user, note_pk=note.pk),
         'show_full': show_full,
-        'was_updated': was_updated,
+        'was_updated': services.has_note_been_updated(note),
         'in_profile': in_profile,
         'is_liked': services.did_user_like_note(user, note),
         'is_disliked': services.did_user_dislike_note(user, note),

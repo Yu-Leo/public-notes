@@ -276,3 +276,11 @@ def user_disliked_note(user: models.User, note_pk: int) -> None:
         note.dislikes.remove(user)
     else:
         note.dislikes.add(user)
+
+
+def has_note_been_updated(note: models.Note) -> bool:
+    """
+    Note marks as updated if difference between
+    time of last update and creation time more than one second
+    """
+    return (note.updated_at - note.created_at).total_seconds() >= 1
