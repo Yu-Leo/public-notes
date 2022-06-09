@@ -40,6 +40,8 @@ class Note(models.Model):
     is_pined = models.BooleanField(verbose_name=_('PinedInProfile'), default=False)
     category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name=_('Category'), null=True, blank=True)
     tags = models.ManyToManyField('Tag', blank=True, verbose_name=_('Tags'), related_name='notes')
+    likes = models.ManyToManyField('User', blank=True, verbose_name=_('NoteLikes'), related_name='liked_notes')
+    dislikes = models.ManyToManyField('User', blank=True, verbose_name=_('NoteDislikes'), related_name='disliked_notes')
 
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})

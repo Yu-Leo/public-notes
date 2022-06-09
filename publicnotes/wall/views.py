@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -24,7 +25,7 @@ def index(request):
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
     context = {
-        'page_obj': page_objects
+        'page_obj': page_objects,
     }
     return render(request, 'wall/index.html', context)
 
@@ -40,8 +41,9 @@ def view_note(request, pk: int):
         return redirect('login')
 
     services.increase_number_of_views(note)
-    context = {'allow_edit': request.user == note.author,  # Is authenticated user show his note?
-               'note': note}
+    context = {
+        'note': note,
+    }
 
     return render(request, 'wall/note.html', context)
 
@@ -114,6 +116,17 @@ def delete_note(request, pk):
     services.delete_note_by_pk(pk)
     messages.success(request, _('NoteSuccessfullyDeleted'))
     return redirect(request.user)
+
+
+@login_required(login_url=reverse_lazy('login'))
+def like_note(request, pk):
+    """Page for like note"""
+    note = services.get_note_by_pk(pk)
+    if request.user in note.likes.all():
+        note.likes.remove(request.user)
+    else:
+        note.likes.add(request.user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class ViewCategory(ListView):
@@ -195,10 +208,8 @@ class ViewAuthor(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewAuthor, self).get_context_data(**kwargs)
-        is_self = self.request.user == self.object  # Is authenticated user view his profile?
         context['page_obj'] = services.get_notes_by_author(author_pk=self.kwargs['pk'],
-                                                           include_private=is_self)
-        context['is_self'] = is_self
+                                                           include_private=self.request.user == self.object)
         return context
 
 

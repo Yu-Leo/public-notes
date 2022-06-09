@@ -10,6 +10,6 @@
 
 {% block content %}
 
-{% one_note note allow_edit=allow_edit show_full=True %}
+{% one_note note show_full=True user=request.user %}
 
 {% endblock %}
