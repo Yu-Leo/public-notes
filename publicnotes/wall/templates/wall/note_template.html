@@ -107,7 +107,7 @@
                                                                   class="text-decoration-none text-dark fw-bold">
                 {{ note.category.title }}</a></div>
             {% endif %}
-            <div class="ms-auto">{{ note.views }} просмотра(-ов)</div>
+            <div class="ms-auto">{{ note.views }} {% trans 'Views' %}</div>
         </div>
         {% if show_full %}
         <div class="btn-toolbar justify-content-between mt-3" role="toolbar" aria-label="Toolbar with button groups">
