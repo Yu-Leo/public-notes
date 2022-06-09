@@ -3,11 +3,13 @@ import random
 from django.contrib.auth.models import AnonymousUser
 from django.core.mail import EmailMessage
 from django.db.models import F
+from django.db.models.query import QuerySet
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import ugettext as _
+from mptt.querysets import TreeQuerySet
 
 from . import exceptions
 from . import forms
@@ -15,7 +17,7 @@ from . import models
 from . import utils
 
 
-def get_all_public_notes() -> list[models.Note]:
+def get_all_public_notes() -> QuerySet[models.Note]:
     """
     :return: all public notes from db
     """
@@ -29,14 +31,14 @@ def get_public_notes_from_category(category_pk: int) -> list[models.Note]:
     return get_all_public_notes().filter(category_id=category_pk)
 
 
-def get_public_notes_by_tag(tag_pk: int) -> list[models.Note]:
+def get_public_notes_by_tag(tag_pk: int) -> QuerySet[models.Note]:
     """
-    :return: publicnotes, which belong to tag with tag_pk
+    :return: public notes, which belong to tag with tag_pk
     """
     return get_all_public_notes().filter(tags__pk=tag_pk)
 
 
-def get_notes_by_author(author_pk: int, include_private: bool) -> list[models.Note]:
+def get_notes_by_author(author_pk: int, include_private: bool) -> QuerySet[models.Note]:
     """
     :param include_private: include private notes or not
     :return: notes, which belong to author with tag_pk
@@ -54,7 +56,7 @@ def get_note_by_pk(pk: int) -> models.Note:
     return models.Note.objects.get(pk=pk)
 
 
-def search_note_by_title(title: str) -> list[models.Note]:
+def search_note_by_title(title: str) -> QuerySet[models.Note]:
     """
     :return: notes, which title contains 'title'
     """
@@ -130,7 +132,7 @@ def get_ancestors_of_category(category: models.Category) -> list[models.Category
     return list(reversed(ancestors_list))[:-1]
 
 
-def get_children_of_category(category: models.Category) -> list[models.Category]:
+def get_children_of_category(category: models.Category) -> TreeQuerySet[models.Category]:
     """
     :return: list with children of category
     """
@@ -308,3 +310,18 @@ def decrease_rating(note: models.Note) -> None:
     note.rating = F('rating') - 1
     note.save()
     note.refresh_from_db()
+
+
+def get_categories() -> TreeQuerySet[models.Category]:
+    return models.Category.objects.all()
+
+
+def get_tags() -> QuerySet[models.Tag]:
+    return models.Tag.objects.all()
+
+
+def get_notes_count_for_author(user: models.User) -> int:
+    """
+    :return: Number of public notes, which was created by author
+    """
+    return get_notes_by_author(user.pk, include_private=False).count()
