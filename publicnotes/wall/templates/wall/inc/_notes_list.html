@@ -2,6 +2,6 @@
 
 {% for item in page_obj %}
 
-{% one_note item %}
+{% one_note item user=request.user %}
 
 {% endfor %}

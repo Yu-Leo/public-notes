@@ -76,7 +76,7 @@
 {% block content %}
 
 {% for item in page_obj %}
-{% one_note item allow_edit=is_self in_profile=True %}
+{% one_note item in_profile=True user=request.user %}
 {% endfor %}
 
 {% endblock %}

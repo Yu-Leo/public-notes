@@ -93,14 +93,45 @@
 
     <div class="card-footer">
         <div class="hstack gap-3">
-            {% if note.rating > 0 %}
-            <div class="text-success fw-bold">+{{note.rating}}</div>
-            {% elif note.rating < 0 %}
-            <div class="text-danger fw-bold">{{note.rating}}</div>
-            {% else %}
-            <div class="fw-bold">{{note.rating}}</div>
-            {% endif %}
 
+            <div>
+                <a href="
+                {% if is_authenticated %}
+                {% else %}
+                {% url 'login' %}
+                {% endif %}"
+                   style="color: Grey;">
+                    <i class="fa fa-thumbs-down"></i>
+                </a>
+            </div>
+
+            <div>
+                <span class="fw-bold">
+                    {% if note.rating > 0 %}
+                    <span class="text-success">+{{ note.rating }}</span>
+                    {% elif note.rating < 0 %}
+                    <span class="text-danger">{{ note.rating }}</span>
+                    {% else %}
+                    <span>{{ note.rating }}</span>
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <a href="
+                {% if is_authenticated %}
+                {% url 'like_note' note.pk %}
+                {% else %}
+                {% url 'login' %}
+                {% endif %}"
+                   style="
+                   {% if is_liked %}
+                   color: Black;
+                   {% else %}
+                   color: Grey;
+                   {% endif %}">
+                    <i class="fa fa-thumbs-up"></i>
+                </a>
+            </div>
 
             {% if note.category %}
             <div><span class="">{% trans 'Category' %}: </span><a href="{{ note.category.get_absolute_url }}"

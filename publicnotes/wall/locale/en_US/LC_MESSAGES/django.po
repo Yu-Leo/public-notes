@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 12:21+0300\n"
+"POT-Creation-Date: 2022-06-09 13:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "Bio"
 msgid "PublicEmail"
 msgstr "Public E-mail"
 
-#: models.py:25 models.py:58 models.py:79
+#: models.py:25 models.py:60 models.py:81
 msgid "Title"
 msgstr "Title"
 
@@ -118,37 +118,45 @@ msgstr "Author"
 msgid "PinedInProfile"
 msgstr "Pined in profile"
 
-#: models.py:41 models.py:71 templates/wall/category.html:4
-#: templates/wall/category.html:13 templates/wall/note_template.html:106
+#: models.py:41 models.py:73 templates/wall/category.html:4
+#: templates/wall/category.html:13 templates/wall/note_template.html:123
 msgid "Category"
 msgstr "Category"
 
-#: models.py:42 models.py:89 templates/wall/index.html:10
+#: models.py:42 models.py:91 templates/wall/index.html:10
 msgid "Tags"
 msgstr "Tags"
 
-#: models.py:48 templates/wall/add_note_form.html:22
+#: models.py:43
+msgid "NoteLikes"
+msgstr "Users who have put a like"
+
+#: models.py:44
+msgid "NoteDislikes"
+msgstr "Users who have put a dislike"
+
+#: models.py:50 templates/wall/add_note_form.html:22
 msgid "Note"
 msgstr "Note"
 
-#: models.py:49 templates/wall/author.html:65
+#: models.py:51 templates/wall/author.html:65
 msgid "Notes"
 msgstr "Notes"
 
-#: models.py:57
+#: models.py:59
 msgid "ParentCategory"
 msgstr "Parent category"
 
-#: models.py:59
+#: models.py:61
 msgid "Preview"
 msgstr "Preview"
 
-#: models.py:72 templates/wall/categories_list.html:5
+#: models.py:74 templates/wall/categories_list.html:5
 #: templates/wall/categories_list.html:13
 msgid "Categories"
 msgstr "Categories"
 
-#: models.py:88 templates/wall/tag.html:4 templates/wall/tag.html:13
+#: models.py:90 templates/wall/tag.html:4 templates/wall/tag.html:13
 msgid "Tag"
 msgstr "Tag"
 
@@ -217,8 +225,6 @@ msgid "Update"
 msgstr "Update"
 
 #: templates/wall/edit_note.html:40
-#, fuzzy
-#| msgid "MainPageTitle"
 msgid "DeletingNoteTitle"
 msgstr "Deleting the note"
 
@@ -284,15 +290,15 @@ msgstr "Edit"
 msgid "ReadMore"
 msgstr "Read more"
 
-#: templates/wall/note_template.html:110
+#: templates/wall/note_template.html:127
 msgid "Views"
 msgstr "views"
 
-#: templates/wall/note_template.html:117 templates/wall/note_template.html:119
+#: templates/wall/note_template.html:134 templates/wall/note_template.html:136
 msgid "PreviousNote"
 msgstr "Previous Note"
 
-#: templates/wall/note_template.html:124 templates/wall/note_template.html:126
+#: templates/wall/note_template.html:141 templates/wall/note_template.html:143
 msgid "NextNote"
 msgstr "Next Note"
 

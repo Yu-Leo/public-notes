@@ -1,5 +1,6 @@
 import random
 
+from django.contrib.auth.models import AnonymousUser
 from django.core.mail import EmailMessage
 from django.db.models import F
 from django.template.loader import render_to_string
@@ -221,3 +222,27 @@ def _generate_link_for_activate_user(domain: str, user: models.User) -> str:
     token = utils.user_activation_token.make_token(user)
     return 'http://' + domain + str(reverse_lazy('activate',
                                                  kwargs={'uidb64': uid, 'token': token}))
+
+
+def is_some_user_authenticated(user) -> bool:
+    """
+    :param user: user's object from request
+    :return: True if some user authenticated else False
+    """
+    return not isinstance(user, AnonymousUser)
+
+
+def did_user_like_note(user, note: models.Note) -> bool:
+    """
+    :param user: current user (from request)
+    :param note: note object
+    """
+    return user in note.likes.all()
+
+
+def did_user_dislike_note(user, note: models.Note) -> bool:
+    """
+    :param user: current user (from request)
+    :param note: note object
+    """
+    return user in note.dislikes.all()
