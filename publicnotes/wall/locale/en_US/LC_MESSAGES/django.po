@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 11:42+0300\n"
+"POT-Creation-Date: 2022-06-09 12:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,6 +284,10 @@ msgstr "Edit"
 msgid "ReadMore"
 msgstr "Read more"
 
+#: templates/wall/note_template.html:110
+msgid "Views"
+msgstr "views"
+
 #: templates/wall/note_template.html:117 templates/wall/note_template.html:119
 msgid "PreviousNote"
 msgstr "Previous Note"
@@ -321,10 +325,6 @@ msgstr "Email successfully confirmed"
 msgid "EmailConfirmationError"
 msgstr "Email confirmation error"
 
-#: views.py:259
-msgid "Welcome"
-msgstr "Welcome"
-
 #: views.py:262
 msgid "LogInError"
 msgstr "Log in error"
@@ -344,3 +344,6 @@ msgstr "Profile and notes successfully deleted!"
 #: views.py:310
 msgid "YouLogOut"
 msgstr "You log out"
+
+#~ msgid "Welcome"
+#~ msgstr "Welcome"
