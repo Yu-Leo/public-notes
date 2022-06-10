@@ -35,3 +35,39 @@ class NoteTestCase(TestCase):
         self.assertEqual(2, self.notes[1].rating)
         self.assertEqual(-2, self.notes[2].rating)
         self.assertEqual(1, self.notes[3].rating)
+
+
+class UserTestCase(TestCase):
+    @classmethod
+    def setUpTestData(self):
+
+        for i in range(4):
+            User.objects.create(username=f'user_{i}', email=f'user_{i}@localhost')
+
+        users = User.objects.order_by('pk')
+
+        note_1 = Note.objects.create(title='Title 1', is_public=True, author=users[1])
+        note_1.likes.set([users[0], users[1]])
+
+        note_2 = Note.objects.create(title='Title 2', is_public=True, author=users[2])
+        note_2.likes.set([users[0], ])
+        note_2.dislikes.set([users[1], users[2]])
+
+        note_3 = Note.objects.create(title='Title 3', is_public=True, author=users[3])
+        note_3.likes.set([users[0], ])
+
+        note_4 = Note.objects.create(title='Title 4', is_public=True, author=users[3])
+        note_4.likes.set([users[0], ])
+
+    def setUp(self) -> None:
+        self.users = User.objects.order_by('pk')
+
+    def test_get_absolute_url(self):
+        for i in range(len(self.users)):
+            self.assertEqual(f'/author/{i + 1}/', self.users[i].get_absolute_url())
+
+    def test_rating(self):
+        self.assertEqual(0, self.users[0].rating)
+        self.assertEqual(2, self.users[1].rating)
+        self.assertEqual(-1, self.users[2].rating)
+        self.assertEqual(2, self.users[3].rating)
