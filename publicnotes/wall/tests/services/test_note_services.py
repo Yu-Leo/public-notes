@@ -219,8 +219,8 @@ class NoteServicesTestCase(TestCase):
         self.assertEqual({self.user_3, }, reactions_differences.dislikes_difference)
         self.assertEqual(ReactionActions.ADD, reactions_differences.dislikes_action)
 
-    def _get_likes_and_dislikes_differences(self,
-                                            func: Callable[[User, int], None],
+    @staticmethod
+    def _get_likes_and_dislikes_differences(func: Callable[[User, int], None],
                                             note: Note,
                                             user: User) -> ReactionsDifferences:
         likes_before = set(note.likes.all())
