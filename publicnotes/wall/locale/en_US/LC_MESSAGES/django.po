@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 13:43+0300\n"
+"POT-Creation-Date: 2022-06-10 13:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,35 +33,35 @@ msgstr "Dates"
 msgid "CurrentAvatar"
 msgstr "Current avatar"
 
-#: forms.py:36
+#: forms.py:35
 msgid "TellAboutYourself"
 msgstr "Tell us a little about yourself. No more than 20 words."
 
-#: forms.py:46
+#: forms.py:45
 msgid "NoMoreThan20Words"
 msgstr "The 'Bio' section should contain no more than 20 words"
 
-#: forms.py:51 forms.py:66
+#: forms.py:50 forms.py:65
 msgid "Nickname"
 msgstr "Nickname"
 
-#: forms.py:55 forms.py:68
+#: forms.py:54 forms.py:67
 msgid "Password"
 msgstr "Password"
 
-#: forms.py:57
+#: forms.py:56
 msgid "PasswordConfirmation"
 msgstr "Password confirmation"
 
-#: forms.py:73
+#: forms.py:72
 msgid "OldPassword"
 msgstr "Old password"
 
-#: forms.py:75
+#: forms.py:74
 msgid "NewPassword"
 msgstr "New password"
 
-#: forms.py:77
+#: forms.py:76
 msgid "NewPasswordConfirmation"
 msgstr "New password confirmation"
 
@@ -69,7 +69,7 @@ msgstr "New password confirmation"
 msgid "Avatar"
 msgstr "Avatar"
 
-#: models.py:14 models.py:30 templates/wall/author.html:48
+#: models.py:14 templates/wall/author.html:48
 #: templates/wall/authors_list.html:34
 msgid "Rating"
 msgstr "Rating"
@@ -82,7 +82,7 @@ msgstr "Bio"
 msgid "PublicEmail"
 msgstr "Public E-mail"
 
-#: models.py:25 models.py:60 models.py:81
+#: models.py:25 models.py:66 models.py:87
 msgid "Title"
 msgstr "Title"
 
@@ -102,65 +102,65 @@ msgstr "Last update time"
 msgid "NumberOfViews"
 msgstr "Number of views"
 
-#: models.py:31
+#: models.py:30
 msgid "Public"
 msgstr "Public"
 
-#: models.py:32
+#: models.py:31
 msgid "Important"
 msgstr "Important"
 
-#: models.py:36
+#: models.py:35
 msgid "Author"
 msgstr "Author"
 
-#: models.py:40 templates/wall/note_template.html:58
+#: models.py:39 templates/wall/note_template.html:58
 msgid "PinedInProfile"
 msgstr "Pined in profile"
 
-#: models.py:41 models.py:73 templates/wall/category.html:4
-#: templates/wall/category.html:13 templates/wall/note_template.html:123
+#: models.py:40 models.py:79 templates/wall/category.html:4
+#: templates/wall/category.html:13 templates/wall/note_template.html:133
 msgid "Category"
 msgstr "Category"
 
-#: models.py:42 models.py:91 templates/wall/index.html:10
+#: models.py:41 models.py:97 templates/wall/index.html:10
 msgid "Tags"
 msgstr "Tags"
 
-#: models.py:43
+#: models.py:42
 msgid "NoteLikes"
 msgstr "Users who have put a like"
 
-#: models.py:44
+#: models.py:43
 msgid "NoteDislikes"
 msgstr "Users who have put a dislike"
 
-#: models.py:50 templates/wall/add_note_form.html:22
+#: models.py:56 templates/wall/add_note_form.html:22
 msgid "Note"
 msgstr "Note"
 
-#: models.py:51 templates/wall/author.html:65
+#: models.py:57 templates/wall/author.html:65
 msgid "Notes"
 msgstr "Notes"
 
-#: models.py:59
+#: models.py:65
 msgid "ParentCategory"
 msgstr "Parent category"
 
-#: models.py:61
+#: models.py:67
 msgid "Preview"
 msgstr "Preview"
 
-#: models.py:74 templates/wall/categories_list.html:5
+#: models.py:80 templates/wall/categories_list.html:5
 #: templates/wall/categories_list.html:13
 msgid "Categories"
 msgstr "Categories"
 
-#: models.py:90 templates/wall/tag.html:4 templates/wall/tag.html:13
+#: models.py:96 templates/wall/tag.html:4 templates/wall/tag.html:13
 msgid "Tag"
 msgstr "Tag"
 
-#: services.py:210
+#: services.py:213
 msgid "ConfirmEmail"
 msgstr "Confirm E-mail"
 
@@ -290,15 +290,15 @@ msgstr "Edit"
 msgid "ReadMore"
 msgstr "Read more"
 
-#: templates/wall/note_template.html:127
+#: templates/wall/note_template.html:137
 msgid "Views"
 msgstr "views"
 
-#: templates/wall/note_template.html:134 templates/wall/note_template.html:136
+#: templates/wall/note_template.html:144 templates/wall/note_template.html:146
 msgid "PreviousNote"
 msgstr "Previous Note"
 
-#: templates/wall/note_template.html:141 templates/wall/note_template.html:143
+#: templates/wall/note_template.html:151 templates/wall/note_template.html:153
 msgid "NextNote"
 msgstr "Next Note"
 
@@ -311,45 +311,45 @@ msgstr "Registration"
 msgid "SearchWord"
 msgstr "Search"
 
-#: views.py:115
+#: views.py:117
 msgid "NoteSuccessfullyDeleted"
 msgstr "Note successfully deleted!"
 
-#: views.py:212
+#: views.py:226
 msgid "EmailSent"
 msgstr "The letter with a link to confirmation is sent to the specified email"
 
-#: views.py:214
+#: views.py:228
 msgid "RegistrationError"
 msgstr "Registration error"
 
-#: views.py:229
+#: views.py:243
 msgid "EmailSuccessfullyConfirmed"
 msgstr "Email successfully confirmed"
 
-#: views.py:232
+#: views.py:246
 msgid "EmailConfirmationError"
 msgstr "Email confirmation error"
 
-#: views.py:262
+#: views.py:276
 msgid "LogInError"
 msgstr "Log in error"
 
-#: views.py:281
+#: views.py:295
 msgid "PasswordSuccessfullyChanged"
 msgstr "Password successfully changed"
 
-#: views.py:284
+#: views.py:298
 msgid "Error"
 msgstr "Error"
 
-#: views.py:302
+#: views.py:316
 msgid "ProfileAndNotesSuccessfullyDeleted"
 msgstr "Profile and notes successfully deleted!"
 
-#: views.py:310
+#: views.py:324
 msgid "YouLogOut"
 msgstr "You log out"
 
-#~ msgid "Welcome"
-#~ msgstr "Welcome"
+msgid "Welcome"
+msgstr "Welcome"
