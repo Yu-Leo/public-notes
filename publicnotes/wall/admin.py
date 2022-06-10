@@ -30,7 +30,7 @@ class MyUserAdmin(UserAdmin):
         (_('Dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
-    readonly_fields = ('get_photo',)
+    readonly_fields = ('get_photo', 'rating')
 
     def get_photo(self, obj):
         if obj.photo:
