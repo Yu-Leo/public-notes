@@ -7,7 +7,7 @@ class NoteTestCase(TestCase):
     """Test 'Note' model"""
 
     @classmethod
-    def setUpTestData(self) -> None:
+    def setUpTestData(cls) -> None:
         """Create test notes objects"""
         for i in range(3):
             User.objects.create(username=f'user_{i}', email=f'user_{i}@localhost')
@@ -43,7 +43,7 @@ class UserTestCase(TestCase):
     """Test 'User' model"""
 
     @classmethod
-    def setUpTestData(self) -> None:
+    def setUpTestData(cls) -> None:
         """Create test users objects"""
         for i in range(4):
             User.objects.create(username=f'user_{i}', email=f'user_{i}@localhost')
@@ -82,9 +82,9 @@ class CategoryTestCase(TestCase):
     NUMBER_OF_CATEGORIES = 3
 
     @classmethod
-    def setUpTestData(self) -> None:
+    def setUpTestData(cls) -> None:
         """Create test categories objects"""
-        for i in range(self.NUMBER_OF_CATEGORIES):
+        for i in range(cls.NUMBER_OF_CATEGORIES):
             Category.objects.create(title=f'Category_{i + 1}')
 
     def setUp(self) -> None:
@@ -104,11 +104,11 @@ class TagTestCase(TestCase):
     NUMBER_OF_TAGS = 3
 
     @classmethod
-    def setUpTestData(self) -> None:
+    def setUpTestData(cls) -> None:
         """
         Create test tags objects
         """
-        for i in range(self.NUMBER_OF_TAGS):
+        for i in range(cls.NUMBER_OF_TAGS):
             Tag.objects.create(title=f'Tag_{i + 1}')
 
     def setUp(self) -> None:
