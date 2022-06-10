@@ -6,19 +6,6 @@ from django.utils.translation import ugettext as _
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-class User(AbstractUser):
-    """Main user's object"""
-
-    email = models.EmailField(unique=True, verbose_name='E-mail')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Avatar'), blank=True)
-    rating = models.IntegerField(verbose_name=_('Rating'), default=0)
-    bio = models.TextField(verbose_name=_('Bio'), blank=True)
-    show_email = models.BooleanField(verbose_name=_('PublicEmail'), default=False)
-
-    def get_absolute_url(self):
-        return reverse('author', kwargs={"pk": self.pk})
-
-
 class Note(models.Model):
     """Note's object. Main entity in application"""
 
@@ -56,6 +43,26 @@ class Note(models.Model):
         verbose_name = _('Note')
         verbose_name_plural = _('Notes')
         ordering = ['-created_at', 'title']
+
+
+class User(AbstractUser):
+    """Main user's object"""
+
+    email = models.EmailField(unique=True, verbose_name='E-mail')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Avatar'), blank=True)
+    bio = models.TextField(verbose_name=_('Bio'), blank=True)
+    show_email = models.BooleanField(verbose_name=_('PublicEmail'), default=False)
+
+    def get_absolute_url(self):
+        return reverse('author', kwargs={"pk": self.pk})
+
+    @property
+    def rating(self) -> int:
+        """
+        Rating calculates as sum of ratings of user's public notes
+        """
+        user_notes = Note.objects.filter(author=self, is_public=True)
+        return sum(map(lambda note: note.rating, user_notes))
 
 
 class Category(MPTTModel):
