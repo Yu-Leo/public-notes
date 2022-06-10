@@ -213,6 +213,7 @@ class ViewAuthor(DetailView):
         context = super(ViewAuthor, self).get_context_data(**kwargs)
         context['page_obj'] = services.get_notes_by_author(author_pk=self.kwargs['pk'],
                                                            include_private=self.request.user == self.object)
+        context['is_self'] = self.request.user == self.object
         return context
 
 
