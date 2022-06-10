@@ -1,7 +1,7 @@
 from django.test import TestCase
-from wall.models import Note, User, Category, Tag
 
 from wall import services
+from wall.models import Note, User, Category, Tag
 
 
 class ServicesTestCase(TestCase):
@@ -10,7 +10,7 @@ class ServicesTestCase(TestCase):
     NUMBER_OF_TAGS = 2
 
     @classmethod
-    def setUpTestData(self) -> None:
+    def setUpTestData(cls) -> None:
         user_1 = User.objects.create(username=f'user_1', email=f'user_1@localhost')
 
         category_1 = Category.objects.create(title='Category_1')
@@ -76,3 +76,35 @@ class ServicesTestCase(TestCase):
         self.assertQuerysetEqual(all_users_notes,
                                  result_for_all_notes,
                                  transform=lambda x: x)
+
+    def test_get_note_by_pk(self):
+        note = Note.objects.get(pk=1)
+
+        result = services.get_note_by_pk(1)
+
+        self.assertEqual(note, result)
+
+    def test_search_note_by_title(self):
+        search_result = Note.objects.filter(title__icontains='Note')
+
+        result = services.search_note_by_title('Note')
+
+        self.assertQuerysetEqual(search_result,
+                                 result,
+                                 transform=lambda x: x)
+
+    def test_delete_note_by_pk(self):
+        note = Note.objects.create(title='$')
+
+        notes_before_delete = set(Note.objects.all())
+        services.delete_note_by_pk(note.pk)
+        notes_after_delete = set(Note.objects.all())
+
+        difference = notes_before_delete - notes_after_delete
+
+        d = {note, }
+        self.assertEqual(d, difference)
+
+    def test_get_random_note_with_notes(self):
+        result = services.get_random_note()
+        self.assertIsInstance(result, Note)
