@@ -1,37 +1,39 @@
 from django.test import TestCase
 
+from wall import exceptions
 from wall import services
 from wall.models import Note, User, Category, Tag
 
 
-class ServicesTestCase(TestCase):
-    """Test functions from services.py"""
+class NoteServicesTestCase(TestCase):
+    """Test functions from services/note_services.py"""
 
     NUMBER_OF_TAGS = 2
 
     @classmethod
     def setUpTestData(cls) -> None:
-        user_1 = User.objects.create(username=f'user_1', email=f'user_1@localhost')
+        cls.user_1 = User.objects.create(username=f'user_1', email=f'user_1@localhost')
 
-        category_1 = Category.objects.create(title='Category_1')
+        cls.category_1 = Category.objects.create(title='Category_1')
 
-        tag_1 = Tag.objects.create(title='Tag_1')
-        tag_2 = Tag.objects.create(title='Tag_2')
+        cls.tag_1 = Tag.objects.create(title='Tag_1')
+        cls.tag_2 = Tag.objects.create(title='Tag_2')
 
+    def setUp(self) -> None:
         note_1 = Note.objects.create(title='Note_1',
                                      is_public=True,
-                                     category=category_1,
-                                     author=user_1, )
-        note_1.tags.set([tag_1, tag_2])
+                                     category=self.category_1,
+                                     author=self.user_1, )
+        note_1.tags.set([self.tag_1, self.tag_2])
 
         note_2 = Note.objects.create(title='Note_2',
                                      is_public=True, )
-        note_2.tags.set([tag_2, ])
+        note_2.tags.set([self.tag_2, ])
 
         note_3 = Note.objects.create(title='Note_3',
-                                     category=category_1,
-                                     author=user_1)
-        note_3.tags.set([tag_1, ])
+                                     category=self.category_1,
+                                     author=self.user_1)
+        note_3.tags.set([self.tag_1, ])
 
     def test_get_all_public_notes(self):
         all_public_notes = Note.objects.filter(is_public=True)
@@ -94,17 +96,30 @@ class ServicesTestCase(TestCase):
                                  transform=lambda x: x)
 
     def test_delete_note_by_pk(self):
-        note = Note.objects.create(title='$')
-
+        note = Note.objects.get(pk=1)
         notes_before_delete = set(Note.objects.all())
+
         services.delete_note_by_pk(note.pk)
+
         notes_after_delete = set(Note.objects.all())
-
         difference = notes_before_delete - notes_after_delete
-
-        d = {note, }
-        self.assertEqual(d, difference)
+        self.assertEqual({note, }, difference)
 
     def test_get_random_note_with_notes(self):
         result = services.get_random_note()
         self.assertIsInstance(result, Note)
+
+    def test_get_random_note_without_notes(self):
+        Note.objects.all().delete()  # Delete all notes (needs for this test)
+
+        with self.assertRaises(exceptions.ThereAreNoNotes):
+            services.get_random_note()
+
+    def test_increase_number_of_views(self):
+        note = Note.objects.get(pk=1)
+        views_before_increase = note.views
+
+        services.increase_number_of_views(note)
+
+        views_after_increase = note.views
+        self.assertEqual(1, views_after_increase - views_before_increase)
