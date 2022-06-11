@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 
-from . import models
+from wall import models
 
 
 class NoteForm(forms.ModelForm):
