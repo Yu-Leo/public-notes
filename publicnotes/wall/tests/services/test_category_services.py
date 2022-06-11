@@ -4,7 +4,7 @@ from wall import services
 from wall.models import Category
 
 
-class NoteServicesTestCase(TestCase):
+class CategoryServicesTestCase(TestCase):
     """Test functions from services/category_services.py"""
 
     @classmethod
