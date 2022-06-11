@@ -2,7 +2,7 @@ import six
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 
-from . import models
+from wall import models
 
 
 class TokenGenerator(PasswordResetTokenGenerator):

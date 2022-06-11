@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from mptt.admin import MPTTModelAdmin
 
-from . import models
+from wall import models
 
 
 class NoteAdmin(admin.ModelAdmin):

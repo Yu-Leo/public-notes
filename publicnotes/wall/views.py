@@ -10,11 +10,11 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, ListView, TemplateView
 
-from . import exceptions
-from . import forms
-from . import models
-from . import services
-from . import utils
+from wall import exceptions
+from wall import forms
+from wall import models
+from wall import services
+from wall import utils
 
 
 def index(request):
