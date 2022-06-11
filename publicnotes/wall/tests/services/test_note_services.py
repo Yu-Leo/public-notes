@@ -1,11 +1,13 @@
+import enum
+from typing import Callable
+from typing import NamedTuple
+
 from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
-from typing import NamedTuple
+
 from wall import exceptions
 from wall import services
 from wall.models import Note, User, Category, Tag
-from typing import Callable
-import enum
 
 
 class ReactionActions(enum.Enum):
@@ -233,22 +235,21 @@ class NoteServicesTestCase(TestCase):
 
         likes_difference = likes_after ^ likes_before
 
-        if len(likes_after) == 0 or likes_after in likes_before:
+        if user in likes_before and user not in likes_after:
             likes_action = ReactionActions.REMOVE
-        elif likes_after == likes_before or len(likes_after) == len(likes_before) == 0:
-            likes_action = ReactionActions.NOTHING
-        else:
+        elif user not in likes_before and user in likes_after:
             likes_action = ReactionActions.ADD
+        else:
+            likes_action = ReactionActions.NOTHING
 
         dislikes_difference = dislikes_after ^ dislikes_before
 
-        if len(dislikes_after) == 0 or dislikes_after in dislikes_before:
+        if user in dislikes_before and user not in dislikes_after:
             dislikes_action = ReactionActions.REMOVE
-
-        elif dislikes_after == dislikes_before or len(dislikes_after) == len(dislikes_before) == 0:
-            dislikes_action = ReactionActions.NOTHING
-        else:
+        elif user not in dislikes_before and user in dislikes_after:
             dislikes_action = ReactionActions.ADD
+        else:
+            dislikes_action = ReactionActions.NOTHING
 
         return ReactionsDifferences(likes_difference, likes_action, dislikes_difference, dislikes_action)
 
