@@ -60,7 +60,7 @@ def get_next_note_in_category(note: models.Note):
 def one_note(note: models.Note,
              show_full: bool = False,
              in_profile: bool = False,
-             user: models.User | AnonymousUser = None,
+             user: models.User | AnonymousUser = AnonymousUser,
              ):
     """
     Show one note as card.
