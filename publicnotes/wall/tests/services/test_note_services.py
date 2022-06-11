@@ -139,7 +139,30 @@ class NoteServicesTestCase(TestCase):
         with self.assertRaises(exceptions.ThereAreNoNotes):
             services.get_random_note()
 
-    # def test_add_note
+    def test_add_note(self):
+        notes_before = set(Note.objects.all())
+
+        data_from_form = {'title': 'Note_5',
+                          'content': 'Some content',
+                          'stared': True,
+                          'category': self.category_1,
+                          'tags': Tag.objects.all(),
+                          'is_public': True,
+                          'is_pined': True}
+
+        added_note = services.add_note(data_from_form, self.user_1)
+
+        notes_after = set(Note.objects.all())
+        notes_difference = notes_after - notes_before
+
+        self.assertEqual({added_note, }, notes_difference)
+        self.assertEqual('Note_5', added_note.title)
+        self.assertEqual('Some content', added_note.content)
+        self.assertTrue(added_note.stared)
+        self.assertEqual(self.category_1, added_note.category)
+        self.assertEqual({self.tag_1, self.tag_2}, set(added_note.tags.all()))
+        self.assertTrue(added_note.is_public)
+        self.assertTrue(added_note.is_pined)
 
     def test_increase_number_of_views(self):
         views_before_increase = self.note_1.views

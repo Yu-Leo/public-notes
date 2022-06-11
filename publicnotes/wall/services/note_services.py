@@ -5,7 +5,6 @@ from django.db.models import F
 from django.db.models.query import QuerySet
 
 from wall import exceptions
-from wall import forms
 from wall.models import Note, User
 
 
@@ -71,17 +70,16 @@ def get_random_note() -> Note:
     raise exceptions.ThereAreNoNotes
 
 
-def add_note(note_form: forms.NoteForm, author: User) -> Note:
+def add_note(data_from_form: dict, author: User) -> Note:
     """
     Add new note to db.
     :return: new note's object
     """
-    notes_data = note_form.cleaned_data
-    tags = note_form.cleaned_data.get('tags')
-    del notes_data['tags']
-    notes_data['author'] = author
+    tags = data_from_form.get('tags')
+    del data_from_form['tags']
+    data_from_form['author'] = author
 
-    note = Note.objects.create(**notes_data)
+    note = Note.objects.create(**data_from_form)
     note.tags.set(tags)
     return note
 

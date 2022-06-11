@@ -67,7 +67,8 @@ def add_note(request):
     if request.method == 'POST':
         note_form = forms.NoteForm(request.POST)
         if note_form.is_valid():
-            note = services.add_note(note_form, request.user)
+            data_from_form = note_form.cleaned_data
+            note = services.add_note(data_from_form, request.user)
             return redirect(note)
     elif request.method == 'GET' and request.GET.get('category') is not None:
         category_pk = int(request.GET.get('category'))
