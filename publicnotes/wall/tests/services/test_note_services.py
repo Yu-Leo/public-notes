@@ -1,7 +1,10 @@
+import datetime
 import enum
 from typing import Callable
 from typing import NamedTuple
+from unittest import mock
 
+import pytz
 from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
 
@@ -276,7 +279,25 @@ class NoteServicesTestCase(TestCase):
 
         return ReactionsDifferences(likes_difference, likes_action, dislikes_difference, dislikes_action)
 
-    # def test_has_note_been_updated
+    def test_has_note_been_updated(self):
+        mocked_creation_time = datetime.datetime(1985, 10, 26, 1, 18, 0, 0, tzinfo=pytz.utc)
+
+        with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked_creation_time)):
+            note_1 = Note.objects.create(title='Note_5_1')
+            note_2 = Note.objects.create(title='Note_6_1')
+
+        mocked_first_update_time = datetime.datetime(1985, 10, 26, 1, 18, 0, 0, tzinfo=pytz.utc)
+        with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked_first_update_time)):
+            note_1.title = 'Note_5_2'
+            note_1.save()
+
+        mocked_second_update_time = datetime.datetime(1985, 10, 26, 1, 20, 0, 0, tzinfo=pytz.utc)
+        with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked_second_update_time)):
+            note_2.title = 'Note_6_2'
+            note_2.save()
+
+        self.assertFalse(services.has_note_been_updated(note_1))
+        self.assertTrue(services.has_note_been_updated(note_2))
 
     def test_get_notes_count_for_author(self):
         result_for_user_1 = services.get_notes_count_for_author(self.user_1)
