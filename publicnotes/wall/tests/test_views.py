@@ -7,7 +7,7 @@ from wall.models import Note, User
 class IndexViewTestCase(TestCase):
 
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
         cls.user_1 = User.objects.create(username='user_1',
                                          email='user_1@localhost',
                                          password='12345')
@@ -29,7 +29,7 @@ class IndexViewTestCase(TestCase):
 class ViewNoteTestCase(TestCase):
 
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
         cls.user_1 = User.objects.create(username='user_1',
                                          email='user_1@localhost',
                                          password='12345')
@@ -70,7 +70,7 @@ class ViewNoteTestCase(TestCase):
 class RandomNoteViewTestCase(TestCase):
 
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
         cls.user_1 = User.objects.create(username='user_1',
                                          email='user_1@localhost',
                                          password='12345')
@@ -95,7 +95,7 @@ class RandomNoteViewTestCase(TestCase):
 class AddNoteViewTestCase(TestCase):
 
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
         cls.user_1 = User.objects.create(username='user_1',
                                          email='user_1@localhost',
                                          password='12345')
@@ -141,7 +141,7 @@ class AddNoteViewTestCase(TestCase):
 class EditNoteViewTestCase(TestCase):
 
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
         cls.user_1 = User.objects.create(username='user_1',
                                          email='user_1@localhost',
                                          password='12345')
@@ -163,10 +163,6 @@ class EditNoteViewTestCase(TestCase):
         response = self.client.get(reverse('edit_note', kwargs={'pk': 1}))
         self.assertRedirects(response, reverse('login'))
 
-    def test_for_anonymous_user(self):
-        response = self.client.get(reverse('edit_note', kwargs={'pk': 1}))
-        self.assertEqual(response.status_code, 302)
-
     def test_post(self):
         self.client.force_login(self.user_1)
         data = {
@@ -179,3 +175,29 @@ class EditNoteViewTestCase(TestCase):
         response = self.client.post(reverse('edit_note', kwargs={'pk': 1}), data=data)
         self.assertRedirects(response, reverse('note', kwargs={'pk': 1}))
         self.assertEqual(Note.objects.get(pk=1).title, 'New note title')
+
+
+class DeleteNoteViewTestCase(TestCase):
+
+    def setUp(self) -> None:
+        self.user_1 = User.objects.create(username='user_1',
+                                          email='user_1@localhost',
+                                          password='12345')
+
+        self.user_2 = User.objects.create(username='user_2',
+                                          email='user_2@localhost',
+                                          password='123')
+
+        Note.objects.create(title='Note_1', is_public=True, author=self.user_1)
+
+    def test_for_authenticated_author(self):
+        self.client.force_login(self.user_1)
+        response = self.client.get(reverse('delete_note', kwargs={'pk': 1}))
+        self.assertRedirects(response, reverse('author', kwargs={'pk': self.user_1.pk}))
+        with self.assertRaises(Note.DoesNotExist):
+            Note.objects.get(pk=1)
+
+    def test_for_authenticated_not_author(self):
+        self.client.force_login(self.user_2)
+        response = self.client.get(reverse('delete_note', kwargs={'pk': 1}))
+        self.assertRedirects(response, reverse('login'))
