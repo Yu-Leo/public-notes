@@ -26,7 +26,7 @@ class UserServicesTestCase(TestCase):
         services.delete_user(self.user_1)
 
         users_after = set(User.objects.all())
-        self.assertEqual(1, len(users_before - users_after))
+        self.assertEqual(len(users_before - users_after), 1)
 
     # register_user
 

@@ -17,16 +17,16 @@ class CategoryServicesTestCase(TestCase):
     def test_get_category_by_pk(self):
         category = self.category_1
         result = services.get_category_by_pk(1)
-        self.assertEqual(category, result)
+        self.assertEqual(result, category)
 
     def test_get_ancestors_of_category(self):
         result = services.get_ancestors_of_category(self.category_4)
-        self.assertEqual([self.category_1, self.category_2], result)
+        self.assertEqual(result, [self.category_1, self.category_2])
 
     def test_get_children_of_category(self):
         result = services.get_children_of_category(self.category_1)
-        self.assertEqual({self.category_2, self.category_3}, set(result))
+        self.assertEqual(set(result), {self.category_2, self.category_3})
 
     def test_get_categories(self):
         result = services.get_categories()
-        self.assertEqual({self.category_1, self.category_2, self.category_3, self.category_4}, set(result))
+        self.assertEqual(set(result), {self.category_1, self.category_2, self.category_3, self.category_4})
