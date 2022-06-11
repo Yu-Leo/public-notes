@@ -9,8 +9,12 @@ class IndexViewTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user_1 = User.objects.create(username='user_1',
-                                         email=f'user_1@localhost',
+                                         email='user_1@localhost',
                                          password='12345')
+
+        cls.user_2 = User.objects.create(username='user_2',
+                                         email='user_2@localhost',
+                                         password='123')
         for i in range(9):
             Note.objects.create(title=f'Note_{i + 1}', is_public=True)
         Note.objects.create(title='Note_11', author=cls.user_1)
@@ -24,13 +28,39 @@ class IndexViewTestCase(TestCase):
         response = self.client.get(reverse('home') + '?page=2')
         self.assertEqual(len(response.context['page_obj']), 4)
 
-    def test_view_note(self):
-        # Test for existing note_pk
+    def test_view_note_for_existing_note_pk(self):
         response = self.client.get(reverse('note', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wall/note.html')
 
-        # Test for not existing note_pk
+    def test_view_note_for_not_existing_note_pk(self):
         response = self.client.get(reverse('note', kwargs={'pk': 100}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wall/404.html')
+
+    def test_view_note_for_authenticated_author(self):
+        self.client.force_login(self.user_1)
+        response = self.client.get(reverse('note', kwargs={'pk': 10}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/note.html')
+
+    def test_view_note_for_authenticated_not_author(self):
+        self.client.force_login(self.user_2)
+        response = self.client.get(reverse('note', kwargs={'pk': 10}))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('login'))
+
+    def test_view_note_for_anonymous_user(self):
+        response = self.client.get(reverse('note', kwargs={'pk': 10}))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('login'))
+
+    def test_random_note_when_notes_exist(self):
+        response = self.client.get(reverse('random_note'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_random_note_when_notes_are_missing(self):
+        Note.objects.all().delete()  # Delete all notes (needs for this test)
+        response = self.client.get(reverse('random_note'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('home'))
