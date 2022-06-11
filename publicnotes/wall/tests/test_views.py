@@ -17,20 +17,20 @@ class IndexViewTestCase(TestCase):
 
     def test_index(self):
         response = self.client.get(reverse('home'))
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wall/index.html')
-        self.assertEqual(5, len(response.context['page_obj']))
+        self.assertEqual(len(response.context['page_obj']), 5)
 
         response = self.client.get(reverse('home') + '?page=2')
-        self.assertEqual(4, len(response.context['page_obj']))
+        self.assertEqual(len(response.context['page_obj']), 4)
 
     def test_view_note(self):
         # Test for existing note_pk
         response = self.client.get(reverse('note', kwargs={'pk': 1}))
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wall/note.html')
 
         # Test for not existing note_pk
         response = self.client.get(reverse('note', kwargs={'pk': 100}))
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wall/404.html')

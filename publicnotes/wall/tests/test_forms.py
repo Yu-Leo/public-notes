@@ -31,7 +31,7 @@ class UpdateProfileFromTestCase(TestCase):
 
     def test_clean_bio(self):
         self.assertTrue(self.form_1.is_valid())
-        self.assertEqual('bio', self.form_1.clean_bio())
+        self.assertEqual(self.form_1.clean_bio(), 'bio')
 
         self.assertFalse(self.form_2.is_valid())
         self.assertEqual(self.form_2.errors['bio'], [_('NoMoreThan20Words')])

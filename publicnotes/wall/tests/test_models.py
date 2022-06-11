@@ -30,13 +30,13 @@ class NoteTestCase(TestCase):
 
     def test_get_absolute_url(self) -> None:
         for i in range(len(self.notes)):
-            self.assertEqual(f'/note/{i + 1}/', self.notes[i].get_absolute_url())
+            self.assertEqual(self.notes[i].get_absolute_url(), f'/note/{i + 1}/')
 
     def test_rating(self) -> None:
-        self.assertEqual(0, self.notes[0].rating)
-        self.assertEqual(2, self.notes[1].rating)
-        self.assertEqual(-2, self.notes[2].rating)
-        self.assertEqual(1, self.notes[3].rating)
+        self.assertEqual(self.notes[0].rating, 0)
+        self.assertEqual(self.notes[1].rating, 2)
+        self.assertEqual(self.notes[2].rating, -2)
+        self.assertEqual(self.notes[3].rating, 1)
 
 
 class UserTestCase(TestCase):
@@ -67,13 +67,13 @@ class UserTestCase(TestCase):
 
     def test_get_absolute_url(self) -> None:
         for i in range(len(self.users)):
-            self.assertEqual(f'/author/{i + 1}/', self.users[i].get_absolute_url())
+            self.assertEqual(self.users[i].get_absolute_url(), f'/author/{i + 1}/')
 
     def test_rating(self) -> None:
-        self.assertEqual(0, self.users[0].rating)
-        self.assertEqual(2, self.users[1].rating)
-        self.assertEqual(-1, self.users[2].rating)
-        self.assertEqual(2, self.users[3].rating)
+        self.assertEqual(self.users[0].rating, 0)
+        self.assertEqual(self.users[1].rating, 2)
+        self.assertEqual(self.users[2].rating, -1)
+        self.assertEqual(self.users[3].rating, 2)
 
 
 class CategoryTestCase(TestCase):
@@ -92,11 +92,11 @@ class CategoryTestCase(TestCase):
 
     def test_get_absolute_url(self) -> None:
         for i in range(self.NUMBER_OF_CATEGORIES):
-            self.assertEqual(f'/category/{i + 1}/', self.categories[i].get_absolute_url())
+            self.assertEqual(self.categories[i].get_absolute_url(), f'/category/{i + 1}/')
 
     def test_object_name(self) -> None:
         for i in range(self.NUMBER_OF_CATEGORIES):
-            self.assertEqual(self.categories[i].title, str(self.categories[i]))
+            self.assertEqual(str(self.categories[i]), self.categories[i].title)
 
 
 class TagTestCase(TestCase):
@@ -116,8 +116,8 @@ class TagTestCase(TestCase):
 
     def test_get_absolute_url(self) -> None:
         for i in range(self.NUMBER_OF_TAGS):
-            self.assertEqual(f'/tag/{i + 1}/', self.tags[i].get_absolute_url())
+            self.assertEqual(self.tags[i].get_absolute_url(), f'/tag/{i + 1}/', )
 
     def test_object_name(self) -> None:
         for i in range(self.NUMBER_OF_TAGS):
-            self.assertEqual(self.tags[i].title, str(self.tags[i]))
+            self.assertEqual(str(self.tags[i]), self.tags[i].title)

@@ -15,8 +15,8 @@ class TagServicesTestCase(TestCase):
     def test_get_tag_by_pk(self):
         tag = self.tag_1
         result = services.get_tag_by_pk(1)
-        self.assertEqual(tag, result)
+        self.assertEqual(result, tag)
 
     def test_get_tags(self):
         result = services.get_tags()
-        self.assertEqual({self.tag_1, self.tag_2}, set(result))
+        self.assertEqual(set(result), {self.tag_1, self.tag_2})

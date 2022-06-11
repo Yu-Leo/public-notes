@@ -70,8 +70,8 @@ class NoteServicesTestCase(TestCase):
 
         result = services.get_all_public_notes()
 
-        self.assertQuerysetEqual(all_public_notes,
-                                 result,
+        self.assertQuerysetEqual(result,
+                                 all_public_notes,
                                  transform=lambda x: x)
 
     def test_get_public_notes_from_category(self):
@@ -79,8 +79,8 @@ class NoteServicesTestCase(TestCase):
 
         result = services.get_public_notes_from_category(category_pk=self.category_1.pk)
 
-        self.assertQuerysetEqual(all_public_notes_in_category_1,
-                                 result,
+        self.assertQuerysetEqual(result,
+                                 all_public_notes_in_category_1,
                                  transform=lambda x: x)
 
     def test_get_public_notes_by_tag(self):
@@ -88,8 +88,8 @@ class NoteServicesTestCase(TestCase):
             tag = Tag.objects.get(pk=i + 1)
             all_public_notes_by_tag = Note.objects.filter(is_public=True, tags__pk=tag.pk)
             result = services.get_public_notes_by_tag(tag_pk=tag.pk)
-            self.assertQuerysetEqual(all_public_notes_by_tag,
-                                     result,
+            self.assertQuerysetEqual(result,
+                                     all_public_notes_by_tag,
                                      transform=lambda x: x)
 
     def test_get_notes_by_author(self):
@@ -99,11 +99,11 @@ class NoteServicesTestCase(TestCase):
         result_for_public_notes = services.get_notes_by_author(self.user_1.pk, include_private=False)
         result_for_all_notes = services.get_notes_by_author(self.user_1.pk, include_private=True)
 
-        self.assertQuerysetEqual(public_users_notes,
-                                 result_for_public_notes,
+        self.assertQuerysetEqual(result_for_public_notes,
+                                 public_users_notes,
                                  transform=lambda x: x)
-        self.assertQuerysetEqual(all_users_notes,
-                                 result_for_all_notes,
+        self.assertQuerysetEqual(result_for_all_notes,
+                                 all_users_notes,
                                  transform=lambda x: x)
 
     def test_get_note_by_pk(self):
@@ -111,15 +111,15 @@ class NoteServicesTestCase(TestCase):
 
         result = services.get_note_by_pk(1)
 
-        self.assertEqual(note, result)
+        self.assertEqual(result, note)
 
     def test_search_note_by_title(self):
         search_result = Note.objects.filter(title__icontains='Note')
 
         result = services.search_note_by_title('Note')
 
-        self.assertQuerysetEqual(search_result,
-                                 result,
+        self.assertQuerysetEqual(result,
+                                 search_result,
                                  transform=lambda x: x)
 
     def test_delete_note_by_pk(self):
@@ -130,7 +130,7 @@ class NoteServicesTestCase(TestCase):
 
         notes_after = set(Note.objects.all())
         difference = notes_before - notes_after
-        self.assertEqual({note, }, difference)
+        self.assertEqual(difference, {note, })
 
     def test_get_random_note_with_notes(self):
         result = services.get_random_note()
@@ -158,12 +158,12 @@ class NoteServicesTestCase(TestCase):
         notes_after = set(Note.objects.all())
         notes_difference = notes_after - notes_before
 
-        self.assertEqual({added_note, }, notes_difference)
-        self.assertEqual('Note_5', added_note.title)
-        self.assertEqual('Some content', added_note.content)
+        self.assertEqual(notes_difference, {added_note, })
+        self.assertEqual(added_note.title, 'Note_5')
+        self.assertEqual(added_note.content, 'Some content')
         self.assertTrue(added_note.stared)
-        self.assertEqual(self.category_1, added_note.category)
-        self.assertEqual({self.tag_1, self.tag_2}, set(added_note.tags.all()))
+        self.assertEqual(added_note.category, self.category_1)
+        self.assertEqual(set(added_note.tags.all()), {self.tag_1, self.tag_2})
         self.assertTrue(added_note.is_public)
         self.assertTrue(added_note.is_pined)
 
@@ -173,7 +173,7 @@ class NoteServicesTestCase(TestCase):
         services.increase_number_of_views(self.note_1)
 
         views_after_increase = self.note_1.views
-        self.assertEqual(1, views_after_increase - views_before_increase)
+        self.assertEqual(views_after_increase - views_before_increase, 1)
 
     def test_check_right_to_read_for_note(self):
         result_for_public_note = services.check_right_to_read_for_note(self.user_1, self.note_1)
@@ -197,55 +197,55 @@ class NoteServicesTestCase(TestCase):
         reactions_differences = self._get_likes_and_dislikes_differences(services.user_liked_note,
                                                                          self.note_1, self.user_1)
 
-        self.assertEqual({self.user_1, }, reactions_differences.likes_difference)
-        self.assertEqual(ReactionActions.ADD, reactions_differences.likes_action)
-        self.assertEqual({self.user_1, }, reactions_differences.dislikes_difference)
-        self.assertEqual(ReactionActions.REMOVE, reactions_differences.dislikes_action)
+        self.assertEqual(reactions_differences.likes_difference, {self.user_1, })
+        self.assertEqual(reactions_differences.likes_action, ReactionActions.ADD)
+        self.assertEqual(reactions_differences.dislikes_difference, {self.user_1, }, )
+        self.assertEqual(reactions_differences.dislikes_action, ReactionActions.REMOVE)
 
     def test_user_liked_note_when_user_was_in_likes_list(self):
         reactions_differences = self._get_likes_and_dislikes_differences(services.user_liked_note,
                                                                          self.note_1, self.user_2)
 
-        self.assertEqual({self.user_2, }, reactions_differences.likes_difference)
-        self.assertEqual(ReactionActions.REMOVE, reactions_differences.likes_action)
-        self.assertEqual(set(), reactions_differences.dislikes_difference)
-        self.assertEqual(ReactionActions.NOTHING, reactions_differences.dislikes_action)
+        self.assertEqual(reactions_differences.likes_difference, {self.user_2, })
+        self.assertEqual(reactions_differences.likes_action, ReactionActions.REMOVE)
+        self.assertEqual(reactions_differences.dislikes_difference, set())
+        self.assertEqual(reactions_differences.dislikes_action, ReactionActions.NOTHING)
 
     def test_user_liked_note_when_user_was_not_in_any_reactions_list(self):
         reactions_differences = self._get_likes_and_dislikes_differences(services.user_liked_note,
                                                                          self.note_1, self.user_3)
 
-        self.assertEqual({self.user_3, }, reactions_differences.likes_difference)
-        self.assertEqual(ReactionActions.ADD, reactions_differences.likes_action)
-        self.assertEqual(set(), reactions_differences.dislikes_difference)
-        self.assertEqual(ReactionActions.NOTHING, reactions_differences.dislikes_action)
+        self.assertEqual(reactions_differences.likes_difference, {self.user_3, })
+        self.assertEqual(reactions_differences.likes_action, ReactionActions.ADD)
+        self.assertEqual(reactions_differences.dislikes_difference, set())
+        self.assertEqual(reactions_differences.dislikes_action, ReactionActions.NOTHING)
 
     def test_user_disliked_note_if_user_was_in_dislikes_list(self):
         reactions_differences = self._get_likes_and_dislikes_differences(services.user_disliked_note,
                                                                          self.note_1, self.user_1)
 
-        self.assertEqual(set(), reactions_differences.likes_difference)
-        self.assertEqual(ReactionActions.NOTHING, reactions_differences.likes_action)
-        self.assertEqual({self.user_1, }, reactions_differences.dislikes_difference)
-        self.assertEqual(ReactionActions.REMOVE, reactions_differences.dislikes_action)
+        self.assertEqual(reactions_differences.likes_difference, set())
+        self.assertEqual(reactions_differences.likes_action, ReactionActions.NOTHING)
+        self.assertEqual(reactions_differences.dislikes_difference, {self.user_1, })
+        self.assertEqual(reactions_differences.dislikes_action, ReactionActions.REMOVE)
 
     def test_user_disliked_note_when_user_was_in_likes_list(self):
         reactions_differences = self._get_likes_and_dislikes_differences(services.user_disliked_note,
                                                                          self.note_1, self.user_2)
 
-        self.assertEqual({self.user_2, }, reactions_differences.likes_difference)
-        self.assertEqual(ReactionActions.REMOVE, reactions_differences.likes_action)
-        self.assertEqual({self.user_2, }, reactions_differences.dislikes_difference)
-        self.assertEqual(ReactionActions.ADD, reactions_differences.dislikes_action)
+        self.assertEqual(reactions_differences.likes_difference, {self.user_2, })
+        self.assertEqual(reactions_differences.likes_action, ReactionActions.REMOVE)
+        self.assertEqual(reactions_differences.dislikes_difference, {self.user_2, })
+        self.assertEqual(reactions_differences.dislikes_action, ReactionActions.ADD)
 
     def test_user_disliked_note_when_user_was_not_in_any_reactions_list(self):
         reactions_differences = self._get_likes_and_dislikes_differences(services.user_disliked_note,
                                                                          self.note_1, self.user_3)
 
-        self.assertEqual(set(), reactions_differences.likes_difference)
-        self.assertEqual(ReactionActions.NOTHING, reactions_differences.likes_action)
-        self.assertEqual({self.user_3, }, reactions_differences.dislikes_difference)
-        self.assertEqual(ReactionActions.ADD, reactions_differences.dislikes_action)
+        self.assertEqual(reactions_differences.likes_difference, set())
+        self.assertEqual(reactions_differences.likes_action, ReactionActions.NOTHING)
+        self.assertEqual(reactions_differences.dislikes_difference, {self.user_3, })
+        self.assertEqual(reactions_differences.dislikes_action, ReactionActions.ADD)
 
     @staticmethod
     def _get_likes_and_dislikes_differences(func: Callable[[User, int], None],
@@ -303,5 +303,5 @@ class NoteServicesTestCase(TestCase):
         result_for_user_1 = services.get_notes_count_for_author(self.user_1)
         result_for_user_2 = services.get_notes_count_for_author(self.user_2)
 
-        self.assertEqual(2, result_for_user_1)
-        self.assertEqual(0, result_for_user_2)
+        self.assertEqual(result_for_user_1, 2)
+        self.assertEqual(result_for_user_2, 0)
