@@ -124,12 +124,12 @@ class NoteServicesTestCase(TestCase):
 
     def test_delete_note_by_pk(self):
         note = self.note_1
-        notes_before_delete = set(Note.objects.all())
+        notes_before = set(Note.objects.all())
 
         services.delete_note_by_pk(note.pk)
 
-        notes_after_delete = set(Note.objects.all())
-        difference = notes_before_delete - notes_after_delete
+        notes_after = set(Note.objects.all())
+        difference = notes_before - notes_after
         self.assertEqual({note, }, difference)
 
     def test_get_random_note_with_notes(self):
