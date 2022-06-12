@@ -1,7 +1,9 @@
+from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.translation import ugettext as _
 
-from wall.models import Note, User
+from wall.models import Note, User, Category, Tag
 
 
 class IndexViewTestCase(TestCase):
@@ -230,3 +232,105 @@ class LikeAdnDislikeNoteViewTestCase(TestCase):
         self.client.get(reverse('dislike_note', kwargs={'pk': 1}))
         rating_after = self.note_1.rating
         self.assertEqual(rating_before - rating_after, 1)
+
+
+class CategoryViewTestCase(TestCase):
+
+    @classmethod
+    def setUpTestData(cls) -> None:
+        cls.category_1 = Category.objects.create(parent=None, title='Category_1')
+
+    def test_for_existing_category(self):
+        response = self.client.get(reverse('category', kwargs={'pk': 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/category.html')
+
+    def test_for_not_existing_category(self):
+        response = self.client.get(reverse('category', kwargs={'pk': 100}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/404.html')
+
+
+class TagViewTestCase(TestCase):
+
+    @classmethod
+    def setUpTestData(cls) -> None:
+        cls.tag_1 = Tag.objects.create(title='Tag_1')
+
+    def test_for_existing_tag(self):
+        response = self.client.get(reverse('tag', kwargs={'pk': 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/tag.html')
+
+    def test_for_not_existing_tag(self):
+        response = self.client.get(reverse('tag', kwargs={'pk': 100}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/404.html')
+
+
+class DeleteUserTestCase(TestCase):
+
+    def setUp(self) -> None:
+        self.user_1 = User.objects.create(username='user_1',
+                                          email='user_1@localhost',
+                                          password='12345')
+
+    def test_for_authenticated_user(self):
+        self.client.force_login(self.user_1)
+        response = self.client.get(reverse('delete_profile'))
+        self.assertRedirects(response, reverse('home'))
+        with self.assertRaises(User.DoesNotExist):
+            User.objects.get(pk=1)
+
+
+class LogInTestCase(TestCase):
+
+    def setUp(self) -> None:
+        self.user_data = {
+            'username': 'testuser',
+            'password': 'secret'}
+        User.objects.create_user(**self.user_data)
+
+    def test_valid_form(self):
+        response = self.client.post(reverse('login'), self.user_data, follow=True)
+        self.assertTrue(response.context['user'].is_authenticated)
+        self.assertRedirects(response, reverse('home'))
+
+        messages = list(response.context['messages'])
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), f'{_("Welcome")}, {self.user_data["username"]}')
+
+    def test_invalid_form(self):
+        self.user_data['password'] = 'wrong_password'
+        response = self.client.post(reverse('login'), self.user_data, follow=True)
+        self.assertFalse(response.context['user'].is_authenticated)
+
+        messages = list(response.context['messages'])
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), _('LogInError'))
+
+
+class LogOutTestCase(TestCase):
+
+    def setUp(self) -> None:
+        self.user_1 = User.objects.create(username='user_1',
+                                          email='user_1@localhost',
+                                          password='12345')
+
+    def test_for_authenticated_user(self):
+        self.client.force_login(self.user_1)
+        response = self.client.get(reverse('logout'))
+        self.assertIsInstance(response.wsgi_request.user, AnonymousUser)
+
+
+class SearchTestCase(TestCase):
+
+    @classmethod
+    def setUp(cls) -> None:
+        Note.objects.create(title='Note')
+        Note.objects.create(title='Another note')
+
+    def test(self):
+        response = self.client.get(reverse('search'), {'search': 'note'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/search.html')
