@@ -310,6 +310,20 @@ class LogInTestCase(TestCase):
         self.assertEqual(str(messages[0]), _('LogInError'))
 
 
+class ChangePasswordTestCase(TestCase):
+
+    def setUp(self) -> None:
+        self.user_1 = User.objects.create(username='user_1',
+                                          email='user_1@localhost',
+                                          password='12345')
+
+    def test_get(self):
+        self.client.force_login(self.user_1)
+        response = self.client.get(reverse('change_password'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'wall/change_password.html')
+
+
 class LogOutTestCase(TestCase):
 
     def setUp(self) -> None:
