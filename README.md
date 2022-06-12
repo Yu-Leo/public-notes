@@ -153,20 +153,20 @@
     - **locale** - папка с переводами
     - **config** - настройки проекта
     - **templates** - общие шаблоны проекта
-    - **wall** - главное приложение
+    - **wall** - главное Django приложение проекта 
         - **locale** - папка с переводами
         - **migragions** - файлы миграций
+        - **services** - бизнес-логика приложения
         - **static** - файлы статики
         - **templates** - шаблоны приложения
         - **templatetags** - кастомные теги
+        - **tests** - тесты
         - **admin.py** - настройки админки
         - **apps.py**
         - **exceptions.py** - кастомные исключения
         - **forms.py** - формы и их настройки
         - **generate_fake_data.py** - скрипт для генерации случайных заметок
         - **models.py** - модели приложения
-        - **services.py** - слой бизнес-логики приложения
-        - **test.py**
         - **urls.py** - настройки URL приложения
         - **utils.py** - утилиты, используемые в бизнес-логике
         - **views.py** - представления моделей
@@ -184,6 +184,23 @@
     - `EMAIL_PORT`
     - `EMAIL_HOST_USER`
     - `EMAIL_HOST_PASSWORD`
+
+### :coffee: Тесты
+
+Запуск всех тестов (выполнять в папке **publicnotes**):
+```bash
+./manage.py test wall.tests
+```
+
+С использованием `coverage`:
+```bash
+coverage run ./manage.py test wall.tests
+```
+
+С генерацией страницы отчета:
+```bash
+coverage run ./manage.py test wall.tests && coverage html
+```
 
 <a id="chapter-5"></a>
 
