@@ -153,7 +153,7 @@
     - **locale** - папка с переводами
     - **config** - настройки проекта
     - **templates** - общие шаблоны проекта
-    - **wall** - главное Django приложение проекта 
+    - **wall** - главное Django приложение проекта
         - **locale** - папка с переводами
         - **migragions** - файлы миграций
         - **services** - бизнес-логика приложения
@@ -188,16 +188,19 @@
 ### :coffee: Тесты
 
 Запуск всех тестов (выполнять в папке **publicnotes**):
+
 ```bash
 ./manage.py test wall.tests
 ```
 
 С использованием `coverage`:
+
 ```bash
 coverage run ./manage.py test wall.tests
 ```
 
 С генерацией страницы отчета:
+
 ```bash
 coverage run ./manage.py test wall.tests && coverage html
 ```
