@@ -7,60 +7,65 @@
   <a href="https://github.com/Yu-Leo/public-notes/graphs/contributors" target="_blank"> <img alt="commit activity" src="https://img.shields.io/github/commit-activity/m/Yu-Leo/public-notes?style=for-the-badge&labelColor=090909"></a>
 </p>
 
-## Навигация
+<p align="center">
+English | <a href="./README_RU.md">Русский</a>
+</p>
 
-* [Описание проекта](#chapter-0)
-* [Интерфейс](#chapter-1)
-* [Как начать](#chapter-2)
-* [Код](#chapter-3)
-* [Лицензия](#chapter-5)
+<hr>
+
+## Navigation
+
+* [Project description](#chapter-0)
+* [Interface](#chapter-1)
+* [Getting started](#chapter-2)
+* [Source code](#chapter-3)
+* [License](#chapter-5)
 
 <a id="chapter-0"></a>
 
-## :page_facing_up: Описание проекта
+## :page_facing_up: Project description
 
-Сайт, на котором пользователи могут оставлять заметки.
+The website where users can write public notes.
 
-### Функциональность:
+### Functionality:
 
-- Заметки:
-    - Отображение одним списком (главная страница)
-    - Отображение по категориям. Каждая заметка может принадлежать одной категории
-    - Отображение по тегам. Каждая заметка может иметь несколько тегов
-    - Счётчик кол-ва просмотров
-    - Поиск по названиям
-    - Добавление публичных и приватных заметок
-    - Возможность закреплять заметки (закреплённые заметки будут отображаться сверху списка на странице профиля)
-    - Рейтинговая система: каждый лайк повышает рейтинг на 1, каждый дизлайк - уменьшает
-    - Редактирование
-    - Удаление
-- Отображение списка авторов
-- Профиль:
-    - Регистрация
-    - Подтверждение e-mail по одноразовой ссылке
-    - Отображение профиля и заметок
-    - Рейтинговая система: рейтинг пользователя - сумма рейтингов его публичных заметок
-    - Изменение данных профиля
-    - Смена пароля
-    - Удаление профиля
-- Категории:
-    - Отображение категорий в виде списка с различными уровнями вложенности
-    - Каждая категория может иметь подкатегории. Заметки могут относиться как к родительской, так и к дочерним
-      категориям
-- Поддержка русского и английского языков
+- Notes:
+    - Displaying a single list (main page)
+    - Displaying by category. Each note can belong to one category
+    - Displaying by tags. Each note can have multiple tags
+    - Number of views counter
+    - Search by titles
+    - Adding public and private notes
+    - Ability to pin notes (pinned notes will be displayed at the top of the list on the profile page)
+    - Rating system: each like increases the rating by 1, each dislike decreases
+    - Editing
+    - Deleting
+- Displaying the list of authors
+- Profile:
+    - Registration
+    - Confirmation of e-mail by one-time link
+    - Displaying profile and notes
+    - Rating system: user's rating is the sum of ratings of his public notes
+    - Changing profile data
+    - Changing the password
+    - Deleting a profile
+- Categories:
+    - Displaying categories as a list with different levels of nesting
+    - Each category can have subcategories. Notes can belong to both parent and child categories
+- Support for Russian and English languages
 
 <a id="chapter-1"></a>
 
-## :camera: Интерфейс
+## :camera: Interface
 
-- **Главная** - главная страница сайта, на которой отображаются все заметки.
-- **О проекте** - страница с информацией о проекте
-- **Категории** - распределение заметок по категориям
-- **Список категорий** - отображение категорий в виде списка с различными уровнями вложенности
-- **Авторы** - список авторов, оставивших свои заметки на сайте
-- **Добавить заметку** - форма добавления заметки (только для авторизованных пользователей)
-- **Поиск** - поиск по названиям заметок
-- **\<username\>** - профиль пользователя (только для авторизованных пользователей)
+- **Main** - the main page of the site where all notes are displayed
+- **About** - project information page
+- **Categories** - distribution of notes by category
+- **Categories list** - displaying categories as a list with different levels of nesting
+- **Authors** - list of authors who wrote notes on the site
+- **Add note** - form for adding notes (only for authorized users)
+- **Search** - search by note titles
+- **\<username\>** - user profile (only for authorized users)
 
 ![main_page](./docs/img/main_page.jpg)
 
@@ -70,59 +75,59 @@
 
 <a id="chapter-2"></a>
 
-## :hammer: Как начать
+## :hammer: Getting started
 
-1. Скачать данный репозиторий
-    * Вариант 1
-        1. Установить [git](https://git-scm.com/download)
-        2. Клонировать репозиторий
+1. Download this repository
+    * Option 1
+        1. Install [git](https://git-scm.com/download)
+        2. Clone this repository
         ```bash
         git clone https://github.com/Yu-Leo/public-notes.git
         cd public-notes
         ```
-    * Вариант 2 - [Скачать ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
-2. Создать виртуальное окружение в репозитории проекта
+    * Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+2. Create a virtual environment in the project repository
     ```bash
     python3 -m venv venv
     ```
-3. Активировать виртуальное окружение
+3. Activate the virtual environment
     ```bash
     source venv/bin/activate
     ```
-4. Установить зависимости проекта
+4. Install project dependencies
     ```bash
     pip install -r requirements.txt
     ```
-5. Задать [необходимые переменные окружения](#envvars).
-    * Вариант 1.
-      Задать вручную.
+5. Set [required environment variables](#envvars).
+    * Option 1.
+      Set manually.
         ```bash
         export VAR_NAME=VAR_VALUE
         ```
-    * Вариант 2.
-      Использовать [direnv](https://direnv.net/).
-        1. [Установить direnv](https://direnv.net/docs/installation.html)
+    * Option 2.
+      Use [direnv](https://direnv.net/).
+        1. [Install direnv](https://direnv.net/docs/installation.html)
         ```bash
         sudo pacman -S direnv
         ```
-        2. В корне директории создать файл `.envrc`, в котором прописать необходимые переменные окружения
+        2. In the root of the directory, create a file `.envrc`, in which to register the necessary environment variables
         ```bash
         export VAR_NAME=VAR_VALUE
         ```
-        3. Разрешить запуск файла `.envrc` при входе в директорию
+        3. Allow the `.envrc` file to run when entering the directory
         ```bash
         direnv allow
         ```
-6. Скомпилировать переводы фраз:
-    1. Общие (в папке `publicnotes`)
+6. Compile phrase translations
+    1. Common (in the `publicnotes` folder)
     ```bash
        django-admin compilemessages
     ```
-    2. Для приложения 'walls' (в папке `publicnotes/walls`)
+    2. For the application 'walls' (in the `publicnotes/walls` folder)
     ```bash
        django-admin compilemessages
     ```
-7. Запустить сервер
+7. Run the server
     ```bash
     cd publicnotes
     python manage.py runserver
@@ -130,80 +135,80 @@
 
 <a id="chapter-3"></a>
 
-## :computer: Код
+## :computer: Source code
 
-### :wrench: Используемые технологии
+### :wrench: Technologies
 
 #### BackEnd:
 
-- СУБД: **SQLite3**
-- Язык программирования: **Python (3.10.4)**
-- Фреймворки и библиотеки:
+- DBMS: **SQLite3**
+- Programming language: **Python (3.10.4)**
+- Frameworks and libraries:
     - **Django (3.1.14)**
     - **django_debug_toolbar (2.2.1)**
     - **django_mptt (0.13.4)**
-- Веб-сервер: **gunicorn**
+- Web server: **gunicorn**
 
 #### FrontEnd:
 
-- Языки: **html**, **css**
-- Фреймворки и библиотеки:
+- Language: **html**, **css**
+- Frameworks and libraries:
     - **Bootstrap 5**
 
-### :file_folder: Папки и файлы
+### :file_folder: Folders and files
 
-- **publicnotes** - исходный код проекта
-    - **media** - папка с медиа-файлами
-    - **locale** - папка с переводами
-    - **config** - настройки проекта
-    - **templates** - общие шаблоны проекта
-    - **wall** - главное Django приложение проекта
-        - **locale** - папка с переводами
-        - **migragions** - файлы миграций
-        - **services** - бизнес-логика приложения
-        - **static** - файлы статики
-        - **templates** - шаблоны приложения
-        - **templatetags** - кастомные теги
-        - **tests** - тесты
-        - **admin.py** - настройки админки
+- **publicnotes** - project source code
+    - **media** - folder with media files
+    - **locale** - folder with translations
+    - **config** - project settings
+    - **templates** - common project templates
+    - **wall** - the main Django application of the project
+        - **locale** - folder with translations
+        - **migragions** - migration files
+        - **services** - business logic of the application
+        - **static** - static files
+        - **templates** - application templates
+        - **templatetags** - custom tags
+        - **tests** - tests
+        - **admin.py** - admin panel settings
         - **apps.py**
-        - **exceptions.py** - кастомные исключения
-        - **forms.py** - формы и их настройки
-        - **generate_fake_data.py** - скрипт для генерации случайных заметок
-        - **models.py** - модели приложения
-        - **urls.py** - настройки URL приложения
-        - **utils.py** - утилиты, используемые в бизнес-логике
-        - **views.py** - представления моделей
-- **docs** - документация
+        - **exceptions.py** - custom exceptions
+        - **forms.py** - forms and their settings
+        - **generate_fake_data.py** - script for generating random notes (for manual testing)
+        - **models.py** - application models
+        - **urls.py** - application URL settings
+        - **utils.py** - utilities used in business logic
+        - **views.py** - model representations
+- **docs** - documentation
 
-### :wrench: Настройки
+### :wrench: Settings
 
 <a id="envvars"></a>
 
-#### Необходимые переменные окружения:
+#### Required environment variables:
 
-- `DJANGO_SECRET_KEY` - SECRET_KEY для конфига Django
-- Настройки отправки e-mail:
+- `DJANGO_SECRET_KEY` - SECRET_KEY for the Django config
+- Settings for sending e-mail:
     - `EMAIL_HOST`
     - `EMAIL_PORT`
     - `EMAIL_HOST_USER`
     - `EMAIL_HOST_PASSWORD`
 
-### :coffee: Тесты
+### :coffee: Tests
 
-Запуск всех тестов (выполнять в папке **publicnotes**):
+Run all tests (run in the **publicnotes** folder):
 
 ```bash
 ./manage.py test wall.tests
 ```
 
-С использованием `coverage`:
+Using `coverage`:
 
 ```bash
 coverage run ./manage.py test wall.tests
 ```
 
-С генерацией страницы отчета:
+With report page generation:
 
 ```bash
 coverage run ./manage.py test wall.tests && coverage html
@@ -211,12 +216,12 @@ coverage run ./manage.py test wall.tests && coverage html
 
 <a id="chapter-5"></a>
 
-## :open_hands: Лицензия
+## :open_hands: License
 
-Используете мой код - ставьте звёздочку ⭐️ на репозиторий
+If you use my code, put a star ⭐️ on the repository
 
-Автор: [Yu-Leo](https://github.com/Yu-Leo)
+Author: [Yu-Leo](https://github.com/Yu-Leo)
 
 GNU General Public License v3.0
 
-Полный текст в [LICENSE](LICENSE)
+Full text in [LICENSE](LICENSE)
