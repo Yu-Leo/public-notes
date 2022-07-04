@@ -164,7 +164,7 @@ The website where users can write public notes.
     - **templates** - common project templates
     - **wall** - the main Django application of the project
         - **locale** - folder with translations
-        - **migragions** - migration files
+        - **migrations** - migration files
         - **services** - business logic of the application
         - **static** - static files
         - **templates** - application templates
