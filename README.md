@@ -78,44 +78,44 @@ The website where users can write public notes.
 ## :hammer: Getting started
 
 1. Download this repository
-    * Option 1
+    - Option 1
         1. Install [git](https://git-scm.com/download)
         2. Clone this repository
-        ```bash
-        git clone https://github.com/Yu-Leo/public-notes.git
-        cd public-notes
-        ```
-    * Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+         ```bash
+         git clone https://github.com/Yu-Leo/public-notes.git
+         cd public-notes
+         ```
+    - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
 
 2. Run with docker-compose or configure for development:
 
-### Run with docker-compose:
+### Run using docker-compose:
 
-2. Create `.env` file with [required environment variables](#envvars).
-3. Run docker-compose:
+1. Create `.env` file with [required environment variables](#envvars).
+2. Run:
     ```bash
     docker-compose up --build
     ```
-4. Stop docker-compose:
+3. Stop:
     ```bash
     docker-compose down
     ```
 
-### Development
+### Configure for development
 
-2. Create a virtual environment in the project repository
+1. Create a virtual environment in the project repository
     ```bash
     python3 -m venv venv
     ```
-3. Activate the virtual environment
+2. Activate the virtual environment
     ```bash
     source venv/bin/activate
     ```
-4. Install project dependencies
+3. Install project dependencies
     ```bash
     pip install -r requirements.txt
     ```
-5. Set [required environment variables](#envvars).
+4. Set [required environment variables](#envvars).
     * Option 1.
       Set manually.
         ```bash
@@ -136,7 +136,7 @@ The website where users can write public notes.
         ```bash
         direnv allow
         ```
-6. Compile phrase translations
+5. Compile phrase translations
     1. Install `gettext`:
        ```bash
        sudo apt-get install gettext
@@ -145,7 +145,7 @@ The website where users can write public notes.
        ```bash
           django-admin compilemessages
        ```
-7. Run the server
+6. Run the server
     ```bash
     cd publicnotes
     python manage.py runserver
