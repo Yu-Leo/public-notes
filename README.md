@@ -86,6 +86,23 @@ The website where users can write public notes.
         cd public-notes
         ```
     * Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+
+2. Run with docker-compose or configure for development:
+
+### Run with docker-compose:
+
+2. Create `.env` file with [required environment variables](#envvars).
+3. Run docker-compose:
+    ```bash
+    docker-compose up --build
+    ```
+4. Stop docker-compose:
+    ```bash
+    docker-compose down
+    ```
+
+### Development
+
 2. Create a virtual environment in the project repository
     ```bash
     python3 -m venv venv
@@ -110,7 +127,8 @@ The website where users can write public notes.
         ```bash
         sudo pacman -S direnv
         ```
-        2. In the root of the directory, create a file `.envrc`, in which to register the necessary environment variables
+        2. In the root of the directory, create a file `.envrc`, in which to register the necessary environment
+           variables
         ```bash
         export VAR_NAME=VAR_VALUE
         ```
@@ -123,7 +141,7 @@ The website where users can write public notes.
     ```bash
        django-admin compilemessages
     ```
-    2. For the application 'walls' (in the `publicnotes/walls` folder)
+    2. For the application 'walls' (in the `publicnotes/wall` folder)
     ```bash
        django-admin compilemessages
     ```
@@ -187,6 +205,7 @@ The website where users can write public notes.
 
 #### Required environment variables:
 
+- `DJANGO_DEBUG` - Run in DEBUG mode or not (set 1 or 0). Default 0.
 - `DJANGO_SECRET_KEY` - SECRET_KEY for the Django config
 - Settings for sending e-mail:
     - `EMAIL_HOST`
