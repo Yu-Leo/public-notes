@@ -86,17 +86,16 @@ The website where users can write public notes.
          cd public-notes
          ```
     - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
-
-2. Run with docker-compose or configure for development:
+2. Create `.env` file with [required environment variables](#envvars).
+3. Run with docker-compose or configure for development:
 
 ### Run using docker-compose:
 
-1. Create `.env` file with [required environment variables](#envvars).
-2. Run:
+1. Run:
     ```bash
     docker-compose up --build
     ```
-3. Stop:
+2. Stop:
     ```bash
     docker-compose down
     ```
@@ -115,28 +114,7 @@ The website where users can write public notes.
     ```bash
     pip install -r requirements.txt
     ```
-4. Set [required environment variables](#envvars).
-    * Option 1.
-      Set manually.
-        ```bash
-        export VAR_NAME=VAR_VALUE
-        ```
-    * Option 2.
-      Use [direnv](https://direnv.net/).
-        1. [Install direnv](https://direnv.net/docs/installation.html)
-        ```bash
-        sudo pacman -S direnv
-        ```
-        2. In the root of the directory, create a file `.envrc`, in which to register the necessary environment
-           variables
-        ```bash
-        export VAR_NAME=VAR_VALUE
-        ```
-        3. Allow the `.envrc` file to run when entering the directory
-        ```bash
-        direnv allow
-        ```
-5. Compile phrase translations
+4. Compile phrase translations
     1. Install `gettext`:
        ```bash
        sudo apt-get install gettext
@@ -145,7 +123,7 @@ The website where users can write public notes.
        ```bash
           django-admin compilemessages
        ```
-6. Run the server
+5. Run the server
     ```bash
     cd publicnotes
     python manage.py runserver
