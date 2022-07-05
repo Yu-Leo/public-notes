@@ -5,7 +5,7 @@ WORKDIR /usr/src/app/
 
 COPY . /usr/src/app
 
-# Requirements
+# Dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
