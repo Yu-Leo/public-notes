@@ -137,14 +137,14 @@ The website where users can write public notes.
         direnv allow
         ```
 6. Compile phrase translations
-    1. Common (in the `publicnotes` folder)
-    ```bash
-       django-admin compilemessages
-    ```
-    2. For the application 'walls' (in the `publicnotes/wall` folder)
-    ```bash
-       django-admin compilemessages
-    ```
+    1. Install `gettext`:
+       ```bash
+       sudo apt-get install gettext
+       ```
+    2. Run in `publicnotes` folder:
+       ```bash
+          django-admin compilemessages
+       ```
 7. Run the server
     ```bash
     cd publicnotes
