@@ -1,3 +1,5 @@
+# TODO: Update
+
 <h1 align="center"> Public Notes </h1>
 
 <p align="center">
@@ -8,7 +10,7 @@
 
 
 <p align="center">
-<a href="./PN_README.md">English</a> | Русский
+<a href="./README.md">English</a> | Русский
 </p>
 
 <hr>
