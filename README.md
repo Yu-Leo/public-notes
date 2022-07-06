@@ -36,7 +36,8 @@ The website where users can write public notes.
     - Number of views counter
     - Search by titles
     - Adding public and private notes
-    - Ability to pin notes (pinned notes will be displayed at the top of the list on the profile page)
+    - Ability to pin notes (pinned notes will be displayed at the top of the
+      list on the profile page)
     - Rating system: each like increases the rating by 1, each dislike decreases
     - Editing
     - Deleting
@@ -51,7 +52,8 @@ The website where users can write public notes.
     - Deleting a profile
 - Categories:
     - Displaying categories as a list with different levels of nesting
-    - Each category can have subcategories. Notes can belong to both parent and child categories
+    - Each category can have subcategories. Notes can belong to both parent and
+      child categories
 - Support for Russian and English languages
 
 <a id="chapter-1"></a>
@@ -61,7 +63,8 @@ The website where users can write public notes.
 - **Main** - the main page of the site where all notes are displayed
 - **About** - project information page
 - **Categories** - distribution of notes by category
-- **Categories list** - displaying categories as a list with different levels of nesting
+- **Categories list** - displaying categories as a list with different levels of
+  nesting
 - **Authors** - list of authors who wrote notes on the site
 - **Add note** - form for adding notes (only for authorized users)
 - **Search** - search by note titles
@@ -85,7 +88,8 @@ The website where users can write public notes.
          git clone https://github.com/Yu-Leo/public-notes.git
          cd public-notes
          ```
-    - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+    - Option 2
+      - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
 2. Create `.env` file with [required environment variables](#envvars).
 3. Run with docker-compose or configure for development:
 
@@ -147,9 +151,13 @@ The website where users can write public notes.
 
 #### FrontEnd:
 
-- Language: **html**, **css**
+- Languages: **html**, **css**
 - Frameworks and libraries:
     - **Bootstrap 5**
+
+#### Tools:
+
+- Docker and Docker Compose
 
 ### :file_folder: Folders and files
 
@@ -170,7 +178,8 @@ The website where users can write public notes.
         - **apps.py**
         - **exceptions.py** - custom exceptions
         - **forms.py** - forms and their settings
-        - **generate_fake_data.py** - script for generating random notes (for manual testing)
+        - **generate_fake_data.py** - script for generating random notes (for
+          manual testing)
         - **models.py** - application models
         - **urls.py** - application URL settings
         - **utils.py** - utilities used in business logic
