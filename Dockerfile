@@ -11,3 +11,5 @@ RUN pip install -r requirements.txt
 # Translations
 RUN apt-get update && apt-get install -y gettext
 RUN cd ./publicnotes  && django-admin compilemessages
+
+RUN python ./publicnotes/manage.py collectstatic --noinput
