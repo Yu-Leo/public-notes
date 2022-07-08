@@ -35,6 +35,8 @@ The website where users can write public notes.
 
 ## :orange_book: Architecture
 
+![Modules diagram](./modules_diagram.jpg)
+
 ## :blue_book: Database schema
 
 ## :file_folder: Folders and files
