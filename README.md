@@ -7,12 +7,6 @@
   <a href="https://github.com/Yu-Leo/public-notes/graphs/contributors" target="_blank"> <img alt="commit activity" src="https://img.shields.io/github/commit-activity/m/Yu-Leo/public-notes?style=for-the-badge&labelColor=090909"></a>
 </p>
 
-<p align="center">
-English | <a href="./README_RU.md">Русский</a>
-</p>
-
-<hr>
-
 ## Navigation
 
 * [Project description](#chapter-0)
@@ -27,32 +21,7 @@ English | <a href="./README_RU.md">Русский</a>
 
 The website where users can write public notes.
 
-### Functionality:
-
-- Notes:
-    - Displaying a single list (main page)
-    - Displaying by category. Each note can belong to one category
-    - Displaying by tags. Each note can have multiple tags
-    - Number of views counter
-    - Search by titles
-    - Adding public and private notes
-    - Ability to pin notes (pinned notes will be displayed at the top of the list on the profile page)
-    - Rating system: each like increases the rating by 1, each dislike decreases
-    - Editing
-    - Deleting
-- Displaying the list of authors
-- Profile:
-    - Registration
-    - Confirmation of e-mail by one-time link
-    - Displaying profile and notes
-    - Rating system: user's rating is the sum of ratings of his public notes
-    - Changing profile data
-    - Changing the password
-    - Deleting a profile
-- Categories:
-    - Displaying categories as a list with different levels of nesting
-    - Each category can have subcategories. Notes can belong to both parent and child categories
-- Support for Russian and English languages
+See full description in [technical documentation](./docs/README.md).
 
 <a id="chapter-1"></a>
 
@@ -61,7 +30,8 @@ The website where users can write public notes.
 - **Main** - the main page of the site where all notes are displayed
 - **About** - project information page
 - **Categories** - distribution of notes by category
-- **Categories list** - displaying categories as a list with different levels of nesting
+- **Categories list** - displaying categories as a list with different levels of
+  nesting
 - **Authors** - list of authors who wrote notes on the site
 - **Add note** - form for adding notes (only for authorized users)
 - **Search** - search by note titles
@@ -78,56 +48,60 @@ The website where users can write public notes.
 ## :hammer: Getting started
 
 1. Download this repository
-    * Option 1
+    - Option 1
         1. Install [git](https://git-scm.com/download)
         2. Clone this repository
-        ```bash
-        git clone https://github.com/Yu-Leo/public-notes.git
-        cd public-notes
-        ```
-    * Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
-2. Create a virtual environment in the project repository
+         ```bash
+         git clone https://github.com/Yu-Leo/public-notes.git
+         cd public-notes
+         ```
+    - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+2. Set the values of the [required environment variables](#envvars)
+    - Create `.env` file with values for **production** mode
+    - Create `.env.dev` file with values for **development** mode
+
+Now you can:
+
+- Run in **production** mode using docker-compose
+- Run in **development** mode using docker-compose
+- Setting up for development and run on a local machine
+
+### Run in **production** mode using docker-compose:
+
+```bash
+docker-compose up --build
+```
+
+### Run in **development** mode using docker-compose:
+
+```bash
+docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
+```
+
+### Setting up for development and run on a local machine:
+
+1. Create a virtual environment in the project repository
     ```bash
     python3 -m venv venv
     ```
-3. Activate the virtual environment
+2. Activate the virtual environment
     ```bash
     source venv/bin/activate
     ```
-4. Install project dependencies
+3. Install project dependencies
     ```bash
     pip install -r requirements.txt
     ```
-5. Set [required environment variables](#envvars).
-    * Option 1.
-      Set manually.
-        ```bash
-        export VAR_NAME=VAR_VALUE
-        ```
-    * Option 2.
-      Use [direnv](https://direnv.net/).
-        1. [Install direnv](https://direnv.net/docs/installation.html)
-        ```bash
-        sudo pacman -S direnv
-        ```
-        2. In the root of the directory, create a file `.envrc`, in which to register the necessary environment variables
-        ```bash
-        export VAR_NAME=VAR_VALUE
-        ```
-        3. Allow the `.envrc` file to run when entering the directory
-        ```bash
-        direnv allow
-        ```
-6. Compile phrase translations
-    1. Common (in the `publicnotes` folder)
+4. Compile phrase translations
+    1. Install `gettext`:
     ```bash
-       django-admin compilemessages
+    sudo apt-get install gettext
     ```
-    2. For the application 'walls' (in the `publicnotes/walls` folder)
+    2. Run in `publicnotes` folder:
     ```bash
-       django-admin compilemessages
-    ```
-7. Run the server
+    django-admin compilemessages
+     ```
+5. Run the server
     ```bash
     cd publicnotes
     python manage.py runserver
@@ -136,6 +110,8 @@ The website where users can write public notes.
 <a id="chapter-3"></a>
 
 ## :computer: Source code
+
+### :books: [Technical documentation](./docs/README.md)
 
 ### :wrench: Technologies
 
@@ -151,35 +127,13 @@ The website where users can write public notes.
 
 #### FrontEnd:
 
-- Language: **html**, **css**
+- Languages: **html**, **css**
 - Frameworks and libraries:
     - **Bootstrap 5**
 
-### :file_folder: Folders and files
+#### Tools:
 
-- **publicnotes** - project source code
-    - **media** - folder with media files
-    - **locale** - folder with translations
-    - **config** - project settings
-    - **templates** - common project templates
-    - **wall** - the main Django application of the project
-        - **locale** - folder with translations
-        - **migrations** - migration files
-        - **services** - business logic of the application
-        - **static** - static files
-        - **templates** - application templates
-        - **templatetags** - custom tags
-        - **tests** - tests
-        - **admin.py** - admin panel settings
-        - **apps.py**
-        - **exceptions.py** - custom exceptions
-        - **forms.py** - forms and their settings
-        - **generate_fake_data.py** - script for generating random notes (for manual testing)
-        - **models.py** - application models
-        - **urls.py** - application URL settings
-        - **utils.py** - utilities used in business logic
-        - **views.py** - model representations
-- **docs** - documentation
+- **Docker** and **Docker compose**
 
 ### :wrench: Settings
 
@@ -187,6 +141,7 @@ The website where users can write public notes.
 
 #### Required environment variables:
 
+- `DJANGO_DEBUG` - Run in DEBUG mode or not (set 1 or 0). Default 0.
 - `DJANGO_SECRET_KEY` - SECRET_KEY for the Django config
 - Settings for sending e-mail:
     - `EMAIL_HOST`
@@ -218,10 +173,8 @@ coverage run ./manage.py test wall.tests && coverage html
 
 ## :open_hands: License
 
-If you use my code, put a star ⭐️ on the repository
-
 Author: [Yu-Leo](https://github.com/Yu-Leo)
 
-GNU General Public License v3.0
+[GNU General Public License v3.0](./LICENSE)
 
-Full text in [LICENSE](LICENSE)
+If you use my code, please put a star ⭐️ on the repository
