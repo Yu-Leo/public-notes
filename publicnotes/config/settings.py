@@ -1,16 +1,20 @@
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+# Load environment variables if they don't exist (for development in local machine)
+if 'DJANGO_SECRET_KEY' not in os.environ:
+    load_dotenv(dotenv_path=Path(os.path.join(os.path.dirname(BASE_DIR), '.env.dev')))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.getenv('DJANGO_DEBUG', default=0)))
 
 ALLOWED_HOSTS = ['ylpn.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
@@ -98,6 +102,7 @@ LANGUAGE_CODE = 'ru'
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'wall', 'locale')
 )
 
 TIME_ZONE = 'Europe/Moscow'
@@ -110,12 +115,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 INTERNAL_IPS = [
     "127.0.0.1",
