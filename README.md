@@ -173,10 +173,8 @@ coverage run ./manage.py test wall.tests && coverage html
 
 ## :open_hands: License
 
-If you use my code, put a star ⭐️ on the repository
-
 Author: [Yu-Leo](https://github.com/Yu-Leo)
 
-GNU General Public License v3.0
+[GNU General Public License v3.0](./LICENSE)
 
-Full text in [LICENSE](LICENSE)
+If you use my code, please put a star ⭐️ on the repository
