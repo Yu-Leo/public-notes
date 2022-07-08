@@ -37,7 +37,13 @@ The website where users can write public notes.
 
 ![Modules diagram](./modules_diagram.jpg)
 
+Original: [modules_diagram.drawio](./modules_diagram.drawio)
+
 ## :blue_book: Database schema
+
+![Database schema](./database_schema.jpg)
+
+Original: [database_schema.drawio](./database_schema.drawio)
 
 ## :file_folder: Folders and files
 
