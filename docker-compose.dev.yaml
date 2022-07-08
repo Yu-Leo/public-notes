@@ -2,5 +2,7 @@ version: "3.7"
 
 services:
   web:
+    build:
+      dockerfile: Dockerfile.dev
     env_file:
       - .env.dev
