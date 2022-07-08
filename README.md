@@ -21,7 +21,7 @@
 
 The website where users can write public notes.
 
-See full description in [technical documentation](./docs/README.md)
+See full description in [technical documentation](./docs/README.md).
 
 <a id="chapter-1"></a>
 
@@ -55,8 +55,7 @@ See full description in [technical documentation](./docs/README.md)
          git clone https://github.com/Yu-Leo/public-notes.git
          cd public-notes
          ```
-    - Option 2
-        - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+    - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
 2. Set the values of the [required environment variables](#envvars)
     - Create `.env` file with values for **production** mode
     - Create `.env.dev` file with values for **development** mode
