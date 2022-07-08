@@ -112,7 +112,7 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
 
 ## :computer: Source code
 
-### [Technical documentation](./docs/README.md)
+### :books: [Technical documentation](./docs/README.md)
 
 ### :wrench: Technologies
 
