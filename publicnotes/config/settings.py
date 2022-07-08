@@ -6,10 +6,9 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-load_dotenv(dotenv_path=Path(os.path.join(os.path.dirname(BASE_DIR), '.env')))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+# Load environment variables if they don't exist (for development in local machine)
+if 'DJANGO_SECRET_KEY' not in os.environ:
+    load_dotenv(dotenv_path=Path(os.path.join(os.path.dirname(BASE_DIR), '.env.dev')))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
