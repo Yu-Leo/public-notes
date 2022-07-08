@@ -89,22 +89,30 @@ The website where users can write public notes.
          cd public-notes
          ```
     - Option 2
-      - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
-2. Create `.env` file with [required environment variables](#envvars).
-3. Run with docker-compose or configure for development:
+        - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+2. Set the values of the [required environment variables](#envvars)
+    - Create `.env` file with values for **production** mode
+    - Create `.env.dev` file with values for **development** mode
 
-### Run using docker-compose:
+Now you can:
 
-1. Run:
-    ```bash
-    docker-compose up --build
-    ```
-2. Stop:
-    ```bash
-    docker-compose down
-    ```
+- Run in **production** mode using docker-compose
+- Run in **development** mode using docker-compose
+- Setting up for development and run on a local machine
 
-### Configure for development
+### Run in **production** mode using docker-compose:
+
+```bash
+docker-compose up --build
+```
+
+### Run in **development** mode using docker-compose:
+
+```bash
+docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
+```
+
+### Setting up for development and run on a local machine:
 
 1. Create a virtual environment in the project repository
     ```bash
@@ -120,13 +128,13 @@ The website where users can write public notes.
     ```
 4. Compile phrase translations
     1. Install `gettext`:
-       ```bash
-       sudo apt-get install gettext
-       ```
+    ```bash
+    sudo apt-get install gettext
+    ```
     2. Run in `publicnotes` folder:
-       ```bash
-          django-admin compilemessages
-       ```
+    ```bash
+    django-admin compilemessages
+     ```
 5. Run the server
     ```bash
     cd publicnotes
@@ -157,7 +165,7 @@ The website where users can write public notes.
 
 #### Tools:
 
-- Docker and Docker Compose
+- Docker and Docker compose
 
 ### :file_folder: Folders and files
 
