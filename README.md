@@ -7,12 +7,6 @@
   <a href="https://github.com/Yu-Leo/public-notes/graphs/contributors" target="_blank"> <img alt="commit activity" src="https://img.shields.io/github/commit-activity/m/Yu-Leo/public-notes?style=for-the-badge&labelColor=090909"></a>
 </p>
 
-<p align="center">
-English | <a href="./README_RU.md">Русский</a>
-</p>
-
-<hr>
-
 ## Navigation
 
 * [Project description](#chapter-0)
