@@ -15,7 +15,8 @@
 
 <body class="bg-light">
 
-{% include 'inc/_navbar.html'%}
+{% include 'inc/_navbar.html' %}
+
 
 <div class="container">
     <div class="row pt-3">
@@ -24,13 +25,13 @@
         </div>
 
         <div class="col-md-9">
-            {% include 'inc/_messages.html'%}
+            {% include 'inc/_messages.html' %}
             {% block content_title %} {% endblock %}
             {% block content %} CONTENT {% endblock %}
         </div>
     </div>
 </div>
-{% include 'inc/_footer.html'%}
+{% include 'inc/_footer.html' %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>

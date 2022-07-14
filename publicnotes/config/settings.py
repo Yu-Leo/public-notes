@@ -126,6 +126,13 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join('/var/tmp/django_cache/', os.path.basename(BASE_DIR)),
+    }
+}
+
 AUTH_USER_MODEL = 'wall.User'
 
 # Email settings
