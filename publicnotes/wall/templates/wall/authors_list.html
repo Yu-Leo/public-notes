@@ -7,31 +7,31 @@
 {% block sidebar %}{% endblock %}
 
 {% block content_title %}
-<h1 class="mb-3">{% trans 'Authors' %}</h1>
+    <h1 class="mb-3">{% trans 'Authors' %}</h1>
 {% endblock %}
 
 {% block content %}
-<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
-    {% for item in authors %}
-    <div class="col">
-        <div class="card h-100 border-purple">
-            <div class="hstack gap-3">
-                <div class="">
-                    <img src="{% if item.photo %}
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+        {% for item in authors %}
+            <div class="col">
+                <div class="card h-100 border-purple">
+                    <div class="hstack gap-3">
+                        <div class="">
+                            <img src="{% if item.photo %}
                 {{ item.photo.url }}
                 {% else %}
                 {% load static %}
                 {% static 'wall/img/default_avatar.png' %}
                 {% endif %}" alt="..." width="100" height="100"
-                         style="border-radius: 50%; padding: 10px;">
-                </div>
-                <h5 class="card-title fw-bold"> {{item.username}} </h5>
-            </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{% trans 'NotesCount' %}: <span class="fw-bold">
+                                 style="border-radius: 50%; padding: 10px;">
+                        </div>
+                        <h5 class="card-title fw-bold"> {{ item.username }} </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{% trans 'NotesCount' %}: <span class="fw-bold">
                         {% get_notes_count_for_author item %} </span></li>
-                    <li class="list-group-item">{% trans 'Rating' %}: <span class="
+                            <li class="list-group-item">{% trans 'Rating' %}: <span class="
                         {% if item.rating > 0 %}
                         text-success
                         {% elif item.rating < 0 %}
@@ -40,18 +40,18 @@
                         {% endif %}
                         fw-bold"> {{ item.rating }}
                     </span>
-                    </li>
-                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">
+                            {% trans 'OpenProfile' %}
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="card-footer">
-                <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">
-                    {% trans 'OpenProfile' %}
-                </a>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
 
-</div>
+    </div>
 
 {% endblock %}
