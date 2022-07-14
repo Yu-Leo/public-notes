@@ -41,8 +41,12 @@ class Note(models.Model):
             self.recalculate_rating()
 
     def recalculate_rating(self):
+        """
+        Rating calculates as difference between number of likes and number of dislikes
+        """
         self.rating = len(self.likes.all()) - len(self.dislikes.all())
         self.save()
+        self.author.recalculate_rating()
 
     class Meta:
         verbose_name = _('Note')
@@ -57,17 +61,24 @@ class User(AbstractUser):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Avatar'), blank=True)
     bio = models.TextField(verbose_name=_('Bio'), blank=True)
     show_email = models.BooleanField(verbose_name=_('PublicEmail'), default=False)
+    rating = models.IntegerField(verbose_name=_('Rating'), default=0)
 
     def get_absolute_url(self):
         return reverse('author', kwargs={"pk": self.pk})
 
-    @property
-    def rating(self) -> int:
+    def save(self, *args, **kwargs):
+        creating = not self.pk
+        super().save(*args, **kwargs)
+        if creating:
+            self.recalculate_rating()
+
+    def recalculate_rating(self):
         """
         Rating calculates as sum of ratings of user's public notes
         """
         user_notes = Note.objects.filter(author=self, is_public=True)
-        return sum(map(lambda note: note.rating, user_notes))
+        self.rating = sum(map(lambda note: note.rating, user_notes))
+        self.save()
 
 
 class Category(MPTTModel):
