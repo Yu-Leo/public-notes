@@ -7,14 +7,14 @@ from mptt.admin import MPTTModelAdmin
 from wall import models
 
 
-class NoteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_at', 'rating', 'stared', 'category')
-    list_display_links = ('id', 'title')
-    list_filter = ('created_at', 'category')
-
-    fields = ('title', 'is_public', 'views', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags',
-              'content')
-    readonly_fields = ('created_at', 'updated_at', 'rating', 'views')
+# class NoteAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'title', 'created_at', 'rating', 'stared', 'category')
+#     list_display_links = ('id', 'title')
+#     list_filter = ('created_at', 'category')
+#
+#     fields = ('title', 'is_public', 'views', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags',
+#               'content')
+#     readonly_fields = ('created_at', 'updated_at', 'rating', 'views')
 
 
 class MyUserAdmin(UserAdmin):
@@ -50,6 +50,6 @@ class TagAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.User, MyUserAdmin)
-admin.site.register(models.Note, NoteAdmin)
+# admin.site.register(models.Note, NoteAdmin)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Tag, TagAdmin)

@@ -12,7 +12,7 @@ def get_all_public_notes() -> QuerySet[Note]:
     """
     :return: all public notes from db
     """
-    return Note.objects.filter(is_public=True).select_related('category', 'author')
+    return Note.objects.filter(is_public=True).select_related('category', 'author').prefetch_related('tags')
 
 
 def get_public_notes_from_category(category_pk: int) -> list[Note]:
@@ -126,6 +126,8 @@ def user_liked_note(user: User, note_pk: int) -> None:
     else:
         note.likes.add(user)
 
+    note.recalculate_rating()
+
 
 def user_disliked_note(user: User, note_pk: int) -> None:
     """
@@ -140,6 +142,8 @@ def user_disliked_note(user: User, note_pk: int) -> None:
         note.dislikes.remove(user)
     else:
         note.dislikes.add(user)
+
+    note.recalculate_rating()
 
 
 def has_note_been_updated(note: Note) -> bool:
