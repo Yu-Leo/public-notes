@@ -29,15 +29,20 @@ class Note(models.Model):
     likes = models.ManyToManyField('User', blank=True, verbose_name=_('NoteLikes'), related_name='liked_notes')
     dislikes = models.ManyToManyField('User', blank=True, verbose_name=_('NoteDislikes'), related_name='disliked_notes')
 
+    rating = models.IntegerField(verbose_name=_('Rating'), default=0)
+
     def get_absolute_url(self):
         return reverse('note', kwargs={"pk": self.pk})
 
-    @property
-    def rating(self) -> int:
-        """
-        Rating calculates as difference between number of likes and number of dislikes
-        """
-        return len(self.likes.all()) - len(self.dislikes.all())
+    def save(self, *args, **kwargs):
+        creating = not self.pk
+        super().save(*args, **kwargs)
+        if creating:
+            self.recalculate_rating()
+
+    def recalculate_rating(self):
+        self.rating = len(self.likes.all()) - len(self.dislikes.all())
+        self.save()
 
     class Meta:
         verbose_name = _('Note')
