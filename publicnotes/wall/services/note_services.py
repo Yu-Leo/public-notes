@@ -12,7 +12,8 @@ def get_all_public_notes() -> QuerySet[Note]:
     """
     :return: all public notes from db
     """
-    return Note.objects.filter(is_public=True).select_related('category', 'author').prefetch_related('tags')
+    notes = Note.objects.filter(is_public=True)
+    return notes.select_related('category', 'author').prefetch_related('tags', 'likes', 'dislikes')
 
 
 def get_public_notes_from_category(category_pk: int) -> list[Note]:
