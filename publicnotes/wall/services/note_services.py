@@ -105,11 +105,11 @@ def check_right_to_read_for_note(authenticated_user: User, note: Note) -> bool:
 
 
 def is_authenticated_user_the_author_of_note(authenticated_user: User | AnonymousUser,
-                                             note_pk: int) -> bool:
+                                             note: Note) -> bool:
     """
-    :return: is authenticated_user the author of note with note_pk
+    :return: is authenticated_user the author of note
     """
-    return authenticated_user == Note.objects.get(pk=note_pk).author
+    return authenticated_user == note.author
 
 
 def user_liked_note(user: User, note_pk: int) -> None:
