@@ -15,79 +15,80 @@
             </div>
             <div class="fw-bold">
                 {% if note.author %}
-                <a href="{{ note.author.get_absolute_url }}" class="text-decoration-none text-purple">
-                    {{ note.author.username }}</a>
+                    <a href="{{ note.author.get_absolute_url }}" class="text-decoration-none text-purple">
+                        {{ note.author.username }}</a>
                 {% else %}
-                Аноним
+                    Аноним
                 {% endif %}
             </div>
             <div class="fw-light">
                 {{ note.created_at|date:"d.m.Y H:i" }}
                 {% if was_updated %}
-                <span data-bs-toggle="tooltip"
-                      title="{{ note.updated_at|date:'d.m.Y H:i' }}">
+                    <span data-bs-toggle="tooltip"
+                          title="{{ note.updated_at|date:'d.m.Y H:i' }}">
                     ({% trans 'Updated' %})</span>
                 {% endif %}
             </div>
             {% if note.stared %}
-            <div>
-                <i class="fa fa-star"></i>
-            </div>
+                <div>
+                    <i class="fa fa-star"></i>
+                </div>
             {% endif %}
 
             {% if not note.is_public %}
-            <div>
+                <div>
                 <span data-bs-toggle="tooltip"
                       title="{% trans 'PrivateNote' %}">
                     <i class="fa fa-eye-slash"></i>
                 </span>
-            </div>
+                </div>
             {% endif %}
             <div>
                 {% for tag in note.tags.all %}
-                <a href="{{ tag.get_absolute_url }}"
-                   class="badge rounded-pill text-bg-purple text-decoration-none me-1">
-                    {{ tag.title }}</a>
+                    <a href="{{ tag.get_absolute_url }}"
+                       class="badge rounded-pill text-bg-purple text-decoration-none me-1">
+                        {{ tag.title }}</a>
                 {% endfor %}
             </div>
             <div class="ms-auto">
             </div>
             {% if in_profile and note.is_pined %}
-            <div class="me-2">
+                <div class="me-2">
                 <span data-bs-toggle="tooltip"
                       title="{% trans 'PinedInProfile' %}">
                     <i class="fa fa-arrow-up"></i>
                 </span>
-            </div>
+                </div>
             {% endif %}
             {% if allow_edit %}
-            <div>
+                <div>
                 <span data-bs-toggle="tooltip"
                       title="{% trans 'Edit' %}">
                     <a href="{% url 'edit_note' note.pk %}" class="text-purple"><i class="fa fa-pencil"></i></a>
                 </span>
-            </div>
+                </div>
             {% endif %}
         </div>
     </div>
     <div class="card-body" style="transform: rotate(0);">
         <h5 class="card-title">
             {% if show_full %}
-            {{ note.title }}
+                {{ note.title }}
             {% else %}
-            {{ note.title|truncatewords:10 }}
+                {{ note.title|truncatewords:10 }}
             {% endif %}
         </h5>
         <p class="card-text">
             {% if show_full %}
-            {{ note.content }}
+                {{ note.content }}
             {% else %}
-            {{ note.content|truncatewords:30 }}
+                {{ note.content|truncatewords:30 }}
             {% endif %}
         </p>
 
         {% if not show_full %}
-        <a href="{{ note.get_absolute_url }}" class="btn btn-outline-purple stretched-link">{% trans 'ReadMore' %}</a>
+            <a href="{{ note.get_absolute_url }}"
+               class="btn btn-outline-purple stretched-link">{% trans 'ReadMore' %}</a>
         {% endif %}
     </div>
 
@@ -97,11 +98,11 @@
             <div>
                 <a href="{% url 'dislike_note' note.pk %}"
                    style="
-                   {% if is_disliked %}
-                   color: Black;
-                   {% else %}
-                   color: Grey;
-                   {% endif %}">
+                           {% if is_disliked %}
+                               color: Black;
+                           {% else %}
+                               color: Grey;
+                           {% endif %}">
                     <i class="fa fa-thumbs-down"></i>
                 </a>
             </div>
@@ -109,50 +110,51 @@
             <div>
                 <span class="fw-bold">
                     {% if note.rating > 0 %}
-                    <span class="text-success">+{{ note.rating }}</span>
+                        <span class="text-success">+{{ note.rating }}</span>
                     {% elif note.rating < 0 %}
-                    <span class="text-danger">{{ note.rating }}</span>
+                        <span class="text-danger">{{ note.rating }}</span>
                     {% else %}
-                    <span>{{ note.rating }}</span>
+                        <span>{{ note.rating }}</span>
                     {% endif %}
                 </span>
             </div>
             <div>
                 <a href="{% url 'like_note' note.pk %}"
                    style="
-                   {% if is_liked %}
-                   color: Black;
-                   {% else %}
-                   color: Grey;
-                   {% endif %}">
+                           {% if is_liked %}
+                               color: Black;
+                           {% else %}
+                               color: Grey;
+                           {% endif %}">
                     <i class="fa fa-thumbs-up"></i>
                 </a>
             </div>
 
             {% if note.category %}
-            <div><span class="">{% trans 'Category' %}: </span><a href="{{ note.category.get_absolute_url }}"
-                                                                  class="text-decoration-none text-dark fw-bold">
-                {{ note.category.title }}</a></div>
+                <div><span class="">{% trans 'Category' %}: </span><a href="{{ note.category.get_absolute_url }}"
+                                                                      class="text-decoration-none text-dark fw-bold">
+                    {{ note.category.title }}</a></div>
             {% endif %}
             <div class="ms-auto">{{ note.views }} {% trans 'Views' %}</div>
         </div>
         {% if show_full %}
-        <div class="btn-toolbar justify-content-between mt-3" role="toolbar" aria-label="Toolbar with button groups">
-            {% get_prev_note_in_category note as prev_note %}
-            {% if prev_note %}
-            <a href="
+            <div class="btn-toolbar justify-content-between mt-3" role="toolbar"
+                 aria-label="Toolbar with button groups">
+                {% get_prev_note_in_category note as prev_note %}
+                {% if prev_note %}
+                    <a href="
             {{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'PreviousNote' %}</a>
-            {% else %}
-            <a href="#" class="btn btn-outline-purple disabled">{% trans 'PreviousNote' %}</a>
-            {% endif %}
+                {% else %}
+                    <a href="#" class="btn btn-outline-purple disabled">{% trans 'PreviousNote' %}</a>
+                {% endif %}
 
-            {% get_next_note_in_category note as next_note %}
-            {% if next_note %}
-            <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'NextNote' %}</a>
-            {% else %}
-            <a href="#" class="btn btn-outline-purple disabled">{% trans 'NextNote' %}</a>
-            {% endif %}
-        </div>
+                {% get_next_note_in_category note as next_note %}
+                {% if next_note %}
+                    <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'NextNote' %}</a>
+                {% else %}
+                    <a href="#" class="btn btn-outline-purple disabled">{% trans 'NextNote' %}</a>
+                {% endif %}
+            </div>
         {% endif %}
     </div>
 </div>

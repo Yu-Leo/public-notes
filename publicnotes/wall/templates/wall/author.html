@@ -5,47 +5,48 @@
 {% block title %}{{ author.username }}{% endblock %}
 
 {% block sidebar %}
-<div class="card">
-    <img src="{% if author.photo %}
+    <div class="card">
+        <img src="{% if author.photo %}
                 {{ author.photo.url }}
                 {% else %}
                 {% load static %}
                 {% static 'wall/img/default_avatar.png' %}
                 {% endif %}" alt="..."
-         style="border-radius: 50%; padding: 10px;">
+             style="border-radius: 50%; padding: 10px;">
 
-    <div class="card-body">
-        <h4 class="card-title"><span class="fw-bold">{{ author.username }}</span></h4>
-        <h5><span class="fw-light">
+        <div class="card-body">
+            <h4 class="card-title"><span class="fw-bold">{{ author.username }}</span></h4>
+            <h5><span class="fw-light">
             {% if author.first_name %}
-            {{ author.first_name }}
+                {{ author.first_name }}
             {% endif %}
-            {% if author.last_name %}
-            {{ author.last_name }}
-            {% endif %}</span></h5>
-        {% if is_self %}
-        <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">{% trans 'EditProfile' %}</a>
-        {% endif %}
-    </div>
+                {% if author.last_name %}
+                    {{ author.last_name }}
+                {% endif %}</span></h5>
+            {% if is_self %}
+                <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">{% trans 'EditProfile' %}</a>
+            {% endif %}
+        </div>
 
-    <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush">
 
-        {% if author.show_email %}
-        <li class="list-group-item">
-            <p class="card-text"><span class="text-secondary"> E-mail: </span>{{ author.email }}</p>
-        </li>
-        {% endif %}
+            {% if author.show_email %}
+                <li class="list-group-item">
+                    <p class="card-text"><span class="text-secondary"> E-mail: </span>{{ author.email }}</p>
+                </li>
+            {% endif %}
 
-        {% if author.bio %}
-        <li class="list-group-item">
-            <p class="card-text"><span class="text-secondary"> {% trans 'AboutYourself' %}: </span>{{ author.bio }}</p>
-        </li>
-        {% endif %}
+            {% if author.bio %}
+                <li class="list-group-item">
+                    <p class="card-text"><span
+                            class="text-secondary"> {% trans 'AboutYourself' %}: </span>{{ author.bio }}</p>
+                </li>
+            {% endif %}
 
-        <li class="list-group-item"><span class="text-secondary">{% trans 'NotesCount' %}: </span>
-            <span class="fw-bold"> {% get_notes_count_for_author author %}</span></li>
+            <li class="list-group-item"><span class="text-secondary">{% trans 'NotesCount' %}: </span>
+                <span class="fw-bold"> {% get_notes_count_for_author author %}</span></li>
 
-        <li class="list-group-item"><span class="text-secondary">{% trans 'Rating' %}: </span><span class="
+            <li class="list-group-item"><span class="text-secondary">{% trans 'Rating' %}: </span><span class="
                         {% if item.rating > 0 %}
                         text-success
                         {% elif item.rating < 0 %}
@@ -54,29 +55,29 @@
                         {% endif %}
                         fw-bold"> {{ author.rating }}
                     </span>
-        </li>
-    </ul>
-</div>
+            </li>
+        </ul>
+    </div>
 {% endblock %}
 
 {% block content_title %}
-<div class="hstack gap-3 mb-3">
-    <div>
-        <h1>{% trans 'Notes' %}</h1>
+    <div class="hstack gap-3 mb-3">
+        <div>
+            <h1>{% trans 'Notes' %}</h1>
+        </div>
+        {% if is_self %}
+            <div>
+                <a href="{% url 'add_note' %}" class="btn btn-outline-purple">{% trans 'AddNote' %}</a>
+            </div>
+        {% endif %}
     </div>
-    {% if is_self %}
-    <div>
-        <a href="{% url 'add_note' %}" class="btn btn-outline-purple">{% trans 'AddNote' %}</a>
-    </div>
-    {% endif %}
-</div>
 {% endblock %}
 
 
 {% block content %}
 
-{% for item in page_obj %}
-{% one_note item in_profile=True user=request.user %}
-{% endfor %}
+    {% for item in page_obj %}
+        {% one_note item in_profile=True user=request.user %}
+    {% endfor %}
 
 {% endblock %}

@@ -7,20 +7,20 @@
 
 
 {% block content_title %}
-<div class="mb-3">
-    <div class="hstack gap-3">
-        <div>
-            <h1>{% trans 'Tag' %}: {{ tag.title }}</h1>
+    <div class="mb-3">
+        <div class="hstack gap-3">
+            <div>
+                <h1>{% trans 'Tag' %}: {{ tag.title }}</h1>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 
 {% block content %}
 
-{% include 'wall/inc/_notes_list.html'%}
+    {% include 'wall/inc/_notes_list.html' %}
 
-{% include 'wall/inc/_pagination.html' %}
+    {% include 'wall/inc/_pagination.html' %}
 
 {% endblock %}

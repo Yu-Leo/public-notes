@@ -6,49 +6,51 @@
 {% block sidebar %}{% endblock %}
 
 {% block content_title %}
-<div class="hstack gap-3 mb-3">
-    <div>
-        <h1>{% trans 'EditNote' %}</h1>
+    <div class="hstack gap-3 mb-3">
+        <div>
+            <h1>{% trans 'EditNote' %}</h1>
+        </div>
+        <div class="ms-auto">
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                    data-bs-target="#deleteNoteModal">
+                {% trans 'DeleteNote' %}
+            </button>
+        </div>
     </div>
-    <div class="ms-auto">
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                data-bs-target="#deleteNoteModal">
-            {% trans 'DeleteNote' %}
-        </button>
-    </div>
-</div>
 
 {% endblock %}
 
 {% block content %}
-<form action="{% url 'edit_note' note_pk  %}" method="post">
-    {% csrf_token %}
+    <form action="{% url 'edit_note' note_pk %}" method="post">
+        {% csrf_token %}
 
-    <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
-        {{ note_form.as_p }}
-        <button type="submit" class="btn btn-purple btn-block">{% trans 'Update' %}</button>
-    </div>
-</form>
+        <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
+            {{ note_form.as_p }}
+            <button type="submit" class="btn btn-purple btn-block">{% trans 'Update' %}</button>
+        </div>
+    </form>
 
 
-<!-- deleteNoteModal -->
-<div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteNoteModalLabel">{% trans 'DeletingNoteTitle' %}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {% trans 'DeletingNoteText' %}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans 'Cancel' %}</button>
-                <a class="btn btn-danger" href="{% url 'delete_note' note_pk %}" role="button">{% trans 'Delete' %}</a>
+    <!-- deleteNoteModal -->
+    <div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteNoteModalLabel">{% trans 'DeletingNoteTitle' %}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% trans 'DeletingNoteText' %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{% trans 'Cancel' %}</button>
+                    <a class="btn btn-danger" href="{% url 'delete_note' note_pk %}"
+                       role="button">{% trans 'Delete' %}</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}
