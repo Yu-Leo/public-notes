@@ -29,14 +29,6 @@ def get_tags():
 
 
 @register.simple_tag
-def get_notes_count_for_author(user: models.User):
-    """
-    :return: Number of public notes, which was created by author
-    """
-    return services.get_notes_count_for_author(user)
-
-
-@register.simple_tag
 def get_prev_note_in_category(note: models.Note):
     """
     :return: Previous note by date of creation in category
