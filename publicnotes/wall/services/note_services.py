@@ -150,10 +150,3 @@ def has_note_been_updated(note: Note) -> bool:
     time of last update and creation time more than one second
     """
     return (note.updated_at - note.created_at).total_seconds() >= 1
-
-
-def get_notes_count_for_author(user: User) -> int:
-    """
-    :return: Number of public notes, which was created by author
-    """
-    return get_notes_by_author(user.pk, include_private=False).count()

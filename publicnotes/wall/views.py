@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Count, When, Case
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -198,6 +199,7 @@ class ViewAuthors(ListView):
     """View list of users"""
 
     model = models.User
+    queryset = models.User.objects.all().annotate(notes_count=Count(Case(When(note__is_public=True, then=1))))
     template_name = 'wall/authors_list.html'
     context_object_name = 'authors'
     allow_empty = False

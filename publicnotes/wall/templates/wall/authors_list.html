@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load wall_tags %}
 
 {% block title %}{% trans 'Authors' %}{% endblock %}
 
@@ -30,7 +29,7 @@
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">{% trans 'NotesCount' %}: <span class="fw-bold">
-                        {% get_notes_count_for_author item %} </span></li>
+                        {{ item.notes_count }} </span></li>
                             <li class="list-group-item">{% trans 'Rating' %}: <span class="
                         {% if item.rating > 0 %}
                         text-success
