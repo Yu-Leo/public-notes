@@ -88,7 +88,7 @@ def edit_note(request, pk: int):
     """Page for editing note"""
 
     if not services.is_authenticated_user_the_author_of_note(authenticated_user=request.user,
-                                                             note_pk=pk):
+                                                             note=services.get_note_by_pk(pk)):
         return redirect('login')
 
     if request.method == 'POST':
@@ -111,7 +111,7 @@ def delete_note(request, pk):
     """Page for deleting note"""
 
     if not services.is_authenticated_user_the_author_of_note(authenticated_user=request.user,
-                                                             note_pk=pk):
+                                                             note=services.get_note_by_pk(pk)):
         return redirect('login')
 
     services.delete_note_by_pk(pk)

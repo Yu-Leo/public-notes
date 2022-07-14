@@ -45,14 +45,14 @@ def get_note_by_pk(pk: int) -> Note:
     """
     :return: note's object by its pk
     """
-    return Note.objects.get(pk=pk)
+    return Note.objects.select_related('category', 'author').get(pk=pk)
 
 
 def search_note_by_title(title: str) -> QuerySet[Note]:
     """
     :return: notes, which title contains 'title'
     """
-    return Note.objects.filter(title__icontains=title)
+    return Note.objects.select_related('category', 'author').filter(title__icontains=title)
 
 
 def delete_note_by_pk(pk: int) -> None:
@@ -91,7 +91,6 @@ def increase_number_of_views(note: Note) -> None:
     """
     note.views = F('views') + 1
     note.save()
-    note.refresh_from_db()
 
 
 def check_right_to_read_for_note(authenticated_user: User, note: Note) -> bool:
@@ -99,9 +98,7 @@ def check_right_to_read_for_note(authenticated_user: User, note: Note) -> bool:
     Checks whether the note can be displayed to the requesting user
     """
     public = note.is_public
-    private = not public and is_authenticated_user_the_author_of_note(
-        authenticated_user=authenticated_user,
-        note_pk=note.pk)
+    private = not public and is_authenticated_user_the_author_of_note(authenticated_user, note)
     return public or private
 
 
