@@ -1,26 +1,23 @@
 {% extends 'base.html' %}
 {% load wall_tags %}
 {% load i18n %}
-{% load cache %}
 
 {% block title %}{% trans 'MainPageHeading' %}{% endblock %}
 
 {% block sidebar %}
-    {% cache 300 tags %}
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">{% trans 'Tags' %}</h4>
-                <p class="fs-5">
-                    {% get_tags as tags %}
-                    {% for tag in tags %}
-                        <a href="{{ tag.get_absolute_url }}"
-                           class="badge rounded-pill text-bg-purple text-decoration-none me-1">
-                            {{ tag.title }}</a>
-                    {% endfor %}
-                </p>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{% trans 'Tags' %}</h4>
+            <p class="fs-5">
+                {% get_tags as tags %}
+                {% for tag in tags %}
+                    <a href="{{ tag.get_absolute_url }}"
+                       class="badge rounded-pill text-bg-purple text-decoration-none me-1">
+                        {{ tag.title }}</a>
+                {% endfor %}
+            </p>
         </div>
-    {% endcache %}
+    </div>
 {% endblock %}
 
 {% block content_title %}
@@ -36,10 +33,10 @@
 
 
 {% block content %}
-
-    {% include 'wall/inc/_notes_list.html' %}
-
-    {% include 'wall/inc/_pagination.html' %}
     {% comment %}
+        {% include 'wall/inc/_notes_list.html' %}
+
+        {% include 'wall/inc/_pagination.html' %}
+
     {% endcomment %}
 {% endblock %}
