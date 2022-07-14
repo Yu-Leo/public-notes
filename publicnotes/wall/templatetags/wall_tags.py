@@ -2,6 +2,7 @@
 
 from django import template
 from django.contrib.auth.models import AnonymousUser
+from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
 
 from wall import models
@@ -15,7 +16,8 @@ def get_categories():
     """
     :return: List of all categories
     """
-    return services.get_categories()
+
+    return cache.get_or_set('categories', services.get_categories(), 300)
 
 
 @register.simple_tag
@@ -23,7 +25,7 @@ def get_tags():
     """
     :return: List of all tags
     """
-    return services.get_tags()
+    return cache.get_or_set('tags', services.get_tags(), 300)
 
 
 @register.simple_tag
