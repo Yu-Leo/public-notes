@@ -41,7 +41,7 @@ def view_note(request, pk: int):
     if not services.check_right_to_read_for_note(authenticated_user=request.user, note=note):
         return redirect('login')
 
-    # services.increase_number_of_views(note)
+    services.increase_number_of_views(note)
     context = {
         'note': note,
     }
