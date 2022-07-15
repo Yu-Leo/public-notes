@@ -309,7 +309,7 @@ class LogInTestCase(TestCase):
 
         messages = list(response.context['messages'])
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), _('LogInError'))
+        self.assertEqual(str(messages[0]), _('Log in error'))
 
 
 class ChangePasswordTestCase(TestCase):

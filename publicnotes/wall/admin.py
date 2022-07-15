@@ -7,14 +7,14 @@ from mptt.admin import MPTTModelAdmin
 from wall import models
 
 
-# class NoteAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'title', 'created_at', 'rating', 'stared', 'category')
-#     list_display_links = ('id', 'title')
-#     list_filter = ('created_at', 'category')
-#
-#     fields = ('title', 'is_public', 'views', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags',
-#               'content')
-#     readonly_fields = ('created_at', 'updated_at', 'rating', 'views')
+class NoteAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_at', 'rating', 'stared', 'category')
+    list_display_links = ('id', 'title')
+    list_filter = ('created_at', 'category')
+
+    fields = ('title', 'is_public', 'views', 'created_at', 'updated_at', 'rating', 'stared', 'category', 'tags',
+              'content')
+    readonly_fields = ('created_at', 'updated_at', 'rating', 'views')
 
 
 class MyUserAdmin(UserAdmin):
@@ -22,9 +22,9 @@ class MyUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('PersonalInfo'), {'fields': ('first_name', 'last_name',
-                                        'email', 'show_email', 'rating', 'photo', 'get_photo', 'bio')}),
-        (_('AccessRights'), {
+        (_('Personal info'), {'fields': ('first_name', 'last_name',
+                                         'email', 'show_email', 'rating', 'photo', 'get_photo', 'bio')}),
+        (_('Access rights'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
         (_('Dates'), {'fields': ('last_login', 'date_joined')}),
@@ -38,7 +38,7 @@ class MyUserAdmin(UserAdmin):
         else:
             return '-'
 
-    get_photo.short_description = _('CurrentAvatar')
+    get_photo.short_description = _('Current avatar')
 
 
 class CategoryAdmin(MPTTModelAdmin):

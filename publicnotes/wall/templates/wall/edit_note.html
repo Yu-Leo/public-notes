@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans 'EditNote' %}{% endblock %}
+{% block title %}{% trans 'Edit note' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
 {% block content_title %}
     <div class="hstack gap-3 mb-3">
         <div>
-            <h1>{% trans 'EditNote' %}</h1>
+            <h1>{% trans 'Edit note' %}</h1>
         </div>
         <div class="ms-auto">
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                     data-bs-target="#deleteNoteModal">
-                {% trans 'DeleteNote' %}
+                {% trans 'Delete note' %}
             </button>
         </div>
     </div>
@@ -37,11 +37,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteNoteModalLabel">{% trans 'DeletingNoteTitle' %}</h5>
+                    <h5 class="modal-title" id="deleteNoteModalLabel">{% trans 'Deleting the note' %}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {% trans 'DeletingNoteText' %}
+                    {% trans 'This note will be deleted forever! Continue?' %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"

@@ -11,9 +11,9 @@ class Note(models.Model):
 
     title = models.CharField(max_length=150, verbose_name=_('Title'))
     content = models.TextField(verbose_name=_('Text'), blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('CreationTime'))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('LastUpdateTime'))
-    views = models.PositiveIntegerField(default=0, verbose_name=_('NumberOfViews'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Creation time'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Last update time'))
+    views = models.PositiveIntegerField(default=0, verbose_name=_('Number of views'))
     is_public = models.BooleanField(verbose_name=_('Public'), default=False)
     stared = models.BooleanField(verbose_name=_('Important'), default=False)
     author = models.ForeignKey(
@@ -23,11 +23,13 @@ class Note(models.Model):
         null=True,
         blank=True,
     )
-    is_pined = models.BooleanField(verbose_name=_('PinedInProfile'), default=False)
+    is_pined = models.BooleanField(verbose_name=_('Pined in profile'), default=False)
     category = TreeForeignKey('Category', on_delete=models.SET_NULL, verbose_name=_('Category'), null=True, blank=True)
     tags = models.ManyToManyField('Tag', blank=True, verbose_name=_('Tags'), related_name='notes')
-    likes = models.ManyToManyField('User', blank=True, verbose_name=_('NoteLikes'), related_name='liked_notes')
-    dislikes = models.ManyToManyField('User', blank=True, verbose_name=_('NoteDislikes'), related_name='disliked_notes')
+    likes = models.ManyToManyField('User', blank=True, verbose_name=_('Users who have put a like'),
+                                   related_name='liked_notes')
+    dislikes = models.ManyToManyField('User', blank=True, verbose_name=_('Users who have put a dislike'),
+                                      related_name='disliked_notes')
 
     rating = models.IntegerField(verbose_name=_('Rating'), default=0)
 
@@ -61,7 +63,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name='E-mail')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Avatar'), blank=True)
     bio = models.TextField(verbose_name=_('Bio'), blank=True)
-    show_email = models.BooleanField(verbose_name=_('PublicEmail'), default=False)
+    show_email = models.BooleanField(verbose_name=_('Public E-mail'), default=False)
     rating = models.IntegerField(verbose_name=_('Rating'), default=0)
 
     def get_absolute_url(self):
@@ -86,7 +88,7 @@ class Category(MPTTModel):
     """Category for note. Сan be nested"""
 
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',
-                            verbose_name=_('ParentCategory'))
+                            verbose_name=_('Parent category'))
     title = models.CharField(max_length=150, verbose_name=_('Title'), unique=True)
     preview = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name=_('Preview'), blank=True)
 

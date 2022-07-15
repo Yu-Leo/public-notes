@@ -24,7 +24,7 @@
                     {{ author.last_name }}
                 {% endif %}</span></h5>
             {% if is_self %}
-                <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">{% trans 'EditProfile' %}</a>
+                <a href="{% url 'edit_profile' %}" class="btn btn-outline-purple d-block">{% trans 'Edit profile' %}</a>
             {% endif %}
         </div>
 
@@ -39,11 +39,11 @@
             {% if author.bio %}
                 <li class="list-group-item">
                     <p class="card-text"><span
-                            class="text-secondary"> {% trans 'AboutYourself' %}: </span>{{ author.bio }}</p>
+                            class="text-secondary"> {% trans 'About' %}: </span>{{ author.bio }}</p>
                 </li>
             {% endif %}
 
-            <li class="list-group-item"><span class="text-secondary">{% trans 'NotesCount' %}: </span>
+            <li class="list-group-item"><span class="text-secondary">{% trans 'Notes' %}: </span>
                 <span class="fw-bold"> {{ author.notes_count }}</span></li>
 
             <li class="list-group-item"><span class="text-secondary">{% trans 'Rating' %}: </span><span class="
@@ -67,7 +67,7 @@
         </div>
         {% if is_self %}
             <div>
-                <a href="{% url 'add_note' %}" class="btn btn-outline-purple">{% trans 'AddNote' %}</a>
+                <a href="{% url 'add_note' %}" class="btn btn-outline-purple">{% trans 'Add note' %}</a>
             </div>
         {% endif %}
     </div>

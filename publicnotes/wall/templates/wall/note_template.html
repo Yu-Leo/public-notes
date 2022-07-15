@@ -26,7 +26,7 @@
                 {% if was_updated %}
                     <span data-bs-toggle="tooltip"
                           title="{{ note.updated_at|date:'d.m.Y H:i' }}">
-                    ({% trans 'Updated' %})</span>
+                    ({% trans 'updated' %})</span>
                 {% endif %}
             </div>
             {% if note.stared %}
@@ -38,7 +38,7 @@
             {% if not note.is_public %}
                 <div>
                 <span data-bs-toggle="tooltip"
-                      title="{% trans 'PrivateNote' %}">
+                      title="{% trans 'Private note' %}">
                     <i class="fa fa-eye-slash"></i>
                 </span>
                 </div>
@@ -88,7 +88,7 @@
 
         {% if not show_full %}
             <a href="{{ note.get_absolute_url }}"
-               class="btn btn-outline-purple stretched-link">{% trans 'ReadMore' %}</a>
+               class="btn btn-outline-purple stretched-link">{% trans 'Read more' %}</a>
         {% endif %}
     </div>
 
@@ -135,7 +135,7 @@
                                                                       class="text-decoration-none text-dark fw-bold">
                     {{ note.category.title }}</a></div>
             {% endif %}
-            <div class="ms-auto">{{ note.views }} {% trans 'Views' %}</div>
+            <div class="ms-auto">{{ note.views }} {% trans 'views' %}</div>
         </div>
         {% if show_full %}
             <div class="btn-toolbar justify-content-between mt-3" role="toolbar"
@@ -143,16 +143,17 @@
                 {% get_prev_note_in_category note as prev_note %}
                 {% if prev_note %}
                     <a href="
-            {{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'PreviousNote' %}</a>
+            {{ prev_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'Previous Note' %}</a>
                 {% else %}
-                    <a href="#" class="btn btn-outline-purple disabled">{% trans 'PreviousNote' %}</a>
+                    <a href="#" class="btn btn-outline-purple disabled">{% trans 'Previous Note' %}</a>
                 {% endif %}
 
                 {% get_next_note_in_category note as next_note %}
                 {% if next_note %}
-                    <a href="{{ next_note.get_absolute_url }}" class="btn btn-outline-purple">{% trans 'NextNote' %}</a>
+                    <a href="{{ next_note.get_absolute_url }}"
+                       class="btn btn-outline-purple">{% trans 'Next Note' %}</a>
                 {% else %}
-                    <a href="#" class="btn btn-outline-purple disabled">{% trans 'NextNote' %}</a>
+                    <a href="#" class="btn btn-outline-purple disabled">{% trans 'Next Note' %}</a>
                 {% endif %}
             </div>
         {% endif %}
