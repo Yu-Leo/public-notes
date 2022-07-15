@@ -116,7 +116,7 @@ def delete_note(request, pk):
         return redirect('login')
 
     services.delete_note_by_pk(pk)
-    messages.success(request, _('NoteSuccessfullyDeleted'))
+    messages.success(request, _('Note successfully deleted!'))
     return redirect(request.user)
 
 
@@ -232,9 +232,9 @@ def registration(request):
         form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
             services.register_user(form, domain=utils.get_current_domain(request))
-            messages.warning(request, _('EmailSent'))
+            messages.warning(request, _('The letter with a link to confirmation is sent to the specified email'))
             return redirect('home')
-        messages.error(request, _('RegistrationError'))
+        messages.error(request, _('Registration error'))
     else:
         form = forms.UserRegisterForm()
 
@@ -249,10 +249,10 @@ def activate_user(request, uidb64: str, token: str):
     try:
         user = services.activate_user_by_link(uidb64, token)
         login(request, user)
-        messages.success(request, _('EmailSuccessfullyConfirmed'))
+        messages.success(request, _('Email successfully confirmed'))
         return redirect(user)
     except exceptions.UserActivationError:
-        messages.error(request, _('EmailConfirmationError'))
+        messages.error(request, _('Email confirmation error'))
         return redirect('home')
 
 
@@ -282,7 +282,7 @@ def user_login(request):
             messages.success(request, f'{_("Welcome")}, {user.username}')
             return redirect('home')
         else:
-            messages.error(request, _('LogInError'))
+            messages.error(request, _('Log in error'))
     else:
         form = forms.UserLoginForm()
 
@@ -301,7 +301,7 @@ def change_password(request):
         form = forms.UserChangePasswordForm(request.user, request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, _('PasswordSuccessfullyChanged'))
+            messages.success(request, _('Password successfully changed'))
             return redirect('login')
         else:
             messages.error(request, _('Error'))
@@ -322,7 +322,7 @@ def delete_profile(request):
     user = request.user
     logout(request)
     services.delete_user(user)
-    messages.success(request, _('ProfileAndNotesSuccessfullyDeleted'))
+    messages.success(request, _('Profile and notes successfully deleted!'))
     return redirect('home')
 
 
@@ -330,7 +330,7 @@ def user_logout(request):
     """Logout page"""
 
     logout(request)
-    messages.error(request, _('YouLogOut'))
+    messages.error(request, _('You log out'))
     return redirect('login')
 
 

@@ -2,7 +2,7 @@
 {% load wall_tags %}
 {% load i18n %}
 
-{% block title %}{% trans 'MainPageHeading' %}{% endblock %}
+{% block title %}{% trans 'Main' %}{% endblock %}
 
 {% block sidebar %}
     <div class="card">
@@ -23,10 +23,10 @@
 {% block content_title %}
     <div class="hstack gap-3 mb-3">
         <div>
-            <h1>{% trans 'MainPageTitle' %}</h1>
+            <h1>{% trans 'Notes' %}</h1>
         </div>
         <div>
-            <a href="{% url 'random_note' %}" class="btn btn-outline-purple">{% trans 'RandomNotes' %}</a>
+            <a href="{% url 'random_note' %}" class="btn btn-outline-purple">{% trans 'Random Note' %}</a>
         </div>
     </div>
 {% endblock %}

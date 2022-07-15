@@ -34,4 +34,4 @@ class UpdateProfileFromTestCase(TestCase):
         self.assertEqual(self.form_1.clean_bio(), 'bio')
 
         self.assertFalse(self.form_2.is_valid())
-        self.assertEqual(self.form_2.errors['bio'], [_('NoMoreThan20Words')])
+        self.assertEqual(self.form_2.errors['bio'], [_('The "Bio" section should contain no more than 20 words')])

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans 'EditProfile' %}{% endblock %}
+{% block title %}{% trans 'Edit profile' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -9,15 +9,15 @@
 {% block content_title %}
     <div class="hstack gap-3 mb-3">
         <div>
-            <h1>{% trans 'EditProfile' %}</h1>
+            <h1>{% trans 'Edit profile' %}</h1>
         </div>
         <div class="ms-auto">
-            <a href="{% url 'change_password' %}" class="btn btn-outline-purple">{% trans 'ChangePassword' %}</a>
+            <a href="{% url 'change_password' %}" class="btn btn-outline-purple">{% trans 'Change password' %}</a>
         </div>
         <div>
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                     data-bs-target="#deleteProfileModal">
-                {% trans 'DeleteProfile' %}
+                {% trans 'Delete profile' %}
             </button>
         </div>
     </div>
@@ -41,11 +41,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteProfileModalLabel">{% trans 'DeletingProfileTitle' %}</h5>
+                    <h5 class="modal-title" id="deleteProfileModalLabel">{% trans 'Deleting the profile' %}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {% trans 'DeletingProfileText' %}
+                    {% trans 'Your profile and all your notes will be deleted forever! Continue?' %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"

@@ -14,7 +14,7 @@
             </div>
             <div>
                 <a href="{% url 'add_note' %}?category={{ category.pk }}" class="btn btn-outline-purple">
-                    {% trans 'AddNote' %}</a>
+                    {% trans 'Add note' %}</a>
             </div>
         </div>
         {% if categories_tree %}
@@ -35,7 +35,7 @@
 {% block content %}
     {% if children %}
         <div class="border border-purple border-1 rounded p-3 bg-white mb-3">
-            <h2>{% trans 'SubCategories' %}:</h2>
+            <h2>{% trans 'Subcategories' %}:</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% for item in children %}
                     <div class="col">

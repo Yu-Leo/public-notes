@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans 'AddNote' %}{% endblock %}
+{% block title %}{% trans 'Add note' %}{% endblock %}
 
 {% block sidebar %}{% endblock %}
 
@@ -9,7 +9,7 @@
 {% block content_title %}
     <div class="hstack gap-3 mb-3">
         <div>
-            <h1>{% trans 'AddNote' %}</h1>
+            <h1>{% trans 'Add note' %}</h1>
         </div>
     </div>
 {% endblock %}
@@ -21,7 +21,7 @@
         <div class="border border-purple border-1 rounded p-3 bg-white mb-5">
             <h3>{% trans 'Note' %}:</h3>
             {{ note_form.as_p }}
-            <button type="submit" class="btn btn-purple btn-block">{% trans 'AddNote' %}</button>
+            <button type="submit" class="btn btn-purple btn-block">{% trans 'Add note' %}</button>
         </div>
     </form>
 

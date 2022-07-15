@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-10 13:08+0300\n"
+"POT-Creation-Date: 2022-07-15 12:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,337 +20,343 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: admin.py:25
-msgid "PersonalInfo"
+#: wall/admin.py:25
+msgid "Personal info"
 msgstr "Персональная информация"
 
-#: admin.py:27
-msgid "AccessRights"
+#: wall/admin.py:27
+msgid "Access rights"
 msgstr "Права доступа"
 
-#: admin.py:30
+#: wall/admin.py:30
 msgid "Dates"
 msgstr "Даты"
 
-#: admin.py:41
-msgid "CurrentAvatar"
+#: wall/admin.py:41
+msgid "Current avatar"
 msgstr "Текущая аватарка"
 
-#: forms.py:35
-msgid "TellAboutYourself"
+#: wall/forms.py:35 wall/tests/test_forms.py:37
+msgid "Tell us a little about yourself. No more than 20 words."
 msgstr "Расскажите немного о себе. Не более 20 слов."
 
-#: forms.py:45
-msgid "NoMoreThan20Words"
+#: wall/forms.py:45
+msgid "The \"Bio\" section should contain no more than 20 words"
 msgstr "Раздел 'О себе' должен содержать не более 20 слов"
 
-#: forms.py:50 forms.py:65
+#: wall/forms.py:50 wall/forms.py:65
 msgid "Nickname"
 msgstr "Никнейм"
 
-#: forms.py:54 forms.py:67
+#: wall/forms.py:54 wall/forms.py:67
 msgid "Password"
 msgstr "Пароль"
 
-#: forms.py:56
-msgid "PasswordConfirmation"
+#: wall/forms.py:56
+msgid "Password confirmation"
 msgstr "Подтверждение пароля"
 
-#: forms.py:72
-msgid "OldPassword"
+#: wall/forms.py:72
+msgid "Old password"
 msgstr "Старый пароль"
 
-#: forms.py:74
-msgid "NewPassword"
+#: wall/forms.py:74
+msgid "New password"
 msgstr "Новый пароль"
 
-#: forms.py:76
-msgid "NewPasswordConfirmation"
+#: wall/forms.py:76
+msgid "New password confirmation"
 msgstr "Подтверждение нового пароля"
 
-#: models.py:13
-msgid "Avatar"
-msgstr "Текущая аватарка"
-
-#: models.py:14 templates/wall/author.html:48
-#: templates/wall/authors_list.html:34
-msgid "Rating"
-msgstr "Рейтинг"
-
-#: models.py:15
-msgid "Bio"
-msgstr "О себе"
-
-#: models.py:16
-msgid "PublicEmail"
-msgstr "Публичный e-mail"
-
-#: models.py:25 models.py:66 models.py:87
+#: wall/models.py:12 wall/models.py:90 wall/models.py:111
 msgid "Title"
 msgstr "Название"
 
-#: models.py:26
+#: wall/models.py:13
 msgid "Text"
 msgstr "Текст"
 
-#: models.py:27
-msgid "CreationTime"
+#: wall/models.py:14
+msgid "Creation time"
 msgstr "Время создания"
 
-#: models.py:28
-msgid "LastUpdateTime"
+#: wall/models.py:15
+msgid "Last update time"
 msgstr "Время последнего обновления"
 
-#: models.py:29
-msgid "NumberOfViews"
+#: wall/models.py:16
+msgid "Number of views"
 msgstr "Кол-во просмотров"
 
-#: models.py:30
+#: wall/models.py:17
 msgid "Public"
 msgstr "Публичная"
 
-#: models.py:31
+#: wall/models.py:18
 msgid "Important"
 msgstr "Важная"
 
-#: models.py:35
+#: wall/models.py:22
 msgid "Author"
 msgstr "Автор"
 
-#: models.py:39 templates/wall/note_template.html:58
-msgid "PinedInProfile"
+#: wall/models.py:26
+msgid "Pined in profile"
 msgstr "Закреплена в профиле"
 
-#: models.py:40 models.py:79 templates/wall/category.html:4
-#: templates/wall/category.html:13 templates/wall/note_template.html:133
+#: wall/models.py:27 wall/models.py:103 wall/templates/wall/category.html:4
+#: wall/templates/wall/category.html:13
+#: wall/templates/wall/note_template.html:134
 msgid "Category"
 msgstr "Категория"
 
-#: models.py:41 models.py:97 templates/wall/index.html:10
+#: wall/models.py:28 wall/models.py:121 wall/templates/wall/index.html:10
 msgid "Tags"
 msgstr "Теги"
 
-#: models.py:42
-msgid "NoteLikes"
+#: wall/models.py:29
+msgid "Users who have put a like"
 msgstr "Пользователи, поставившие лайк"
 
-#: models.py:43
-msgid "NoteDislikes"
+#: wall/models.py:30
+msgid "Users who have put a dislike"
 msgstr "Пользователи, поставившие дизлайк"
 
-#: models.py:56 templates/wall/add_note_form.html:22
+#: wall/models.py:32 wall/models.py:65 wall/templates/wall/author.html:49
+#: wall/templates/wall/authors_list.html:33
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: wall/models.py:53 wall/templates/wall/add_note_form.html:22
 msgid "Note"
 msgstr "Заметка"
 
-#: models.py:57 templates/wall/author.html:65
+#: wall/models.py:54 wall/templates/wall/author.html:46
+#: wall/templates/wall/author.html:66 wall/templates/wall/authors_list.html:31
+#: wall/templates/wall/index.html:26
 msgid "Notes"
 msgstr "Заметки"
 
-#: models.py:65
-msgid "ParentCategory"
+#: wall/models.py:62
+msgid "Avatar"
+msgstr "Текущая аватарка"
+
+#: wall/models.py:63
+msgid "Bio"
+msgstr "О себе"
+
+#: wall/models.py:64
+msgid "Public E-mail"
+msgstr "Публичный E-mail"
+
+#: wall/models.py:89
+msgid "Parent category"
 msgstr "Родительская категория"
 
-#: models.py:67
+#: wall/models.py:91
 msgid "Preview"
 msgstr "Превью"
 
-#: models.py:80 templates/wall/categories_list.html:5
-#: templates/wall/categories_list.html:13
+#: wall/models.py:104 wall/templates/wall/categories_list.html:5
+#: wall/templates/wall/categories_list.html:13
 msgid "Categories"
 msgstr "Категории"
 
-#: models.py:96 templates/wall/tag.html:4 templates/wall/tag.html:13
+#: wall/models.py:120 wall/templates/wall/tag.html:4
+#: wall/templates/wall/tag.html:13
 msgid "Tag"
 msgstr "Тег"
 
-#: services.py:213
-msgid "ConfirmEmail"
-msgstr "Подтвердите e-mail"
+#: wall/services/user_services.py:71
+msgid "Confirm E-mail"
+msgstr "Подтвердите E-mail"
 
-#: templates/wall/404.html:11
-msgid "PageNotFound"
+#: wall/templates/wall/404.html:11
+msgid "Page not found"
 msgstr "Запрашиваемая страница не найдена"
 
-#: templates/wall/404.html:14
-msgid "ToMainPage"
+#: wall/templates/wall/404.html:14
+msgid "To main"
 msgstr "На главную"
 
-#: templates/wall/add_note_form.html:4 templates/wall/add_note_form.html:12
-#: templates/wall/add_note_form.html:24 templates/wall/author.html:69
-#: templates/wall/category.html:17
-msgid "AddNote"
+#: wall/templates/wall/add_note_form.html:4
+#: wall/templates/wall/add_note_form.html:12
+#: wall/templates/wall/add_note_form.html:24 wall/templates/wall/author.html:70
+#: wall/templates/wall/category.html:17
+msgid "Add note"
 msgstr "Добавить заметку"
 
-#: templates/wall/author.html:27 templates/wall/edit_profile.html:4
-#: templates/wall/edit_profile.html:12
-msgid "EditProfile"
+#: wall/templates/wall/author.html:27 wall/templates/wall/edit_profile.html:4
+#: wall/templates/wall/edit_profile.html:12
+msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: templates/wall/author.html:41
-msgid "AboutYourself"
+#: wall/templates/wall/author.html:42
+msgid "About"
 msgstr "О себе"
 
-#: templates/wall/author.html:45 templates/wall/authors_list.html:32
-msgid "NotesCount"
-msgstr "Заметок"
-
-#: templates/wall/authors_list.html:5 templates/wall/authors_list.html:10
+#: wall/templates/wall/authors_list.html:4
+#: wall/templates/wall/authors_list.html:9
 msgid "Authors"
 msgstr "Авторы"
 
-#: templates/wall/authors_list.html:48
-msgid "OpenProfile"
+#: wall/templates/wall/authors_list.html:47
+msgid "Open Profile"
 msgstr "Открыть профиль"
 
-#: templates/wall/category.html:38
-msgid "SubCategories"
+#: wall/templates/wall/category.html:38
+msgid "Subcategories"
 msgstr "Подкатегории"
 
-#: templates/wall/change_password.html:4 templates/wall/change_password.html:12
-#: templates/wall/edit_profile.html:15
-msgid "ChangePassword"
+#: wall/templates/wall/change_password.html:4
+#: wall/templates/wall/change_password.html:12
+#: wall/templates/wall/edit_profile.html:15
+msgid "Change password"
 msgstr "Сменить пароль"
 
-#: templates/wall/change_password.html:24
+#: wall/templates/wall/change_password.html:24
 msgid "Change"
 msgstr "Сменить"
 
-#: templates/wall/edit_note.html:4 templates/wall/edit_note.html:11
-msgid "EditNote"
+#: wall/templates/wall/edit_note.html:4 wall/templates/wall/edit_note.html:11
+msgid "Edit note"
 msgstr "Редактировать заметку"
 
-#: templates/wall/edit_note.html:16
-msgid "DeleteNote"
+#: wall/templates/wall/edit_note.html:16
+msgid "Delete note"
 msgstr "Удалить заметку"
 
-#: templates/wall/edit_note.html:29 templates/wall/edit_profile.html:33
+#: wall/templates/wall/edit_note.html:29
+#: wall/templates/wall/edit_profile.html:33
 msgid "Update"
 msgstr "Обновить"
 
-#: templates/wall/edit_note.html:40
-msgid "DeletingNoteTitle"
+#: wall/templates/wall/edit_note.html:40
+msgid "Deleting the note"
 msgstr "Удаление заметки"
 
-#: templates/wall/edit_note.html:44
-msgid "DeletingNoteText"
+#: wall/templates/wall/edit_note.html:44
+msgid "This note will be deleted forever! Continue?"
 msgstr "Эта заметка будет удалена навсегда! Продолжить?"
 
-#: templates/wall/edit_note.html:47 templates/wall/edit_profile.html:51
+#: wall/templates/wall/edit_note.html:48
+#: wall/templates/wall/edit_profile.html:52
 msgid "Cancel"
 msgstr "Отмена"
 
-#: templates/wall/edit_note.html:48 templates/wall/edit_profile.html:52
+#: wall/templates/wall/edit_note.html:50
+#: wall/templates/wall/edit_profile.html:53
 msgid "Delete"
 msgstr "Удалить"
 
-#: templates/wall/edit_profile.html:20
-msgid "DeleteProfile"
+#: wall/templates/wall/edit_profile.html:20
+msgid "Delete profile"
 msgstr "Удалить профиль"
 
-#: templates/wall/edit_profile.html:44
-msgid "DeletingProfileTitle"
+#: wall/templates/wall/edit_profile.html:44
+msgid "Deleting the profile"
 msgstr "Удаление профиля"
 
-#: templates/wall/edit_profile.html:48
-msgid "DeletingProfileText"
+#: wall/templates/wall/edit_profile.html:48
+msgid "Your profile and all your notes will be deleted forever! Continue?"
 msgstr "Ваш профиль и все заметки будут удалены навсегда! Продолжить?"
 
-#: templates/wall/index.html:5
-msgid "MainPageHeading"
+#: wall/templates/wall/index.html:5
+msgid "Main"
 msgstr "Главная"
 
-#: templates/wall/index.html:27
-msgid "MainPageTitle"
-msgstr "Заметки"
-
-#: templates/wall/index.html:30
-msgid "RandomNotes"
+#: wall/templates/wall/index.html:29
+msgid "Random Note"
 msgstr "Случайная заметка"
 
-#: templates/wall/login.html:4 templates/wall/login.html:12
+#: wall/templates/wall/login.html:4 wall/templates/wall/login.html:12
 msgid "Authorization"
 msgstr "Авторизация"
 
-#: templates/wall/login.html:24
-msgid "LogIn"
+#: wall/templates/wall/login.html:24
+msgid "Log in"
 msgstr "Войти"
 
-#: templates/wall/note_template.html:29
-msgid "Updated"
+#: wall/templates/wall/note_template.html:29
+msgid "updated"
 msgstr "изменено"
 
-#: templates/wall/note_template.html:41
-msgid "PrivateNote"
+#: wall/templates/wall/note_template.html:41
+msgid "Private note"
 msgstr "Приватная заметка"
 
-#: templates/wall/note_template.html:66
+#: wall/templates/wall/note_template.html:58
+msgid "PinedInProfile"
+msgstr "Закреплена в профиле"
+
+#: wall/templates/wall/note_template.html:66
 msgid "Edit"
 msgstr "Редактировать"
 
-#: templates/wall/note_template.html:90
-msgid "ReadMore"
+#: wall/templates/wall/note_template.html:91
+msgid "Read more"
 msgstr "Читать далее"
 
-#: templates/wall/note_template.html:137
-msgid "Views"
+#: wall/templates/wall/note_template.html:138
+msgid "views"
 msgstr "просмотра(-ов)"
 
-#: templates/wall/note_template.html:144 templates/wall/note_template.html:146
-msgid "PreviousNote"
+#: wall/templates/wall/note_template.html:146
+#: wall/templates/wall/note_template.html:148
+msgid "Previous Note"
 msgstr "Предыдущая заметка"
 
-#: templates/wall/note_template.html:151 templates/wall/note_template.html:153
-msgid "NextNote"
+#: wall/templates/wall/note_template.html:153
+#: wall/templates/wall/note_template.html:155
+msgid "Next Note"
 msgstr "Следующая заметка"
 
-#: templates/wall/registration.html:4 templates/wall/registration.html:12
-#: templates/wall/registration.html:24
+#: wall/templates/wall/registration.html:4
+#: wall/templates/wall/registration.html:12
+#: wall/templates/wall/registration.html:24
 msgid "Registration"
 msgstr "Регистрация"
 
-#: templates/wall/search.html:4 templates/wall/search.html:12
-msgid "SearchWord"
+#: wall/templates/wall/search.html:4 wall/templates/wall/search.html:12
+msgid "Search"
 msgstr "Поиск"
 
-#: views.py:117
-msgid "NoteSuccessfullyDeleted"
-msgstr "Заметка успешно удалена!"
-
-#: views.py:226
-msgid "EmailSent"
-msgstr "На указанный Вами E-mail отправлено письмо с ссылкой для подтверждения"
-
-#: views.py:228
-msgid "RegistrationError"
-msgstr "Ошибка регистрации"
-
-#: views.py:243
-msgid "EmailSuccessfullyConfirmed"
-msgstr "E-mail успешно подтверждён"
-
-#: views.py:246
-msgid "EmailConfirmationError"
-msgstr "Ошибка подтверждения E-mail"
-
-#: views.py:276
-msgid "LogInError"
+#: wall/tests/test_views.py:312 wall/views.py:285
+msgid "Log in error"
 msgstr "Ошибка входа"
 
-#: views.py:295
-msgid "PasswordSuccessfullyChanged"
-msgstr "'Пароль успешно сменён!'"
+#: wall/views.py:119
+msgid "Note successfully deleted!"
+msgstr "Заметка успешно удалена!"
 
-#: views.py:298
+#: wall/views.py:235
+msgid "The letter with a link to confirmation is sent to the specified email"
+msgstr "На указанный Вами E-mail отправлено письмо с ссылкой для подтверждения"
+
+#: wall/views.py:237
+msgid "Registration error"
+msgstr "Ошибка регистрации"
+
+#: wall/views.py:252
+msgid "Email successfully confirmed"
+msgstr "E-mail успешно подтверждён"
+
+#: wall/views.py:255
+msgid "Email confirmation error"
+msgstr "Ошибка подтверждения E-mail"
+
+#: wall/views.py:304
+msgid "Password successfully changed"
+msgstr "Пароль успешно сменён!"
+
+#: wall/views.py:307
 msgid "Error"
 msgstr "Ошибка"
 
-#: views.py:316
-msgid "ProfileAndNotesSuccessfullyDeleted"
+#: wall/views.py:325
+msgid "Profile and notes successfully deleted!"
 msgstr "Профиль и заметки успешно удалены!"
 
-#: views.py:324
-msgid "YouLogOut"
+#: wall/views.py:333
+msgid "You log out"
 msgstr "Вы вышли из аккаунта"
-
-msgid "Welcome"
-msgstr "Добро пожаловать"

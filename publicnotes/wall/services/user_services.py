@@ -8,8 +8,8 @@ from django.utils.translation import ugettext as _
 
 from wall import exceptions
 from wall import forms
-from wall.models import User, Note
 from wall import utils
+from wall.models import User, Note
 
 
 def delete_user(user: User) -> None:
@@ -68,7 +68,7 @@ def _send_user_activation_email(user: User, domain: str) -> None:
     """
     Send message to user's email with link for activation user's profile
     """
-    email_subject = _('ConfirmEmail')
+    email_subject = _('Confirm E-mail')
     context = {
         'link': _generate_link_for_activate_user(domain, user),
     }

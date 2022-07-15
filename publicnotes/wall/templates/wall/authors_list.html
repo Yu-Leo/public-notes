@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{% trans 'NotesCount' %}: <span class="fw-bold">
+                            <li class="list-group-item">{% trans 'Notes' %}: <span class="fw-bold">
                         {{ item.notes_count }} </span></li>
                             <li class="list-group-item">{% trans 'Rating' %}: <span class="
                         {% if item.rating > 0 %}
@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-footer">
                         <a class="btn btn-purple stretched-link" href="{{ item.get_absolute_url }}" role="button">
-                            {% trans 'OpenProfile' %}
+                            {% trans 'Open Profile' %}
                         </a>
                     </div>
                 </div>

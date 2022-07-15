@@ -32,7 +32,7 @@ class UpdateProfile(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control mb-2'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control mb-2'}),
             'bio': forms.Textarea(attrs={'class': 'form-control mb-2',
-                                         'placeholder': _('TellAboutYourself')}),
+                                         'placeholder': _('Tell us a little about yourself. No more than 20 words.')}),
         }
 
     def clean_bio(self) -> str:
@@ -42,7 +42,7 @@ class UpdateProfile(forms.ModelForm):
         """
         bio: str = self.cleaned_data['bio']
         if len(bio.split()) > 20:
-            raise ValidationError(_('NoMoreThan20Words'))
+            raise ValidationError(_('The "Bio" section should contain no more than 20 words'))
         return bio
 
 
@@ -53,7 +53,7 @@ class UserRegisterForm(UserCreationForm):
                             widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label=_('Password'),
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    password2 = forms.CharField(label=_('PasswordConfirmation'),
+    password2 = forms.CharField(label=_('Password confirmation'),
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
@@ -69,11 +69,11 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserChangePasswordForm(PasswordChangeForm):
-    old_password = forms.CharField(label=_('OldPassword'),
+    old_password = forms.CharField(label=_('Old password'),
                                    widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    new_password1 = forms.CharField(label=_('NewPassword'),
+    new_password1 = forms.CharField(label=_('New password'),
                                     widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    new_password2 = forms.CharField(label=_('NewPasswordConfirmation'),
+    new_password2 = forms.CharField(label=_('New password confirmation'),
                                     widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
