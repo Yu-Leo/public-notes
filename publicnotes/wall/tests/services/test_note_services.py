@@ -185,9 +185,9 @@ class NoteServicesTestCase(TestCase):
         self.assertFalse(result_for_private_note_and_not_author)
 
     def test_is_authenticated_user_the_author_of_note(self):
-        result_for_author = services.is_authenticated_user_the_author_of_note(self.user_1, self.note_1.pk)
-        result_for_not_author = services.is_authenticated_user_the_author_of_note(self.user_2, self.note_1.pk)
-        result_for_anonymous_user = services.is_authenticated_user_the_author_of_note(AnonymousUser(), self.note_1.pk)
+        result_for_author = services.is_authenticated_user_the_author_of_note(self.user_1, self.note_1)
+        result_for_not_author = services.is_authenticated_user_the_author_of_note(self.user_2, self.note_1)
+        result_for_anonymous_user = services.is_authenticated_user_the_author_of_note(AnonymousUser(), self.note_1)
 
         self.assertTrue(result_for_author)
         self.assertFalse(result_for_not_author)
@@ -298,10 +298,3 @@ class NoteServicesTestCase(TestCase):
 
         self.assertFalse(services.has_note_been_updated(note_1))
         self.assertTrue(services.has_note_been_updated(note_2))
-
-    def test_get_notes_count_for_author(self):
-        result_for_user_1 = services.get_notes_count_for_author(self.user_1)
-        result_for_user_2 = services.get_notes_count_for_author(self.user_2)
-
-        self.assertEqual(result_for_user_1, 2)
-        self.assertEqual(result_for_user_2, 0)

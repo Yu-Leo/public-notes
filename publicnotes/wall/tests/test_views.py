@@ -205,7 +205,7 @@ class DeleteNoteViewTestCase(TestCase):
         self.assertRedirects(response, reverse('login'))
 
 
-class LikeAdnDislikeNoteViewTestCase(TestCase):
+class LikeAndDislikeNoteViewTestCase(TestCase):
 
     def setUp(self) -> None:
         self.user_1 = User.objects.create(username='user_1',
@@ -223,6 +223,7 @@ class LikeAdnDislikeNoteViewTestCase(TestCase):
         self.client.force_login(self.user_1)
         rating_before = self.note_1.rating
         self.client.get(reverse('like_note', kwargs={'pk': 1}))
+        self.note_1.refresh_from_db()
         rating_after = self.note_1.rating
         self.assertEqual(rating_after - rating_before, 1)
 
@@ -230,6 +231,7 @@ class LikeAdnDislikeNoteViewTestCase(TestCase):
         self.client.force_login(self.user_1)
         rating_before = self.note_1.rating
         self.client.get(reverse('dislike_note', kwargs={'pk': 1}))
+        self.note_1.refresh_from_db()
         rating_after = self.note_1.rating
         self.assertEqual(rating_before - rating_after, 1)
 
