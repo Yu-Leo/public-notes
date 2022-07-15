@@ -66,10 +66,10 @@ Original: [database_schema.drawio](./database_schema.drawio)
         - **forms.py** - forms and their settings
         - **generate_fake_data.py** - script for generating random notes (for
           manual testing)
-      - **models.py** - application models
-      - **urls.py** - application URL settings
-      - **utils.py** - utilities used in business logic
-      - **views.py** - model representations
+        - **models.py** - application models
+        - **urls.py** - application URL settings
+        - **utils.py** - utilities used in business logic
+        - **views.py** - model representations
 - **docs** - documentation
 - **docker-compose.dev.yaml** - docker-compose config for **development**
 - **docker-compose.yaml** - docker-compose config for **production**
