@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from wall import services
 from wall.models import Note, User, Category, Tag
 
 
@@ -16,14 +17,17 @@ class NoteTestCase(TestCase):
         Note.objects.create(title='Title 1')
 
         note_2 = Note.objects.create(title='Title 2')
-        note_2.likes.set([users[0], users[1]])
+        services.user_liked_note(users[0], note_2.pk)
+        services.user_liked_note(users[1], note_2.pk)
 
         note_3 = Note.objects.create(title='Title 3')
-        note_3.dislikes.set([users[0], users[1]])
+        services.user_disliked_note(users[0], note_3.pk)
+        services.user_disliked_note(users[1], note_3.pk)
 
         note_4 = Note.objects.create(title='Title 4')
-        note_4.likes.set([users[0], users[1]])
-        note_4.dislikes.set([users[2], ])
+        services.user_liked_note(users[0], note_4.pk)
+        services.user_liked_note(users[1], note_4.pk)
+        services.user_disliked_note(users[2], note_4.pk)
 
     def setUp(self) -> None:
         self.notes = Note.objects.order_by('pk')
@@ -50,17 +54,19 @@ class UserTestCase(TestCase):
         users = User.objects.order_by('pk')
 
         note_1 = Note.objects.create(title='Title 1', is_public=True, author=users[1])
-        note_1.likes.set([users[0], users[1]])
+        services.user_liked_note(users[0], note_1.pk)
+        services.user_liked_note(users[1], note_1.pk)
 
         note_2 = Note.objects.create(title='Title 2', is_public=True, author=users[2])
-        note_2.likes.set([users[0], ])
-        note_2.dislikes.set([users[1], users[2]])
+        services.user_liked_note(users[0], note_2.pk)
+        services.user_disliked_note(users[1], note_2.pk)
+        services.user_disliked_note(users[2], note_2.pk)
 
         note_3 = Note.objects.create(title='Title 3', is_public=True, author=users[3])
-        note_3.likes.set([users[0], ])
+        services.user_liked_note(users[0], note_3.pk)
 
         note_4 = Note.objects.create(title='Title 4', is_public=True, author=users[3])
-        note_4.likes.set([users[0], ])
+        services.user_liked_note(users[0], note_4.pk)
 
     def setUp(self) -> None:
         self.users = User.objects.order_by('pk')

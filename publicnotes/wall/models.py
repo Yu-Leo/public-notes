@@ -45,7 +45,7 @@ class Note(models.Model):
         Rating calculates as difference between number of likes and number of dislikes
         """
         self.rating = len(self.likes.all()) - len(self.dislikes.all())
-        self.save()
+        self.save(update_fields=('rating',))
         if self.author is not None:
             self.author.recalculate_rating()
 

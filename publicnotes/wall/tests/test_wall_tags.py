@@ -37,16 +37,6 @@ class WallTagsTestCase(TestCase):
             cls.note_2.title = 'Note_2_2'
             cls.note_2.save()
 
-    def test_get_categories(self):
-        self.assertEqual(set(wall_tags.get_categories()), {self.category_1, })
-
-    def test_get_tags(self):
-        self.assertEqual(set(wall_tags.get_tags()), {self.tag_1, })
-
-    def test_get_notes_count_for_author(self):
-        self.assertEqual(wall_tags.get_notes_count_for_author(self.user_1), 1)
-        self.assertEqual(wall_tags.get_notes_count_for_author(self.user_2), 0)
-
     def test_get_prev_note_in_category(self):
         self.assertIsNone(wall_tags.get_prev_note_in_category(self.note_1))
         self.assertEqual(wall_tags.get_prev_note_in_category(self.note_2), self.note_1)
