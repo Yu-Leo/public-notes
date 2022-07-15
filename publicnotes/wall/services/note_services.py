@@ -92,7 +92,8 @@ def increase_number_of_views(note: Note) -> None:
     Increase number of views for note by 1
     """
     note.views = F('views') + 1
-    note.save()
+    note.save(update_fields=('views',))
+    note.refresh_from_db()
 
 
 def check_right_to_read_for_note(authenticated_user: User, note: Note) -> bool:
