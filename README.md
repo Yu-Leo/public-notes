@@ -154,20 +154,20 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
 Run all tests:
 
 ```bash
-publicnotes/manage.py test wall.tests
+./publicnotes/manage.py test wall.tests
 
 ```
 
 Using `coverage`:
 
 ```bash
-coverage run publicnotes/manage.py test wall.tests
+coverage run ./publicnotes/manage.py test wall.tests
 ```
 
 With report page generation:
 
 ```bash
-coverage run publicnotes/manage.py test wall.tests && coverage html
+coverage run ./publicnotes/manage.py test wall.tests && coverage html
 ```
 
 <a id="chapter-5"></a>
