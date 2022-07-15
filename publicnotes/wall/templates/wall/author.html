@@ -44,12 +44,12 @@
             {% endif %}
 
             <li class="list-group-item"><span class="text-secondary">{% trans 'NotesCount' %}: </span>
-                <span class="fw-bold"> {% get_notes_count_for_author author %}</span></li>
+                <span class="fw-bold"> {{ author.notes_count }}</span></li>
 
             <li class="list-group-item"><span class="text-secondary">{% trans 'Rating' %}: </span><span class="
-                        {% if item.rating > 0 %}
+                        {% if author.rating > 0 %}
                         text-success
-                        {% elif item.rating < 0 %}
+                        {% elif author.rating < 0 %}
                         text-danger
                         {% else %}
                         {% endif %}
