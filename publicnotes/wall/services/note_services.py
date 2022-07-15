@@ -36,6 +36,7 @@ def get_notes_by_author(author_pk: int, include_private: bool) -> QuerySet[Note]
     :return: notes, which belong to author with tag_pk
     """
     all_notes = Note.objects.filter(author=author_pk)
+    all_notes = all_notes.select_related('category', 'author').prefetch_related('tags', 'likes', 'dislikes')
     if not include_private:
         return all_notes.filter(is_public=True)
     return all_notes.order_by('-is_pined', '-created_at')

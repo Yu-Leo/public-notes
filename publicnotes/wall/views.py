@@ -41,7 +41,7 @@ def view_note(request, pk: int):
     if not services.check_right_to_read_for_note(authenticated_user=request.user, note=note):
         return redirect('login')
 
-    services.increase_number_of_views(note)
+    # services.increase_number_of_views(note)
     context = {
         'note': note,
     }
@@ -209,8 +209,13 @@ class ViewAuthor(DetailView):
     """View user's profile"""
 
     model = models.User
+
     template_name = 'wall/author.html'
     context_object_name = 'author'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.annotate(notes_count=Count(Case(When(note__is_public=True, then=1))))
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewAuthor, self).get_context_data(**kwargs)
