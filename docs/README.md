@@ -33,6 +33,11 @@ The website where users can write public notes.
       child categories
 - Support for Russian and English languages
 
+### Supported languages (in the interface)
+
+- English
+- Russian (Русский)
+
 ## :orange_book: Architecture
 
 ![Modules diagram](./modules_diagram.jpg)
