@@ -46,7 +46,8 @@ class Note(models.Model):
         """
         self.rating = len(self.likes.all()) - len(self.dislikes.all())
         self.save()
-        self.author.recalculate_rating()
+        if self.author is not None:
+            self.author.recalculate_rating()
 
     class Meta:
         verbose_name = _('Note')
