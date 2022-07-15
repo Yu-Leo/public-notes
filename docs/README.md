@@ -77,3 +77,5 @@ Original: [database_schema.drawio](./database_schema.drawio)
 - **Dockerfile** - docker config for **production**
 
 **Using caching.** The cache is saved to `/var/tmp/django_cache/publicnotes/`. Updates every 5 minutes
+
+## :arrow_left: [Back to README](../README.md)
