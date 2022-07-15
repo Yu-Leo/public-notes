@@ -53,7 +53,8 @@ def search_note_by_title(title: str) -> QuerySet[Note]:
     """
     :return: notes, which title contains 'title'
     """
-    return Note.objects.select_related('category', 'author').filter(title__icontains=title)
+    return Note.objects.select_related('category', 'author').prefetch_related('tags', 'likes', 'dislikes').filter(
+        title__icontains=title)
 
 
 def delete_note_by_pk(pk: int) -> None:
