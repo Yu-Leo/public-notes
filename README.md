@@ -60,14 +60,11 @@ See full description in [technical documentation](./docs/README.md).
 - DBMS: **PostgreSQL**
 - Programming language: **Python (3.10.4)**
 - Frameworks and libraries:
-    - **Django (3.1.14)**
-    - **django_debug_toolbar (2.2.1)**
-    - **django_mptt (0.13.4)**
-- Web server: **gunicorn**
+    - **Django 3.1**
 
 #### FrontEnd:
 
-- Languages: **html**, **css**
+- Languages: **HTML**, **CSS**
 - Frameworks and libraries:
     - **Bootstrap 5**
 
