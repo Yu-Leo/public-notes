@@ -1,4 +1,4 @@
-# Public notes. Technical documentation
+# Technical documentation
 
 ## :page_facing_up: Description
 
