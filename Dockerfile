@@ -16,6 +16,6 @@ COPY . /usr/src/app/
 
 RUN cd ./publicnotes  && django-admin compilemessages
 
-RUN chmod u+x ./wait-for-postgres.sh
+RUN chmod u+x ./wait_for_postgres.sh
 
 RUN python ./publicnotes/manage.py collectstatic --noinput

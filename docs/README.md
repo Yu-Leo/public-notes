@@ -1,4 +1,4 @@
-# Technical documentation of the "Public notes" project
+# Public notes. Technical documentation
 
 ## :page_facing_up: Description
 
@@ -44,11 +44,33 @@ The website where users can write public notes.
 
 Original: [modules_diagram.drawio](./modules_diagram.drawio)
 
-## :blue_book: Database schema
+## :blue_book: Database
+
+### Schema
 
 ![Database schema](./database_schema.jpg)
 
 Original: [database_schema.drawio](./database_schema.drawio)
+
+### PostgreSQL
+
+Used if the project is running inside a docker container using Docker compose. Runs before django project.
+
+Configuration in `.env` and `.env.dev` files (see [getting started tutorial](./getting_started.md))
+
+Script `wait_for_postgres.sh` checks that Postgresql is running and available.
+If this is not the case, the Django app does not launch
+
+### SQLite3
+
+Used by default if the project is running on a local machine.
+
+To use another DBMS during development, set the settings for it in `.env.localdev` file
+(see settings list in [getting started tutorial](./getting_started.md))
+
+### Caching
+
+The cache is saved to `/var/tmp/django_cache/publicnotes/`. Updates every 5 minutes
 
 ## :file_folder: Folders and files
 
@@ -80,7 +102,5 @@ Original: [database_schema.drawio](./database_schema.drawio)
 - **docker-compose.yaml** - docker-compose config for **production**
 - **Dockerfile.dev** - docker config for **development**
 - **Dockerfile** - docker config for **production**
-
-**Using caching.** The cache is saved to `/var/tmp/django_cache/publicnotes/`. Updates every 5 minutes
 
 ## :arrow_left: [Back to README](../README.md)

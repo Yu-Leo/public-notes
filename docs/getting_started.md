@@ -84,4 +84,6 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
     python manage.py runserver
     ```
 
+## :arrow_left: [Back to technical documentation](./README.md)
+
 ## :arrow_left: [Back to README](../README.md)
