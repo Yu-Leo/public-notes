@@ -70,7 +70,7 @@ To use another DBMS during development, set the settings for it in `.env.localde
 
 ### Caching
 
-The cache is saved to `/var/tmp/django_cache/publicnotes/`. Updates every 5 minutes
+By default, the cache is saved to `/var/tmp/django_cache/publicnotes/`. Updates every 5 minutes
 
 ## :file_folder: Folders and files
 
@@ -98,9 +98,49 @@ The cache is saved to `/var/tmp/django_cache/publicnotes/`. Updates every 5 minu
         - **utils.py** - utilities used in business logic
         - **views.py** - model representations
 - **docs** - documentation
-- **docker-compose.dev.yaml** - docker-compose config for **development**
-- **docker-compose.yaml** - docker-compose config for **production**
+- **docker-compose.dev.yaml** - Docker compose config for **development**
+- **docker-compose.yaml** - Docker compose config for **production**
 - **Dockerfile.dev** - docker config for **development**
 - **Dockerfile** - docker config for **production**
+- **wait_for_postgres.sh** - script for checking access to Postgresql
+
+## :wrench: Settings
+
+### Loading environment variables for development and run on a local machine
+
+See environment variables list in [getting started tutorial](./getting_started.md)
+
+**settings.py**
+
+```python
+# Load environment variables if they don't exist (for development on a local machine)
+if 'DJANGO_SECRET_KEY' not in os.environ:
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(BASE_DIR), '.env.localdev'))
+```
+
+### Choose the interface language
+
+**settings.py**
+
+```python
+# Internationalization
+# https://docs.djangoproject.com/en/3.0/topics/i18n/
+
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
+```
+
+### Set the path to the cache folder
+
+**settings.py**
+
+```python
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join('/var/tmp/django_cache/', os.path.basename(BASE_DIR)),
+    }
+}
+```
 
 ## :arrow_left: [Back to README](../README.md)

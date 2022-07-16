@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -8,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables if they don't exist (for development on a local machine)
 if 'DJANGO_SECRET_KEY' not in os.environ:
-    load_dotenv(dotenv_path=Path(os.path.join(os.path.dirname(BASE_DIR), '.env.localdev')))
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(BASE_DIR), '.env.localdev'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
@@ -16,7 +15,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv('DJANGO_DEBUG', default=0)))
 
-ALLOWED_HOSTS = ['ylpn.herokuapp.com', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
 
 # Application definition
 
