@@ -74,7 +74,7 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
     ```bash
     sudo apt-get install gettext
     ```
-    2. Run in `publicnotes` folder:
+   2. Run in `publicnotes` folder:
     ```bash
     django-admin compilemessages
      ```
@@ -83,3 +83,5 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
     cd publicnotes
     python manage.py runserver
     ```
+
+## :arrow_left: [Back to README](../README.md)
