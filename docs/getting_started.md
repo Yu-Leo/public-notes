@@ -3,37 +3,37 @@
 ## General settings
 
 1. Download this repository
-   - Option 1
-      1. Install [git](https://git-scm.com/download)
-      2. Clone this repository
-        ```bash
-        git clone https://github.com/Yu-Leo/public-notes.git
-        cd public-notes
-        ```
-   - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
+    - Option 1
+        1. Install [git](https://git-scm.com/download)
+        2. Clone this repository
+         ```bash
+         git clone https://github.com/Yu-Leo/public-notes.git
+         cd public-notes
+         ```
+    - Option 2 - [Download ZIP](https://github.com/Yu-Leo/public-notes/archive/refs/heads/main.zip)
 2. Copy `/.env.example` to `/.env`, `/.env.dev` and `/.env.localdev`
-   - `.env` file - for run project in **production** mode (using Docker compose)
-   - `.env.dev` file - for run project in **development** mode (using Docker compose)
-   - `.env.localdev` file - for development and run on a local machine:
+    - `.env` file - for run project in **production** mode (using Docker compose)
+    - `.env.dev` file - for run project in **development** mode (using Docker compose)
+    - `.env.localdev` file - for development and run on a local machine:
 3. Add your configurations in them
-   - `DJANGO_DEBUG` - Run in DEBUG mode or not (set 1 or 0). Default 0.
-   - `DJANGO_SECRET_KEY` - SECRET_KEY for the Django config
-   - Settings for sending e-mail:
-      - `EMAIL_HOST`
-      - `EMAIL_PORT`
-      - `EMAIL_HOST_USER`
-      - `EMAIL_HOST_PASSWORD`
-   - Settings for database (optional):
-      - `DB_ENGINE` (default `django.db.backends.sqlite3`. For using PostgreSQL: `django.db.backends.postgresql`)
-      - `DB_NAME` (default `os.path.join(BASE_DIR, 'db.sqlite3')`)
-      - `DB_HOST`
-      - `DB_PORT`
-      - `DB_USER`
-      - `DB_PASSWORD`
-   - Settings for PostgreSQL (for run using Docker compose):
-      - `POSTGRES_DB`
-      - `POSTGRES_USER`
-      - `POSTGRES_PASSWORD`
+    - `DJANGO_DEBUG` - Run in DEBUG mode or not (set 1 or 0). Default 0.
+    - `DJANGO_SECRET_KEY` - SECRET_KEY for the Django config
+    - Settings for sending e-mail:
+        - `EMAIL_HOST`
+        - `EMAIL_PORT`
+        - `EMAIL_HOST_USER`
+        - `EMAIL_HOST_PASSWORD`
+    - Settings for database (optional):
+        - `DB_ENGINE` (default `django.db.backends.sqlite3`. For using PostgreSQL: `django.db.backends.postgresql`)
+        - `DB_NAME` (default `os.path.join(BASE_DIR, 'db.sqlite3')`)
+        - `DB_HOST`
+        - `DB_PORT`
+        - `DB_USER`
+        - `DB_PASSWORD`
+    - Settings for PostgreSQL (for run using Docker compose):
+        - `POSTGRES_DB`
+        - `POSTGRES_USER`
+        - `POSTGRES_PASSWORD`
 
 Now you can:
 
@@ -72,11 +72,11 @@ docker-compose run web ./publicnotes/manage.py migrate
     pip install -r requirements.txt
     ```
 4. Compile phrase translations
-   1. Install `gettext`:
+    1. Install `gettext`:
     ```bash
     sudo apt-get install gettext
     ```
-   2. Run in `publicnotes` folder:
+    2. Run in `publicnotes` folder:
     ```bash
     django-admin compilemessages
      ```
