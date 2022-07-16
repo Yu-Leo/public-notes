@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Load environment variables if they don't exist (for development in local machine)
+# Load environment variables if they don't exist (for development on a local machine)
 if 'DJANGO_SECRET_KEY' not in os.environ:
-    load_dotenv(dotenv_path=Path(os.path.join(os.path.dirname(BASE_DIR), '.env.dev')))
+    load_dotenv(dotenv_path=Path(os.path.join(os.path.dirname(BASE_DIR), '.env.localdev')))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
