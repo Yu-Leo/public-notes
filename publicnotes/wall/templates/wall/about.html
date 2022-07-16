@@ -8,9 +8,6 @@
             <li class="list-group-item"><a class="nav-link text-purple" href="#idea">Идея</a></li>
             <li class="list-group-item"><a class="nav-link text-purple" href="#functionality">Функциональность</a></li>
             <li class="list-group-item"><a class="nav-link text-purple" href="#releases">Версии</a></li>
-            <li class="list-group-item"><a class="nav-link text-purple" href="#technologies">Используемые технологии</a>
-            </li>
-            <li class="list-group-item"><a class="nav-link text-purple" href="#links">Полезные ссылки</a></li>
             <li class="list-group-item"><a class="nav-link text-purple" href="#author">Автор</a></li>
             <li class="list-group-item"><a class="nav-link text-purple" href="#project">Проект</a></li>
         </ul>
@@ -23,7 +20,7 @@
             <h1 id="about">О проекте</h1>
         </div>
         <div>
-            <h2><span class="badge bg-info">v1.0.7</span></h2>
+            <h2><span class="badge bg-info">v1.1.0</span></h2>
         </div>
     </div>
 {% endblock %}
@@ -75,207 +72,78 @@
         </ul>
         <h2 id="releases">Версии:</h2>
         <div class="accordion" id="accordionPanelsStayOpenExample">
+
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                             aria-controls="panelsStayOpen-collapseOne">
-                        v1.0.1
+                        v1.1.0
                     </button>
                 </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
                      aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body">
                         <ul>
-                            <li>Добавлен поиск по названиям заметок</li>
-                            <li>К категориям добавлены картинки</li>
-                            <li>На странице категории добавлена кнопка "Добавить заметку", позволяющая создать заметку
-                                сразу в данной категории
+                            <li>Исправлены ошибки</li>
+                            <li>
+                                Общее:
+                                <ul>
+                                    <li>Добавлена поддержка английского языка в интерфейсе</li>
+                                    <li>Добавлены тесты</li>
+                                    <li>Добавлена возможность запускать сервер в Docker с использованием Docker
+                                        compose
+                                    </li>
+                                    <li>Переведена и улучшена документация</li>
+                                    <li>Оптимизированы запросы к БД</li>
+                                    <li>СУБД сменена на PostgreSQL</li>
+                                </ul>
                             </li>
-                            <li>Исправлен баг: меню навигации не отображалось на мобильных устройствах</li>
-                            <li>Исправлен баг с отображением меню навигации на странице "О проекте"</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseTwo">
-                        v1.0.2
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-                     aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Добавлена возможность создавать подкатегории в каждой категории</li>
-                            <li>Убрана возможность создавать категории пользователям. Категории может создавать только
-                                админ
+                            <li>Заметки:
+                                <ul>
+                                    <li>Добавлен поиск по названиям заметок</li>
+                                    <li>Добавлена возможность создавать приватные заметки</li>
+                                    <li>Добавлено отслеживание кол-ва просмотров у заметок</li>
+                                    <li>Отредактированные заметки помечаются фразой "изменено" возле даты создания</li>
+                                    <li>Добавлена возможность закреплять заметки в профиле</li>
+                                    <li>Добавлена рейтинговая система для заметок</li>
+                                    <li>На странице заметки добавлена кнопка "Редактировать" для авторов заметки</li>
+                                </ul>
                             </li>
-                            <li>В меню пагинации добавлены ссылки на первую и на последнюю страницы</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseThree">
-                        v1.0.3
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
-                     aria-labelledby="panelsStayOpen-headingThree">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Добавлены теги. Каждая заметка может содержать несколько тегов. Добавлена возможность
-                                просматривать статьи по тегам
+                            <li> Категории и теги:
+                                <ul>
+                                    <li>К категориям добавлены картинки</li>
+                                    <li>На странице категории добавлена кнопка "Добавить заметку", позволяющая создать
+                                        заметку
+                                        сразу в данной категории
+                                    </li>
+                                    <li>Добавлена возможность создавать подкатегории в каждой категории</li>
+                                    <li>Убрана возможность создавать категории пользователям. Категории может создавать
+                                        только
+                                        админ
+                                    </li>
+                                    <li>Добавлены теги. Каждая заметка может содержать несколько тегов. Добавлена
+                                        возможность
+                                        просматривать статьи по тегам
+                                    </li>
+                                    <li>В меню пагинации добавлены ссылки на первую и на последнюю страницы</li>
+                                </ul>
                             </li>
-                            <li>На странице заметки добавлена кнопка "Редактировать" для авторов заметки</li>
-                            <li>Исправлен баг с отображением контента в sidebar'e на странице "О проекте"</li>
-                            <li>Рефакторинг и "чистка" кода</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseFour">
-                        v1.0.4
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
-                     aria-labelledby="panelsStayOpen-headingFour">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Добавлена функциональность отправки электронных писем для подтверждения e-mail
-                                после регистрации
+                            <li>
+                                Пользователи:
+                                <ul>
+                                    <li>Добавлена функциональность отправки электронных писем для подтверждения e-mail
+                                        после регистрации
+                                    </li>
+                                    <li>Добавлена рейтинговая система для профилей</li>
+                                </ul>
                             </li>
-                            <li>Добавлена возможность создавать приватные заметки</li>
-                            <li>Добавлено отслеживание кол-ва просмотров у заметок</li>
-                            <li>Отредактированные заметки помечаются фразой "изменено" возле даты создания</li>
-                            <li>Исправлен баг: убрана возможность создания двух и более аккаунтов с одинаковым
-                                e-mail
-                            </li>
-                            <li>Рефакторинг и "чистка" кода</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseFive">
-                        v1.0.5
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
-                     aria-labelledby="panelsStayOpen-headingFive">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Добавлена возможность закреплять заметки в профиле</li>
-                            <li>Добавлена рейтинговая система для заметок</li>
-                            <li>Добавлена рейтинговая система для профилей</li>
-                            <li>Добавлена поддержка английского языка</li>
-                            <li>Рефакторинг и "чистка" кода</li>
-                            <li>Добавлены тесты</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingSix">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseSix">
-                        v1.0.6
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse"
-                     aria-labelledby="panelsStayOpen-headingSix">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Добавлена возможность запускать сервер в Docker с использованием Docker compose</li>
-                            <li>Переведена и улучшена документация</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseSeven">
-                        v1.0.7
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show"
-                     aria-labelledby="panelsStayOpen-headingSeven">
-                    <div class="accordion-body">
-                        <ul>
-                            <li>Оптимизированы запросы к БД</li>
-                            <li>Исправлены ошибки в работе с переводами фраз</li>
-                            <li>Улучшена документация</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
         </div>
-
-        <h2 id="technologies">Используемые технологии:</h2>
-        <ul>
-            <li>
-                BackEnd:
-                <ul>
-                    <li>СУБД: <span class="fw-bold">SQLite3</span></li>
-                    <li>Язык программирования: <span class="fw-bold">Python (3.10.4)</span></li>
-                    <li>Фреймворки и библиотеки:
-                        <ul>
-                            <li class="fw-bold">Django (3.1.14)</li>
-                            <li class="fw-bold">django_debug_toolbar (2.2.1)</li>
-                            <li class="fw-bold">django_mptt (0.13.4)</li>
-                        </ul>
-                    </li>
-                    <li>Веб-сервер: <span class="fw-bold">gunicorn</span></li>
-                </ul>
-            </li>
-            <li>
-                FrontEnd:
-                <ul>
-                    <li>Языки: <span class="fw-bold">html, css</span></li>
-                    <li>Фреймворки и библиотеки:
-                        <ul>
-                            <li class="fw-bold">Bootstrap 5</li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </li>
-            <li>Система контроля версий: <span class="fw-bold">git</span></li>
-            <li>IDE: <span class="fw-bold">JetBrains PyCharm Community</span></li>
-        </ul>
-        <h2 id="links">Полезные ссылки:</h2>
-        <ul>
-            <li><a class="text-decoration-none text-purple" href="https://djangoproject.com/" target="_blank">Django</a>
-            </li>
-            <li><a class="text-decoration-none text-purple" href="https://getbootstrap.com/"
-                   target="_blank">Bootstrap</a>
-            </li>
-        </ul>
         <h2 id="author">Автор:</h2>
         <ul>
             <li><a class="text-decoration-none text-purple" href="https://github.com/Yu-Leo" target="_blank">GitHub</a>
@@ -286,9 +154,6 @@
         <ul>
             <li><a class="text-decoration-none text-purple" href="https://github.com/Yu-Leo/public-notes/"
                    target="_blank">GitHub</a>
-            </li>
-            <li><a class="text-decoration-none text-purple" href="https://ylpn.herokuapp.com/"
-                   target="_blank">Heroku deploy</a>
             </li>
 
         </ul>
