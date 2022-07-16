@@ -45,12 +45,14 @@ Now you can:
 
 ```bash
 docker-compose up --build
+docker-compose run web ./publicnotes/manage.py migrate
 ```
 
 ## Run in **development** mode using Docker compose
 
 ```bash
 docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
+docker-compose run web ./publicnotes/manage.py migrate
 ```
 
 ## Setting up for development and run on a local machine
@@ -66,11 +68,11 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
     source venv/bin/activate
     ```
 3. Install project dependencies
-    ```bash
+   ```bash
     pip install -r requirements.txt
     ```
 4. Compile phrase translations
-    1. Install `gettext`:
+   1. Install `gettext`:
     ```bash
     sudo apt-get install gettext
     ```
@@ -78,10 +80,13 @@ docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build
     ```bash
     django-admin compilemessages
      ```
-5. Run the server
+5. Apply migrations
+   ```bash
+   ./publicnotes/manage.py migrate
+    ```
+8. Run the server
     ```bash
-    cd publicnotes
-    python manage.py runserver
+    ./publicnotes/manage.py runserver
     ```
 
 ## :arrow_left: [Back to technical documentation](./README.md)
